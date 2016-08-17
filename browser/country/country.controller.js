@@ -1,9 +1,11 @@
 'use strict';
-
+/* global countries */
 app.controller('CountryCtrl', function($scope, $stateParams, CountryFactory){
-	CountryFactory.getOneCity($stateParams.id)
-	.then(function(country){
-		$scope.country = country;
-	})
+	countries.forEach(function(country){
+		if(country.id == $stateParams.id){
+			$scope.country = country;
+			console.log("Country is", $scope.country);
+		}
+	})	
 
 });

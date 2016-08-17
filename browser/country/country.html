@@ -1,2 +1,10 @@
-<section id="country">
+<section class="flexbox-parent" id="country">
+		<div ng-repeat="friend in country.friends">
+		<!-- display data for each country -->
+		{{ friend.name }}
+		<img src="{{ friend.source }}">
+
+
+		</div>
+
 </section>

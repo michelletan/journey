@@ -1,8 +1,8 @@
 'use strict';
 
 app.config(function ($stateProvider) {
-  $stateProvider.state('city', {
-    url: '/country/:countryId',
+  $stateProvider.state('country', {
+    url: '/countries/:id',
     templateUrl: '/browser/country/country.html',
     controller: 'CountryCtrl'
   });

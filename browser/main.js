@@ -1,4 +1,4 @@
 'use strict';
 
-var app = angular.module('amigowhereApp', ['ui.router']);
+var app = angular.module('journeyApp', ['ui.router']);
 

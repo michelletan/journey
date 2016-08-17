@@ -9,6 +9,7 @@
 	<script src="/node_modules/angular-ui-router/release/angular-ui-router.js"></script>
 
 	<!-- local JS dependencies -->
+	<script src="/browser/seed.js"></script>
 	<script src="/browser/main.js"></script>
 	<script src="/browser/country/country.factory.js" ></script>
 	<script src="/browser/home/home.controller.js"></script>
@@ -27,30 +28,14 @@
 </head>
 
 <body ng-app="journeyApp">
-	
-	<script src="/browser/fbAPI.js"></script> 
 
+<!-- Commenting out fbAPI until we fix it
+	<script src="/browser/fbAPI.js"></script> 
+ -->
+ 	<a ui-sref="home">Home</a>
 
 	<navbar></navbar>
-	<ui-view>
-
-	<!-- copy from home.html, until we figure out how to render default state -->
-
-	<section class="flexbox-parent" id="home" >
-		<div layout="row" layout-align="center">
-			<div ng-repeat="country in countries">
-			<!-- display data for each country -->
-			
-
-
-			</div>
-
-	</section>
-	<!-- end of home.html copy -->
-
-	</ui-view>
-
-
+	<ui-view></ui-view>
 	<div>
 		<fb:login-button scope="public_profile,email,user_tagged_places,user_friends" autologoutlink="true" onlogin="checkLoginState();">
 		</fb:login-button>

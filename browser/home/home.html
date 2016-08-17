@@ -1,2 +1,9 @@
+<section class="flexbox-parent" id="home" >
+	<div layout="row" layout-align="center">
+		<div ng-repeat="country in countries">
+		<!-- display data for each country -->
+		<img src="{{ country.source }}">
+	 	<a ui-sref="country({id: country.id})">Explore</a>
+		</div>
 
-
+</section>

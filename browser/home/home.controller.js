@@ -1,14 +1,8 @@
 'use strict';
 
-// Both Home Controller and City Controller use the City Factory
+/* global countries */
+// Both HomeController and CountryController use the CountryFactory
 app.controller('HomeCtrl', function($scope, $state, $stateParams, CountryFactory){
-	CountryFactory.getAllCities()
-	.then(function(cities){
-		$scope.cities = cities;
-	});
-
-	$scope.goToCountry = function(countryId){
-		$state.go('country', {id: countryId})
-	}
+	$scope.countries = countries; 
 
 });
