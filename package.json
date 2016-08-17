@@ -1,0 +1,19 @@
+{
+  "name": "amigowhere",
+  "version": "1.0.0",
+  "description": "cs3216 app 1",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "michelle tan, lee kai yi, ten zhi yang and chua yao hui",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-material": "^1.1.0-rc.5",
+    "angular-ui-router": "^0.3.1",
+    "express": "^4.14.0",
+    "path": "^0.12.7"
+  }
+}
