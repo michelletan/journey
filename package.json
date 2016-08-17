@@ -4,7 +4,7 @@
   "description": "cs3216 app 1",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "nodemon server.js --watch browser -e js,html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "michelle tan, lee kai yi, ten zhi yang and chua yao hui",
@@ -15,5 +15,8 @@
     "angular-ui-router": "^0.3.1",
     "express": "^4.14.0",
     "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "nodemon": "^1.10.0"
   }
 }
