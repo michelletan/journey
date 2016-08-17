@@ -1,10 +1,9 @@
 <section class="flexbox-parent" id="home" >
 	<md-grid-list md-cols-gt-md="6" md-row-height-gt-md="1:1">
-			<div ng-repeat="country in countries">
+			<md-grid-tile md-rowspan="2" md-colspan="2" ng-repeat="country in countries">
 				<!-- display data for each country -->
 				<img src="{{ country.source }}">
 			 	<a ui-sref="country({id: country.id})">Explore</a>
-			</div>
-		</div>
-	</md-content>
+			</md-grid-tile>
+	</md-grid-list>
 </section>

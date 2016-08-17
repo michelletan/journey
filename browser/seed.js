@@ -9,7 +9,25 @@ var countries = [
 			{
 				id: 1,
 				name: "Ten Zhi Yang",
-				source: "https://i.ytimg.com/vi/s1ctSDLRUwE/maxresdefault.jpg"
+				source: "https://i.ytimg.com/vi/s1ctSDLRUwE/maxresdefault.jpg",
+				posts: [
+					{
+						id: 1,		
+						type: "tagged_location",
+						name: "Mongolian Temple",
+						lat: 100,
+						lng: 100
+					},
+					{
+						id: 2,
+						type: "post",
+						name: "Mongolian Temple 2",
+						source: "http://www.gluckman.com/UB-1658.jpg",
+						content: "I love this temple!",
+						lat: 110, 
+						lng: 110
+					}
+				]
 			},
 			{
 				id: 3,
@@ -109,4 +127,4 @@ var countries = [
 			}
 		]
 	},	
-]
+];
