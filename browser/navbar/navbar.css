@@ -1,0 +1,23 @@
+md-toolbar {
+  background: white !important;
+}
+
+.md-toolbar-tools {
+  padding: 0px !important;
+  color: black !important;
+}
+
+md-sidenav, md-list {
+  background: #e5e5e5;
+}
+
+.app-name {
+  font-family: 'Dosis', sans-serif;
+  font-weight: 600 !important;
+}
+
+.title-username {
+  font-size: 14px;
+  padding-left: 8px;
+  color: black !important;
+}

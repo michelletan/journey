@@ -1,6 +1,6 @@
 'use strict';
 
-app.directive('navbar', function($state){
+app.directive('navbar', function($state) {
 	return {
 		restrict: 'E',
 		templateUrl: '/browser/navbar/navbar.html',
@@ -10,5 +10,5 @@ app.directive('navbar', function($state){
 				$state.go('home');
 			}
 		}
-	}	
+	}
 });

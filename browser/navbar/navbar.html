@@ -1,3 +1,38 @@
-<section id="navbar">
-
-</section>
+<section ng-controller="NavbarCtrl" id="navbar">
+    <!-- top nav bar -->
+    <div layout="column" layout-align="center">
+        <md-toolbar class="md-whiteframe-4dp">
+            <div class="md-toolbar-tools" layout="row">
+                <div layout="row" layout-align="start center" flex="33">
+                    <md-button ng-click="openSideNav()" class="md-icon-button" hide-gt-xs>
+                        <i class="material-icons">menu</i>
+                    </md-button>
+                </div>
+                <div layout="row" layout-align="center center" flex="33">
+                    <h2 class="app-name">journey</h2>
+                </div>
+                <div layout="row" layout-align="center center" flex="33">
+                    <img alt="person name" ng-src="{{userPic}}" class="md-avatar img-user img-circle" hide-xs/>
+                    <span class="title-username" hide-xs>Michelle</span>
+                </div>
+            </div>
+        </md-toolbar>
+        <!-- side nav menu -->
+        <md-sidenav class="md-sidenav-left" md-component-id="left">
+            <md-toolbar class="md-whiteframe-4dp" layout="row" layout-align="start center" layout-padding>
+                <img alt="person name" ng-src="{{userPic}}" class="md-avatar img-user img-circle" />
+                <span class="title-username">Michelle</span>
+            </md-toolbar>
+            <md-content>
+                <md-list>
+                    <md-list-item ng-repeat="item in menu">
+                        <p> {{item.name}}</p>
+                    </md-list-item>
+                    <md-divider></md-divider>
+                    <md-list-item>
+                        <p>Logout</p>
+                    </md-list-item>
+                </md-list>
+            </md-content>
+        </md-sidenav>
+    </section>

@@ -11,39 +11,56 @@
 	<!-- local JS dependencies -->
 	<script src="/browser/seed.js"></script>
 	<script src="/browser/main.js"></script>
-	<script src="/browser/country/country.factory.js" ></script>
+	<script src="/browser/navbar/navbar.directive.js"></script>
+	<script src="/browser/navbar/navbar.controller.js"></script>
+	<script src="/browser/landing/landing.controller.js"></script>
 	<script src="/browser/home/home.controller.js"></script>
 	<script src="/browser/home/home.state.js"></script>
-	<script src="/browser/navbar/navbar.directive.js"></script>
 	<script src="/browser/country/country.controller.js"></script>
 	<script src="/browser/country/country.state.js"></script>
+	<script src="/browser/country/country.factory.js" ></script>
 
-  <script src="/node_modules/angular-aria/angular-aria.js"></script> 
-  <script src="/node_modules/angular-animate/angular-animate.js"></script> 
-  <script src="/node_modules/angular-material/angular-material.js"></script> 
+	<script src="/node_modules/angular-aria/angular-aria.js"></script>
+	<script src="/node_modules/angular-animate/angular-animate.js"></script>
+	<script src="/node_modules/angular-material/angular-material.min.js"></script>
+
+	<!-- required fonts -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Dosis:600|Roboto" rel="stylesheet">
 
 	<!-- local CSS dependencies -->
+	<link rel="stylesheet" href="/node_modules/angular-material/angular-material.min.css">
 	<link rel="stylesheet" href="/browser/main.css">
-
+	<link rel="stylesheet" href="/browser/navbar/navbar.css">
 </head>
 
 <body ng-app="journeyApp">
 
-<!-- Commenting out fbAPI until we fix it
-	<script src="/browser/fbAPI.js"></script> 
- -->
- 	<a ui-sref="home">Home</a>
-	<navbar></navbar>
+	<!-- Commenting out fbAPI until we fix it
+	<script src="/browser/fbAPI.js"></script>
+-->
 
-	<ui-view></ui-view>
-	<div>
-		<fb:login-button scope="public_profile,email,user_tagged_places,user_friends" autologoutlink="true" onlogin="checkLoginState();">
-		</fb:login-button>
-	</div>
-	 <div>
-		 <div id ="userNameDiv">name</div>
-		 <img alt="profilePic" id ="profileImg"/>
-	 </div>
+<navbar></navbar>
+<a ui-sref="home">Home</a>
+<ui-view></ui-view>
+<!-- Landing page start -->
+<div ng-controller="LandingCtrl">
+	<div layout="row" layout-align="center start">
+		<span flex="20"></span>
+	<md-card flex="50">
+        <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
+	</md-card>
+	<span flex="20"></span>
+</div>
+</div>
+<!-- Landing page end -->
+<div>
+	<fb:login-button scope="public_profile,email,user_tagged_places,user_friends" autologoutlink="true" onlogin="checkLoginState();">
+</fb:login-button>
+</div>
+<div>
+	<div id ="userNameDiv">name</div>
+	<img alt="profilePic" id ="profileImg"/>
+</div>
 </body>
 </html>
-
