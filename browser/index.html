@@ -26,12 +26,13 @@
 
 	<!-- required fonts -->
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Dosis:600|Roboto" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Dosis:600|Roboto:400,500,700" rel="stylesheet">
 
 	<!-- local CSS dependencies -->
 	<link rel="stylesheet" href="/node_modules/angular-material/angular-material.min.css">
 	<link rel="stylesheet" href="/browser/main.css">
 	<link rel="stylesheet" href="/browser/navbar/navbar.css">
+	<link rel="stylesheet" href="/browser/landing/landing.css">
 </head>
 
 <body ng-app="journeyApp">
@@ -41,26 +42,75 @@
 -->
 
 <navbar></navbar>
-<a ui-sref="home">Home</a>
+
 <ui-view></ui-view>
-<!-- Landing page start -->
-<div ng-controller="LandingCtrl">
-	<div layout="row" layout-align="center start">
-		<span flex="20"></span>
-	<md-card flex="50">
-        <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
-	</md-card>
-	<span flex="20"></span>
-</div>
-</div>
-<!-- Landing page end -->
+<md-content>
+	<!-- Landing page start -->
+	<div ng-controller="LandingCtrl">
+
+		<div class="image-spread-container" layout="row" layout-align="center start">
+			<!-- <img ng-src="{{imagePath}}" class="image-spread" alt="Woman on a beach" flex layout-fill> -->
+			<div class="image-spread-text" layout="column" layout-align="center center" layout-fill>
+				<span class="image-spread-header">LIVE THEIR MOMENTS</span>
+				<span layout-padding>Keep up with your friends all over the world</span>
+				<md-button class="btn-login">
+					Log in with Facebook
+				</md-button>
+			</div>
+		</div>
+		<!-- ngRepeat here for app features -->
+		<div layout="row" layout-align="center center" layout-wrap flex-xs="100" flex-offset-gt-xs="15" flex-gt-xs="70">
+			<md-card flex-xs="100" flex-gt-xs="30">
+				<img ng-src="{{imagePath}}" class="md-card-image image-feature" alt="Washed Out">
+				<md-card-title>
+					<md-card-title-text>
+						<span class="md-headline">App Feature</span>
+					</md-card-title-text>
+				</md-card-title>
+				<md-card-content>
+					<p>Some important app feature</p>
+				</md-card-content>
+			</md-card>
+			<md-card flex-xs="100" flex-gt-xs="30">
+				<img ng-src="{{imagePath}}" class="md-card-image image-feature" alt="Washed Out">
+				<md-card-title>
+					<md-card-title-text>
+						<span class="md-headline">App Feature</span>
+					</md-card-title-text>
+				</md-card-title>
+				<md-card-content>
+					<p>Some important app feature</p>
+				</md-card-content>
+			</md-card>
+			<md-card flex-xs="100" flex-gt-xs="30">
+				<img ng-src="{{imagePath}}" class="md-card-image image-feature" alt="Washed Out">
+				<md-card-title>
+					<md-card-title-text>
+						<span class="md-headline">App Feature</span>
+					</md-card-title-text>
+				</md-card-title>
+				<md-card-content>
+					<p>Some important app feature</p>
+				</md-card-content>
+			</md-card>
+		</div>
+	</div>
+	<!-- end landing page -->
+
+	<div class="footer" layout="row" layout-align="center center">
+		<span>©2016 Journey</span>
+		<a href="" layout-padding>About</a>
+		<a href="">Credits</a>
+	</div>
+</md-content>
+<!-- <a ui-sref="home">Home</a>
 <div>
-	<fb:login-button scope="public_profile,email,user_tagged_places,user_friends" autologoutlink="true" onlogin="checkLoginState();">
+<fb:login-button scope="public_profile,email,user_tagged_places,user_friends" autologoutlink="true" onlogin="checkLoginState();">
 </fb:login-button>
 </div>
 <div>
-	<div id ="userNameDiv">name</div>
-	<img alt="profilePic" id ="profileImg"/>
-</div>
+<div id ="userNameDiv">name</div>
+<img alt="profilePic" id ="profileImg"/>
+</div> -->
 </body>
 </html>
