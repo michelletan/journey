@@ -14,6 +14,7 @@
 	<script src="/browser/navbar/navbar.directive.js"></script>
 	<script src="/browser/navbar/navbar.controller.js"></script>
 	<script src="/browser/landing/landing.controller.js"></script>
+	<script src="/browser/landing/landing.state.js"></script>
 	<script src="/browser/home/home.controller.js"></script>
 	<script src="/browser/home/home.state.js"></script>
 	<script src="/browser/country/country.controller.js"></script>
@@ -43,64 +44,18 @@
 
 <navbar></navbar>
 
-<ui-view></ui-view>
 <md-content>
-	<!-- Landing page start -->
-	<div ng-controller="LandingCtrl">
-
-		<div class="image-spread-container" layout="row" layout-align="center start">
-			<!-- <img ng-src="{{imagePath}}" class="image-spread" alt="Woman on a beach" flex layout-fill> -->
-			<div class="image-spread-text" layout="column" layout-align="center center" layout-fill>
-				<span class="image-spread-header">LIVE THEIR MOMENTS</span>
-				<span layout-padding>Keep up with your friends all over the world</span>
-				<md-button class="btn-login">
-					Log in with Facebook
-				</md-button>
-			</div>
-		</div>
-		<!-- ngRepeat here for app features -->
-		<div layout="row" layout-align="center center" layout-wrap flex-xs="100" flex-offset-gt-xs="15" flex-gt-xs="70">
-			<md-card flex-xs="100" flex-gt-xs="30">
-				<img ng-src="{{imagePath}}" class="md-card-image image-feature" alt="Washed Out">
-				<md-card-title>
-					<md-card-title-text>
-						<span class="md-headline">App Feature</span>
-					</md-card-title-text>
-				</md-card-title>
-				<md-card-content>
-					<p>Some important app feature</p>
-				</md-card-content>
-			</md-card>
-			<md-card flex-xs="100" flex-gt-xs="30">
-				<img ng-src="{{imagePath}}" class="md-card-image image-feature" alt="Washed Out">
-				<md-card-title>
-					<md-card-title-text>
-						<span class="md-headline">App Feature</span>
-					</md-card-title-text>
-				</md-card-title>
-				<md-card-content>
-					<p>Some important app feature</p>
-				</md-card-content>
-			</md-card>
-			<md-card flex-xs="100" flex-gt-xs="30">
-				<img ng-src="{{imagePath}}" class="md-card-image image-feature" alt="Washed Out">
-				<md-card-title>
-					<md-card-title-text>
-						<span class="md-headline">App Feature</span>
-					</md-card-title-text>
-				</md-card-title>
-				<md-card-content>
-					<p>Some important app feature</p>
-				</md-card-content>
-			</md-card>
-		</div>
-	</div>
-	<!-- end landing page -->
+	<ui-view></ui-view>
 
 	<div class="footer" layout="row" layout-align="center center">
-		<span>©2016 Journey</span>
+		<!-- temp navigation -->
+		<a ui-sref="home" layout-padding>Home</a>
+		<a ui-sref="country">Explore (Country)</a>
+		<!-- real footer -->
+
+		<!-- <span>©2016 Journey</span>
 		<a href="" layout-padding>About</a>
-		<a href="">Credits</a>
+		<a href="">Credits</a> -->
 	</div>
 </md-content>
 <!-- <a ui-sref="home">Home</a>
