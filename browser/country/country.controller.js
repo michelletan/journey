@@ -6,6 +6,6 @@ app.controller('CountryCtrl', function($scope, $stateParams, CountryFactory){
 			$scope.country = country;
 			console.log("Country is", $scope.country);
 		}
-	})	
+	})
 
 });
