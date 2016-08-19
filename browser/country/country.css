@@ -1,5 +1,5 @@
 .country-header {
-    margin: 15px 0px 15px 0px;
+    margin-top: 15px;
     height: 200px;
     background-size: cover;
     background-repeat: no-repeat;
@@ -18,12 +18,12 @@
 }
 
 .subheader {
-    margin-bottom: 15px;
+    margin-top: 15px;
     font-size: 18px;
     font-weight: 500;
 }
 
-.img-friend {
+.img-cover {
     object-fit: cover;
 }
 

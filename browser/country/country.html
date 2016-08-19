@@ -9,15 +9,16 @@
 				<div layout="column" layout-align="start start" flex="70">
 					<div class="subheader">Places</div>
 					<div id="places-container" layout="row" layout-wrap>
-						<md-card ng-repeat="friend in country.friends | limitTo: maxPlacesShown" flex>
-							<img ng-src="{{friend.source}}" class="md-card-image img-friend" alt="Washed Out" flex>
+						<md-card ng-repeat="friend in country.friends | limitTo: maxPlacesShown" flex="30">
+							<img ng-src="{{friend.source}}" class="md-card-image img-cover" alt="Washed Out" flex>
 							<md-card-content class="places-subtitle">
 								{{friend.name}}
 							</md-card-content>
 						</md-card>
 						<md-card flex="100">
 							<md-card-actions layout="row" layout-align="center center">
-								<md-button>View More</md-button>
+								<md-button ng-click="maxPlacesShown = country.friends.length" ng-show="maxPlacesShown <= defaultPlacesShown">View More</md-button>
+								<md-button ng-click="maxPlacesShown = defaultPlacesShown" ng-show="maxPlacesShown === country.friends.length">Hide</md-button>
 							</md-card-actions>
 						</md-card>
 					</div>
@@ -32,13 +33,12 @@
 								<span class="md-subhead">19 Aug 2016</span>
 							</md-card-header-text>
 						</md-card-header>
-						<img ng-src="{{friend.source}}" class="md-card-image" alt="Washed Out">
 						<md-card-content>
-							<p>
 								The titles of Washed Out's breakthrough song and the first single from Paracosm share the
 								two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
-							</p>
 						</md-card-content>
+						<img ng-src="{{friend.source}}" class="md-card-image img-cover" alt="Washed Out" flex>
+
 						<md-card-actions layout="row" layout-align="end center">
 							<md-button class="md-icon-button" aria-label="Like">
 								<i class="material-icons">thumb_up</i>
@@ -57,7 +57,7 @@
 					<!-- display data for each country -->
 					<md-grid-list md-cols="3" md-row-height="1:1" md-gutter="8px" layout-fill>
 						<md-grid-tile ng-repeat="friend in country.friends">
-							<img class="img-friend" src="{{friend.source}}" layout-fill/>
+							<img class="img-cover" src="{{friend.source}}" layout-fill/>
 							<md-grid-tile-footer>
 								<h3>{{friend.name}}</h3>
 							</md-grid-tile-footer>
