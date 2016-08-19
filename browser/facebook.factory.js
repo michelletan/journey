@@ -42,40 +42,52 @@ app.factory('facebookFactory', function($q){
 	}
 
 	facebookFactory.treeFlipper = function(friends){
-	  	var countries = [];
-	  	friends.forEach(function(fbfriend){
-	  		if(fbfriend.feed != undefined){
-	  			fbfriend.feed.data.forEach(function(post){
-	  				if(post.place !=undefined){
-	  					if(post.place.location != undefined){
-	  						var country = {};
-	  						country.name = post.place.location.country;
-	  						country.places = [];
-	  						var place = {};
-	  						place.id = post.place.id;
-	  						place.name = post.place.name;
-	  						place.friends = [];
+          var countries = [];
+          friends.forEach(function(fbfriend){
+              if(fbfriend.feed != undefined){
+                  fbfriend.feed.data.forEach(function(post){
+                      if(post.place !=undefined){
+                          if(post.place.location != undefined){
+                              var country = {};
+                              country.name = post.place.location.country;
+                              country.places = [];
+                              var place = {};
+                              place.id = post.place.id;
+                              place.name = post.place.name;
+                              place.friends = [];
 
-	  						country.places.push(place);
+                              country.places.push(place);
 
-	  						var friend = {};
-	  						friend.name = fbfriend.name;
-	  						friend.id = fbfriend.id;
-	  						friend.source = fbfriend.picture.data.url;
+                              var friend = {};
+                              friend.name = fbfriend.name;
+                              friend.id = fbfriend.id;
+                              friend.source = fbfriend.picture.data.url;
+                            friend.posts = [];
+                            
+                            var pst = {}
+                            pst.id = post.id;
+                            pst.time = post.created_time;
+                            if (post.story != undefined)
+                                pst.story = post.story;
+                            if (post.message != undefined)
+                                pst.message = post.message;
+                            if(post.full_picture != undefined)
+                                pst.src = post.full_picture;
+                            friends.posts.push(pst);
+                            
+                              place.friends.push(friend);
 
-	  						place.friends.push(friend);
-
-	  						countries.push(country);
-	  					}
-	  				}
-	  			});
-	  		}
-	  	});
-	  	var pretty = JSON.stringify(countries, null, "\t") ;
-	  	document.getElementById("dataDiv").appendChild(document.createTextNode(pretty));
-		//console.log(countries);
-		return countries;
-	}
+                              countries.push(country);
+                          }
+                      }
+                  });
+              }
+          });
+          var pretty = JSON.stringify(countries, null, "\t") ;
+          document.getElementById("dataDiv").appendChild(document.createTextNode(pretty));
+        //console.log(countries);
+        return countries;
+   }
 	
 	facebookFactory.logIntoFb = function(){
 		checkLoginState();
@@ -110,7 +122,7 @@ app.factory('facebookFactory', function($q){
 		var deferred = $q.defer();
 		var query = 'me/friends?fields=id,name,picture.type(large),feed.limit(1000).since(2016-08-01T00:00:00){id,created_time,place{id, name, location{country}},story,message,full_picture}';
 		FB.api(query, function(response){
-			var countries = treeFlipper(response.data);
+			var countries = facebookFactory.treeFlipper(response.data);
 			deferred.resolve(countries);
 		});
 		return deferred.promise;
