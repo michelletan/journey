@@ -1,24 +1,23 @@
 <section>
-
-        <div ng-style="{'background-image':'url({{spreadImagePath}})'}" class="img-overlay spread mid" layout="column" layout-align="center center">
-            <h2>FOLLOW THEIR MOMENTS</h2>
-            <p layout-padding>Keep up with your friends all over the world</p>
-            <span id="logInLanding">
-                <md-button ng-click="logIntoFb()" class="btn-login">
-                    Log in with Facebook
-                </md-button>
-            </span>
-            <!--
-            <fb:login-button id="logInLanding" scope="public_profile,email,user_tagged_places,user_friends" autologoutlink="false" onlogin="checkLoginState();">
-        </fb:login-button>
-    -->
+    <div ng-style="{'background-image':'linear-gradient(rgba(0, 0, 0, 0.4),rgba(0, 0, 0, 0.4)),url({{spreadImagePath}})'}" class="img-overlay spread mid" layout="column" layout-align="center center">
+        <h2>FOLLOW THEIR MOMENTS</h2>
+        <p layout-padding>Keep up with your friends all over the world</p>
+        <span id="logInLanding">
+            <md-button ng-click="logIntoFb()" class="btn-login">
+                Log in with Facebook
+            </md-button>
+        </span>
+        <!--
+        <fb:login-button id="logInLanding" scope="public_profile,email,user_tagged_places,user_friends" autologoutlink="false" onlogin="checkLoginState();">
+    </fb:login-button>
+-->
 </div>
 <div class="spread-divider">
 </div>
 <div ng-style="{'background-image':'url({{imageFeature1Path}})'}" class="img-overlay feature mid" layout="column" layout-align="center center">
     <h2>Live their journeys</h2>
 </div>
-<div ng-style="{'background-image':'url({{imageFeature2Path}})'}" class="img-overlay feature mid" layout="column" layout-align="center center">
+<div ng-style="{'background-image':'linear-gradient(rgba(0, 0, 0, 0.4),rgba(0, 0, 0, 0.4)),url({{imageFeature2Path}})'}" class="img-overlay feature mid" layout="column" layout-align="center center">
     <h2>Make your journal</h2>
 </div>
 <div ng-style="{'background-image':'url({{imageFeature3Path}})'}" class="img-overlay feature mid" layout="column" layout-align="center center">

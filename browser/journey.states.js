@@ -25,5 +25,15 @@ app.config(function($stateProvider){
     controller: 'PlaceCtrl'
   });
 
+  $stateProvider.state('policy', {
+    url: '/policy',
+    templateUrl: '/browser/policy/policy.html'
+  });
+
+  $stateProvider.state('terms', {
+    url: '/terms',
+    templateUrl: '/browser/terms/terms.html'
+  });
+
 
 });

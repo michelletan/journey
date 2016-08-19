@@ -1,10 +1,10 @@
 <section id="country">
-	<div layout="row" layout-align="center start" layout-fill>
+	<div layout="row" layout-align="center start" layout-fill layout-wrap>
+		<div ng-style="{'background-image':'linear-gradient(rgba(0, 0, 0, 0.4),rgba(0, 0, 0, 0.4)),url({{country.source}})'}" class="img-overlay country-header mid" layout="column" layout-align="center center" layout-fill>
+			<h2>{{country.name}}</h2>
+		</div>
 		<!-- country header -->
 		<div layout="column" flex="80">
-			<div ng-style="{'background-image':'url({{country.source}})'}" class="img-overlay country-header mid" layout="column" layout-align="center center">
-			    <h2>{{country.name}}</h2>
-			</div>
 			<div layout="row" layout-align="space-between start">
 				<div layout="column" layout-align="start start" flex="65">
 					<!-- places -->
