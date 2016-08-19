@@ -1,9 +1,41 @@
-<section class="flexbox-parent" id="home" >
-	<md-grid-list md-cols-gt-md="6" md-row-height-gt-md="1:1">
-			<md-grid-tile md-rowspan="2" md-colspan="2" ng-repeat="country in countries">
-				<!-- display data for each country -->
-				<img src="{{ country.source }}">
-			 	<a ui-sref="country({id: country.id})">Explore</a>
-			</md-grid-tile>
-	</md-grid-list>
+<section>
+    <!-- ngRepeat here for app features -->
+    <div layout="row" layout-align="center center" layout-wrap flex-xs="100" flex-offset-gt-xs="15" flex-gt-xs="70">
+    		<div flex="90">
+    		Explore Journeys In:
+    		</div>
+        <md-card flex-xs="100" flex-gt-xs="30">
+            <img ng-src="{{imagePath}}" class="md-card-image image-feature" alt="Washed Out">
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">App Feature</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+                <p>Some important app feature</p>
+            </md-card-content>
+        </md-card>
+        <md-card flex-xs="100" flex-gt-xs="30">
+            <img ng-src="{{imagePath}}" class="md-card-image image-feature" alt="Washed Out">
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">App Feature</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+                <p>Some important app feature</p>
+            </md-card-content>
+        </md-card>
+        <md-card flex-xs="100" flex-gt-xs="30">
+            <img ng-src="{{imagePath}}" class="md-card-image image-feature" alt="Washed Out">
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">App Feature</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+                <p>Some important app feature</p>
+            </md-card-content>
+        </md-card>
+    </div>
 </section>
