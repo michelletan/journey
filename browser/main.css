@@ -1,10 +1,51 @@
 html, body, md-content {
-  background: #e5e5e5;
+    background: #e5e5e5;
+}
+
+.img-overlay {
+    background:
+    linear-gradient(
+        rgba(0, 0, 0, 0.6),
+        rgba(0, 0, 0, 0.6)
+        );
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.spread {
+    height: 450px;
+}
+
+.spread-divider {
+    height: 50px;
+    background-color: white;
+}
+
+.feature {
+    height: 300px;
+}
+
+.mid {
+    color: white;
+    text-align: center;
+}
+
+.mid h2 {
+    margin: 0;
+    font-weight: 600;
+    font-size: 60px;
+}
+
+.mid p {
+    margin: 0;
+    font-weight: 300;
+    font-size: 24px;
 }
 
 .img-user {
-  width: 40px;
-  height: 40px;
+    width: 40px;
+    height: 40px;
 }
 
 .img-circle {
