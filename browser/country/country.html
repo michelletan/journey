@@ -1,19 +1,25 @@
 <section id="country">
 	<div layout="row" layout-align="center start" layout-fill>
 		<!-- country header -->
-		<div layout="column" flex="70">
-			<div class="country-header">
-				<img class="country-header-image" src="{{country.source}}" layout-fill/>
+		<div layout="column" flex="80">
+			<div ng-style="{'background-image':'url({{country.source}})'}" class="country-header" layout="column" layout-align="end start" layout-fill>
+				<span class="country-header-name">{{country.name}}</span>
 			</div>
-			<span class="country-header-name" flex-offset="5">{{country.name}}</span>
-			<div layout="row" layout-align="center start">
+			<div layout="row" layout-align="space-between start">
 				<div layout="column" layout-align="start start" flex="70">
 					<div class="subheader">Places</div>
-					<div layout="row">
-						<div ng-repeat="friend in country.friends" flex="33">
-							<img class="img-friend" src="{{friend.source}}" layout-fill/>
-							<h3>{{friend.name}}</h3>
-						</div>
+					<div id="places-container" layout="row" layout-wrap>
+						<md-card ng-repeat="friend in country.friends | limitTo: maxPlacesShown" flex>
+							<img ng-src="{{friend.source}}" class="md-card-image img-friend" alt="Washed Out" flex>
+							<md-card-content class="places-subtitle">
+								{{friend.name}}
+							</md-card-content>
+						</md-card>
+						<md-card flex="100">
+							<md-card-actions layout="row" layout-align="center center">
+								<md-button>View More</md-button>
+							</md-card-actions>
+						</md-card>
 					</div>
 					<div class="subheader">Posts</div>
 					<md-card ng-repeat="friend in country.friends">

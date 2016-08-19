@@ -1,6 +1,9 @@
 'use strict';
 /* global countries */
 app.controller('CountryCtrl', function($scope, $stateParams, CountryFactory){
+	// View settings
+	$scope.maxPlacesShown = 3;
+
 	countries.forEach(function(country){
 		if(country.id == $stateParams.id){
 			$scope.country = country;
