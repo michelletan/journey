@@ -5,20 +5,20 @@
 app.controller('HomeCtrl', function($scope, $state, $stateParams, CountryFactory, facebookFactory, pixabayFactory, $q){
 
 	var fake = [{
-		source: 'https://dl.dropboxusercontent.com/s/7oj274ereyxpkxd/landing-feature1.jpg?dl=0',
-		name: 'America'
+		source: 'http://www.gluckman.com/UB-1658.jpg',
+		name: 'Mongolia'
 	},
 	{
-		source: 'https://dl.dropboxusercontent.com/s/mnecwpd5a1qctmt/landing-feature2.jpg?dl=0',
-		name: 'China'
+		source: 'http://goldenvipworld.com/images/prodotti/russia/16.jpg',
+		name: 'Russia'
 	},
 	{
-		source: 'https://dl.dropboxusercontent.com/s/rngr2ta7lx1labe/landing-feature3.jpg?dl=0',
-		name: 'France'
+		source: 'http://cdn.lolwot.com/wp-content/uploads/2015/02/18-must-see-places-in-the-world-1.jpg',
+		name: 'United States'
 	},
 	{
-		source: 'https://dl.dropboxusercontent.com/s/70lkgfzcrb0hagu/munich-1220908.jpg?dl=0',
-		name: 'Belgium'
+		source: 'https://www.singaporeair.com/saar5/images/navigation/plan-travel/packages/singapore-stopover-holiday.jpg',
+		name: 'Singapore'
 	}];
 
 	$scope.fakeCountries = fake;
@@ -41,7 +41,7 @@ app.controller('HomeCtrl', function($scope, $state, $stateParams, CountryFactory
 
 	// Public functions
 	function goToCountry(id) {
-		$state.go('country', {id: id});
+		$state.go('country', {id: id+1});
 	}
 
 });
