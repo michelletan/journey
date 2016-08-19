@@ -20,7 +20,7 @@ var port = 8080;
 app.listen(port, function(err) {
 	if(err){
 		throw err;
-	}else{	
+	}else{
 		console.log('Journey server is up. Listening on port: ', port);
 	}
 })

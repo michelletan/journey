@@ -4,6 +4,14 @@
 <head>
 	<title>Journey</title>
 
+	<!-- favicon -->
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+	<link rel="manifest" href="/manifest.json">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#09a6c8">
+	<meta name="theme-color" content="#09a6c8">
+
 	<!-- external JS dependencies -->
 	<script src="/node_modules/angular/angular.js"></script>
 	<script src="/node_modules/angular-ui-router/release/angular-ui-router.js"></script>
@@ -21,10 +29,10 @@
 	<script src="/browser/country/country.controller.js"></script>
 	<script src="/browser/country/country.factory.js" ></script>
 	<script src="/browser/journey.states.js"></script>
+	
 	<script src="/browser/facebook.factory.js"></script>
 	<script src="/browser/pixabay.factory.js"></script>
-	
-	
+
 	<script src="/node_modules/angular-aria/angular-aria.js"></script>
 	<script src="/node_modules/angular-animate/angular-animate.js"></script>
 	<script src="/node_modules/angular-material/angular-material.min.js"></script>
@@ -43,20 +51,20 @@
 </head>
 
 <body ng-app="journeyApp">
-<navbar></navbar>
+	<navbar></navbar>
 
-<md-content>
-	<ui-view></ui-view>
+	<md-content>
+		<ui-view></ui-view>
 
-	<div class="footer" layout="row" layout-align="center center">
-		<span>©2016 Journey</span>
-		<a href="" layout-padding>About</a>
-		<a href="">Credits</a>
-	</div>
-</md-content>
-<!-- <a ui-sref="home">Home</a>
-<div>
-<fb:login-button scope="public_profile,email,user_tagged_places,user_friends" autologoutlink="true" onlogin="checkLoginState();">
+		<div class="footer" layout="row" layout-align="center center">
+			<span>©2016 Journey</span>
+			<a href="" layout-padding>About</a>
+			<a href="">Credits</a>
+		</div>
+	</md-content>
+	<!-- <a ui-sref="home">Home</a>
+	<div>
+	<fb:login-button scope="public_profile,email,user_tagged_places,user_friends" autologoutlink="true" onlogin="checkLoginState();">
 </fb:login-button>
 </div>
 <div>
