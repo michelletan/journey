@@ -30,5 +30,10 @@ app.config(function($stateProvider){
     templateUrl: '/browser/policy/policy.html'
   });
 
+  $stateProvider.state('terms', {
+    url: '/terms',
+    templateUrl: '/browser/terms/terms.html'
+  });
+
 
 });
