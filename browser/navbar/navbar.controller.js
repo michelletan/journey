@@ -8,7 +8,7 @@ app.controller('NavbarCtrl', function($scope, $mdSidenav, facebookFactory) {
     name: 'My Journeys'
   }];
 
-  window.fbAsyncInit = function() {
+	  console.log("testing");
     FB.init({
       appId      : '327010674354140',
       cookie     : true,  // enable cookies to allow the server to access 
@@ -16,6 +16,7 @@ app.controller('NavbarCtrl', function($scope, $mdSidenav, facebookFactory) {
       xfbml      : true,  // parse social plugins on this page
       version    : 'v2.7' // use graph api version 2.7
     });
+	  console.log("testing2");
 
     FB.getLoginStatus(function(response) {
       facebookFactory.statusChangeCallback(response)
@@ -24,8 +25,7 @@ app.controller('NavbarCtrl', function($scope, $mdSidenav, facebookFactory) {
         $scope.name = nameSourceObj.name;
         $scope.userPic = nameSourceObj.source;
       })
-    })
-  }
+    });
 
 
 /*
