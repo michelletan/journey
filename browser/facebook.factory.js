@@ -1,9 +1,9 @@
-app.factory('facebookFactory', function($q){
-	var facebookFactory = {}
+app.factory('FacebookFactory', function($q){
+	var FacebookFactory = {}
 
 	var toPrint = "";
 	
-	facebookFactory.statusChangeCallback = function(response) {
+	FacebookFactory.statusChangeCallback = function(response) {
 		console.log('statusChangeCallback');
 		console.log(response);
 		// The response object is returned with a status field that lets the
@@ -12,7 +12,7 @@ app.factory('facebookFactory', function($q){
 		// for FB.getLoginStatus().
 		if (response.status === 'connected') {
 		  // Logged into your app and Facebook.
-		  return facebookFactory.whenConnected();
+		  return FacebookFactory.whenConnected();
 		} else if (response.status === 'not_authorized') {
 		  // The person is logged into Facebook, but not your app.
 		  
@@ -23,7 +23,7 @@ app.factory('facebookFactory', function($q){
 		}
 	}
 
-	facebookFactory.whenConnected = function(){
+	FacebookFactory.whenConnected = function(){
 		var	deferred = $q.defer(); 
 		FB.api('me?fields=name,picture.type(large)', function(response) {
 			if(!response || response.error){
@@ -38,45 +38,58 @@ app.factory('facebookFactory', function($q){
 		return deferred.promise;
 	}
 
-	facebookFactory.treeFlipper = function(friends){
-	  	var countries = [];
-	  	friends.forEach(function(fbfriend){
-	  		if(fbfriend.feed != undefined){
-	  			fbfriend.feed.data.forEach(function(post){
-	  				if(post.place !=undefined){
-	  					if(post.place.location != undefined){
-	  						var country = {};
-	  						country.name = post.place.location.country;
-	  						country.places = [];
-	  						var place = {};
-	  						place.id = post.place.id;
-	  						place.name = post.place.name;
-	  						place.friends = [];
+	FacebookFactory.treeFlipper = function(friends){
+	var countries = [];
+	friends.forEach(function(fbfriend){
+		if(fbfriend.feed != undefined){
+			fbfriend.feed.data.forEach(function(post){
+				if(post.place !=undefined){
+					if(post.place.location != undefined){
+                              var country = {};
+                              country.name = post.place.location.country;
+                              country.places = [];
+                              var place = {};
+                              place.id = post.place.id;
+                              place.name = post.place.name;
+                              place.friends = [];
 
-	  						country.places.push(place);
+                              country.places.push(place);
 
-	  						var friend = {};
-	  						friend.name = fbfriend.name;
-	  						friend.id = fbfriend.id;
-	  						friend.source = fbfriend.picture.data.url;
+                              var friend = {};
+                              friend.name = fbfriend.name;
+                              friend.id = fbfriend.id;
+                              friend.source = fbfriend.picture.data.url;
+                            friend.posts = [];
+                            
+                            var pst = {}
+                            pst.id = post.id;
+                            pst.time = post.created_time;
+                            if (post.story != undefined)
+                                pst.story = post.story;
+                            if (post.message != undefined)
+                                pst.message = post.message;
+                            if(post.full_picture != undefined)
+                                pst.src = post.full_picture;
+                            friends.posts.push(pst);
+                            
+                              place.friends.push(friend);
 
-	  						place.friends.push(friend);
+                              countries.push(country);
+                          }
+                      }
+                  });
+              }
+          });
+          var pretty = JSON.stringify(countries, null, "\t") ;
+          document.getElementById("dataDiv").appendChild(document.createTextNode(pretty));
+        //console.log(countries);
+        return countries;
+   }
 
-	  						countries.push(country);
-	  					}
-	  				}
-	  			});
-	  		}
-	  	});
-	  	var pretty = JSON.stringify(countries, null, "\t") ;
-	  	document.getElementById("dataDiv").appendChild(document.createTextNode(pretty));
-		//console.log(countries);
-		return countries;
-	}
 
-	facebookFactory.getPlacePic = function(idStr){
+	FacebookFactory.getPlacePic = function(idStr){
 		var deferred = $q.defer(); 
-		var query = idStr+"?fields=name,cover,picture.type(large)"
+		var query = idStr+"?fields=name,cover,picture.type(large)";
 		FB.api(query, function(response){
 			var place = response;
 			var name = place.name;
@@ -97,15 +110,16 @@ app.factory('facebookFactory', function($q){
 	};
 
 
-
-	facebookFactory.test = function(){
-		FB.api('me/friends?fields=id,name,picture.type(large),feed.limit(1000).since(2016-08-01T00:00:00){id,created_time,place{id, name, location{country}},story,message}'
-			,function(response){
-				var countries = treeFlipper(response.data);
-				for(var i=0; i<countries.length; i++){
-					getPlacePic(countries[i].name);
-				}
-			});
+	FacebookFactory.getCountries = function(){
+		var deferred = $q.defer();
+		var query = "me/friends?fields=id,name,picture.type(large),feed.limit(1000).since(2016-08-01T00:00:00){id,created_time,place{id, name, location{country}},story,message,full_picture}" 
+		FB.api(query, function(response){
+			var countries = treeFlipper(response.data);
+			deferred.resolve({
+				countries: countries
+			})
+		})
+		return deferred.promise;
 	}
 
 	  // This function is called when someone finishes with the Login
@@ -117,7 +131,6 @@ app.factory('facebookFactory', function($q){
 	  	});
 	  }
 
-
 	  // Load the SDK asynchronously
 	  (function(d, s, id) {
 	  	var js, fjs = d.getElementsByTagName(s)[0];
@@ -128,9 +141,7 @@ app.factory('facebookFactory', function($q){
 	  }(document, 'script', 'facebook-jssdk'));
 
 
-	  return facebookFactory;
-
-
+	  return FacebookFactory;
 
 	})
 

@@ -1,40 +1,24 @@
 <section>
     <!-- ngRepeat here for app features -->
     <div layout="row" layout-align="center center" layout-wrap flex-xs="100" flex-offset-gt-xs="15" flex-gt-xs="70">
-    		<div flex="90">
-    		Explore Journeys In:
-    		</div>
-        <md-card flex-xs="100" flex-gt-xs="30">
-            <img ng-src="{{imagePath}}" class="md-card-image image-feature" alt="Washed Out">
-            <md-card-title>
+        <div class="home-head">
+		Explore Journeys In:
+		</div>
+        <md-card ng-repeat="country in countries" flex-xs="100" flex-gt-xs="33">
+            <img ng-src="{{country.imageUrl}}" class="md-card-image image-feature" alt="Washed Out">
+            <md-card-title>w
                 <md-card-title-text>
-                    <span class="md-headline">App Feature</span>
+                    <span class="md-headline">{{country.name}}</span>
                 </md-card-title-text>
             </md-card-title>
             <md-card-content>
-                <p>Some important app feature</p>
-            </md-card-content>
-        </md-card>
-        <md-card flex-xs="100" flex-gt-xs="30">
-            <img ng-src="{{imagePath}}" class="md-card-image image-feature" alt="Washed Out">
-            <md-card-title>
-                <md-card-title-text>
-                    <span class="md-headline">App Feature</span>
-                </md-card-title-text>
-            </md-card-title>
-            <md-card-content>
-                <p>Some important app feature</p>
-            </md-card-content>
-        </md-card>
-        <md-card flex-xs="100" flex-gt-xs="30">
-            <img ng-src="{{imagePath}}" class="md-card-image image-feature" alt="Washed Out">
-            <md-card-title>
-                <md-card-title-text>
-                    <span class="md-headline">App Feature</span>
-                </md-card-title-text>
-            </md-card-title>
-            <md-card-content>
-                <p>Some important app feature</p>
+                <p>Friends located:</p>
+                <div ng-repeat="place in places">
+                    <p ng-repeat="friend in place.friends">
+                        {{ friend.name }}
+                    </p>
+                    <img ng-src="{{friend.source}}" alt="friendImg">
+                </div>
             </md-card-content>
         </md-card>
     </div>

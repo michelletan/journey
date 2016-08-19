@@ -10,3 +10,8 @@ body, md-content {
 .img-circle {
     border-radius: 50%;
 }
+
+.home-head {
+	padding-top: 10px;
+	color: black;
+}
