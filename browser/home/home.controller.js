@@ -1,6 +1,5 @@
 'use strict';
 
-/* global countries */
 // Both HomeController and CountryController use the CountryFactory
 app.controller('HomeCtrl', function($scope, $state, $stateParams, CountryFactory, facebookFactory, pixabayFactory, $q){
 
@@ -22,7 +21,6 @@ app.controller('HomeCtrl', function($scope, $state, $stateParams, CountryFactory
 	}];
 
 	$scope.fakeCountries = fake;
-	$scope.goToCountry = goToCountry;
 
 	facebookFactory.getCountries()
 	.then(function(countriesObj){
@@ -40,7 +38,7 @@ app.controller('HomeCtrl', function($scope, $state, $stateParams, CountryFactory
 	});
 
 	// Public functions
-	function goToCountry(id) {
+	$scope.goToCountry = function(id) {
 		$state.go('country', {id: id+1});
 	}
 
