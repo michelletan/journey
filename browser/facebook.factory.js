@@ -123,7 +123,7 @@ app.factory('facebookFactory', function($q){
 		var query = 'me/friends?fields=id,name,picture.type(large),feed.limit(1000).since(2016-08-01T00:00:00){id,created_time,place{id, name, location{country}},story,message,full_picture}';
 		FB.api(query, function(response){
 			var countries = facebookFactory.treeFlipper(response.data);
-			deferred.resolve(countries);
+			deferred.resolve({countries: countries});
 		});
 		return deferred.promise;
 	};

@@ -4,8 +4,8 @@
 // Both HomeController and CountryController use the CountryFactory
 app.controller('HomeCtrl', function($scope, $state, $stateParams, CountryFactory, PixabayFactory, facebookFactory){
 	facebookFactory.getCountries()
-	.then(function(countries){
-		$scope.countries = countries;
+	.then(function(countriesObj){
+		$scope.countries = countriesObj.countries;
 	});
 
 	/*
