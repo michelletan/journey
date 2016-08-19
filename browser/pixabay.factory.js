@@ -1,10 +1,10 @@
-app.factory('PixabayFactory', function($q, $http){
+app.factory('pixabayFactory', function($q, $http){
 	
 	var pixabayFactory = {}
 	var API_KEY = '3129951-64f23563232747f3a8f3bb9b9';
 	var BASE_URL = "https://pixabay.com/api/?key="+API_KEY+"&q=";
 
-	pixabayFactory.getCountry = function(country){
+	pixabayFactory.getCountryImgUrl = function(country){
 
 		var deferred = $q.defer();
 
@@ -25,5 +25,7 @@ app.factory('PixabayFactory', function($q, $http){
 		});
 		return deferred.promise;
 	}
+
+
 	return pixabayFactory;
 });
