@@ -26,6 +26,11 @@ html, body, md-content {
     height: 300px;
 }
 
+.country-header {
+    margin-top: 20px;
+    height: 200px;
+}
+
 .mid {
     color: white;
     text-align: center;
@@ -50,4 +55,15 @@ html, body, md-content {
 
 .img-circle {
     border-radius: 50%;
+}
+
+.subheader {
+    margin: 20px 0px 10px 0px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.subheader-content {
+    padding: 10px;
+    background-color: white;
 }

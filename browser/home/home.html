@@ -1,23 +1,11 @@
 <section>
     <!-- ngRepeat here for app features -->
     <div layout="row" layout-align="center center" layout-wrap flex-xs="100" flex-offset-gt-xs="15" flex-gt-xs="70">
-    		<div flex="90">
-    		Explore Journeys In:
-    		</div>
-        <md-card flex-xs="100" flex-gt-xs="30" ng-repeat="country in countries">
-            <img ng-src="{{country.source}}" class="md-card-image image-feature" alt="CountryImage">
-            <md-card-title>
-                <md-card-title-text>
-                    <span class="md-headline">{{country.name}}</span>
-                </md-card-title-text>
-            </md-card-title>
-            <md-card-content>
-                <div ng-repeat="place in country.places">
-                    <div ng-repeat="friend in place.friends">
-                        {{friend.name}}
-                        <img src="{{friend.source}}" alt="profilePic">
-                    </div>
-                </div>
-            </md-card-content>
-        </md-card>
-</section>
+        <!-- friends' journeys -->
+        <div class="subheader">Explore Journeys in</div>
+        <div ng-repeat="country in countries" ng-style="{'background-image':'url({{country.source}})'}" class="img-overlay country-header mid" layout="column" layout-align="center center">
+            <h2>{{country.name}}</h2>
+        </div>
+        <!-- my journeys -->
+        <div class="subheader">My Journeys</div>
+    </section>
