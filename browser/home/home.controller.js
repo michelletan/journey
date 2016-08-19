@@ -25,14 +25,18 @@ app.controller('HomeCtrl', function($scope, $state, $stateParams, CountryFactory
 	facebookFactory.getCountries()
 	.then(function(countriesObj){
 		var countries = countriesObj.countries;
+		console.log("before finding images, countries is: ", countries);
 		return $q.map(countries, function(country){
 			return pixabayFactory.getCountryImgUrl(country.name)
 			.then(function(imageUrl){
+				console.log("an imageUrl was found: ", imageUrl);
 				country.source = imageUrl;
+				console.log("country with imageUrl is now: ", country);
 				return country;
 			})
 		})
 		.then(function(updatedCountries){
+			console.log("updatedCountries is now: ", updatedCountries);
 			$scope.countries = updatedCountries;
 		})
 	});

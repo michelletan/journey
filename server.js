@@ -1,7 +1,9 @@
 'use strict';
 var express = require('express');
 var app = express();
-
+/*
+var database = require('./db.js');
+*/
 var path = require('path');
 var indexHtmlPath = path.join(__dirname, '/browser/index.html');
 
@@ -23,6 +25,13 @@ app.listen(port, function(err) {
 	if(err){
 		throw err;
 	}else{
-		console.log('Journey server is up. Listening on port: ', port);
+/*		database.db.sync()
+		.then(function(){
+			console.log("Database is synced.");
+		})
+		.then(function(){
+			console.log('Journey server is up. Listening on port: ', port);	
+		})*/
+			console.log('Journey server is up. Listening on port: ', port);
 	}
 })

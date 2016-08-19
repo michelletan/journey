@@ -41,10 +41,11 @@ Journey.belongsTo(User);
 Journey.belongsToMany(Post);
 Post.belongsToMany(Journey);
 
-db.sync();
-
 module.exports = {
-	User: User,
-	Post: Post,
-	Journey: Journey
+	db: db,
+	model: {
+		User: User,
+		Post: Post,
+		Journey: Journey
+	}
 };
