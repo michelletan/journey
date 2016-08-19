@@ -7,23 +7,6 @@
 			</div>
 			<div layout="row" layout-align="space-between start">
 				<div layout="column" layout-align="start start" flex="65">
-					<!-- places -->
-					<div class="subheader">Places</div>
-					<md-card class="subheader-content" layout-fill>
-						<md-grid-list id="places-container" md-cols="3" md-gutter="10px" md-row-height="1:1" layout-fill>
-						  <md-grid-tile ng-click="goToPlace($index)" ng-repeat="friend in country.friends | limitTo: maxPlacesShown">
-							  <img ng-src="{{friend.source}}" class="md-card-image img-cover" alt="Washed Out" layout-fill>
-  							<md-grid-tile-footer class="places-footer">
-  								{{friend.name}}
-  							</md-grid-tile-footer>
-
-						  </md-grid-tile>
-						</md-grid-list>
-						<div layout="row" layout-align="center center" layout-fill>
-								<md-button ng-click="maxPlacesShown = country.friends.length" ng-show="maxPlacesShown <= defaultPlacesShown">View More</md-button>
-  							  <md-button ng-click="maxPlacesShown = defaultPlacesShown" ng-show="maxPlacesShown === country.friends.length">Hide</md-button>
-						</div>
-					</md-card>
 					<!-- posts -->
 					<div class="subheader">Posts</div>
 					<md-card ng-repeat="friend in country.friends" class="post" layout-fill>

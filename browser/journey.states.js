@@ -1,6 +1,6 @@
 'use strict';
 
-app.config(function($stateProvider){ 
+app.config(function($stateProvider){
   $stateProvider.state('landing', {
       url: '/',
       templateUrl: '/browser/landing/landing.html',
@@ -19,7 +19,11 @@ app.config(function($stateProvider){
     controller: 'CountryCtrl'
   });
 
+  $stateProvider.state('place', {
+    url: '/countries/:countryId/places/:placeId',
+    templateUrl: '/browser/place/place.html',
+    controller: 'PlaceCtrl'
+  });
+
 
 });
-
-
