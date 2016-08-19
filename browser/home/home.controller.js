@@ -3,7 +3,7 @@
 // Both HomeController and CountryController use the CountryFactory
 app.controller('HomeCtrl', function($scope, $state, $stateParams, CountryFactory, facebookFactory, pixabayFactory, $q){
 
-	var fake = [{
+/*	var fake = [{
 		source: 'http://www.gluckman.com/UB-1658.jpg',
 		name: 'Mongolia'
 	},
@@ -20,7 +20,7 @@ app.controller('HomeCtrl', function($scope, $state, $stateParams, CountryFactory
 		name: 'Singapore'
 	}];
 
-	$scope.fakeCountries = fake;
+	$scope.fakeCountries = fake;*/
 
 	facebookFactory.getCountries()
 	.then(function(countriesObj){
@@ -43,7 +43,7 @@ app.controller('HomeCtrl', function($scope, $state, $stateParams, CountryFactory
 
 	// Public functions
 	$scope.goToCountry = function(id) {
-		$state.go('country', {id: id+1});
+		$state.go('country', {id: id});
 	}
 
 });

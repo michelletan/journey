@@ -4,14 +4,14 @@
         <!-- friends' journeys -->
         <div class="subheader" layout-fill>Explore Journeys in</div>
         <md-grid-list id="places-container" md-cols="4" md-gutter="10px" md-row-height="1:1" layout-fill>
-            <md-grid-tile ng-click="goToCountry($index)" ng-repeat="country in fakeCountries" ng-style="{'background-image':'url({{country.source}})'}" class="img-overlay country-tile mid" layout="column" layout-align="center center">
+            <md-grid-tile ng-repeat="country in countries" ng-click="goToCountry(country.id)"  ng-style="{'background-image':'url({{country.source}})'}" class="img-overlay country-tile mid" layout="column" layout-align="center center">
                 <h2>{{country.name}}</h2>
             </md-grid-tile>
         </md-grid-list>
         <!-- my journeys -->
         <div class="subheader" layout-fill>My Journeys</div>
         <md-grid-list id="places-container" md-cols="4" md-gutter="10px" md-row-height="1:1" layout-fill>
-            <md-grid-tile ng-click="goToCountry($index)" ng-repeat="country in fakeCountries" ng-style="{'background-image':'url({{country.source}})'}" class="img-overlay country-tile mid" layout="column" layout-align="center center">
+            <md-grid-tile ng-repeat="country in countries" ng-click="goToCountry(country.id)"  ng-style="{'background-image':'url({{country.source}})'}" class="img-overlay country-tile mid" layout="column" layout-align="center center">
                 <h2>{{country.name}}</h2>
             </md-grid-tile>
         </md-grid-list>

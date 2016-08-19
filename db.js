@@ -38,8 +38,8 @@ User.hasMany(Journey);
 Journey.belongsTo(User);
 
 // Many-to-many
-Journey.belongsToMany(Post);
-Post.belongsToMany(Journey);
+Journey.belongsToMany(Post, {through: 'journeyPost'});
+Post.belongsToMany(Journey, {through: 'journeyPost'});
 
 module.exports = {
 	db: db,
