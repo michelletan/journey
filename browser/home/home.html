@@ -1,11 +1,18 @@
 <section>
     <!-- ngRepeat here for app features -->
-    <div layout="row" layout-align="center center" layout-wrap flex-xs="100" flex-offset-gt-xs="15" flex-gt-xs="70">
+    <div layout="column" layout-align="start center" layout-wrap flex-xs="100" flex-offset-gt-xs="15" flex-gt-xs="70">
         <!-- friends' journeys -->
-        <div class="subheader">Explore Journeys in</div>
-        <div ng-repeat="country in countries" ng-style="{'background-image':'url({{country.source}})'}" class="img-overlay country-header mid" layout="column" layout-align="center center">
-            <h2>{{country.name}}</h2>
-        </div>
+        <div class="subheader" layout-fill>Explore Journeys in</div>
+        <md-grid-list id="places-container" md-cols="4" md-gutter="10px" md-row-height="1:1" layout-fill>
+            <md-grid-tile ng-click="goToCountry($index)" ng-repeat="country in fakeCountries" ng-style="{'background-image':'url({{country.source}})'}" class="img-overlay country-tile mid" layout="column" layout-align="center center">
+                <h2>{{country.name}}</h2>
+            </md-grid-tile>
+        </md-grid-list>
         <!-- my journeys -->
-        <div class="subheader">My Journeys</div>
+        <div class="subheader" layout-fill>My Journeys</div>
+        <md-grid-list id="places-container" md-cols="4" md-gutter="10px" md-row-height="1:1" layout-fill>
+            <md-grid-tile ng-click="goToCountry($index)" ng-repeat="country in fakeCountries" ng-style="{'background-image':'url({{country.source}})'}" class="img-overlay country-tile mid" layout="column" layout-align="center center">
+                <h2>{{country.name}}</h2>
+            </md-grid-tile>
+        </md-grid-list>
     </section>

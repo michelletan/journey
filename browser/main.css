@@ -27,7 +27,6 @@ html, body, md-content {
 }
 
 .country-header {
-    margin-top: 20px;
     height: 200px;
 }
 
@@ -46,6 +45,10 @@ html, body, md-content {
     margin: 0;
     font-weight: 300;
     font-size: 24px;
+}
+
+.country-tile h2 {
+    font-size: 48px !important;
 }
 
 .img-user {
