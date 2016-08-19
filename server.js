@@ -7,6 +7,8 @@ var indexHtmlPath = path.join(__dirname, '/browser/index.html');
 
 // Serve up files
 app.use('/node_modules', express.static(__dirname + '/node_modules'));
+app.use('/bower_components', express.static(__dirname + '/bower_components'));
+
 app.use('/browser', express.static(__dirname + '/browser'));
 
 

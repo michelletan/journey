@@ -1,0 +1,24 @@
+{
+  "name": "journey",
+  "description": "cs3216 app 1",
+  "main": "index.js",
+  "authors": [
+    "michelle tan",
+    "lee kai yi",
+    "ten zhi yang and chua yao hui"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/superburrito/journey",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-bluebird-promises": "^1.0.1",
+    "angular-websocket": "angular-bluebird#^2.0.0"
+  }
+}
