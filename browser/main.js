@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('journeyApp', ['ui.router', 'ngMaterial']);
+var app = angular.module('journeyApp', ['ui.router', 'ngMaterial', 'mwl.bluebird']);
 
 // Start up Facebook API
 FB.init({
