@@ -13,12 +13,6 @@ app.config(function($stateProvider){
     controller: 'HomeCtrl'
   });
 
-  $stateProvider.state('home', {
-    url: '/home',
-    templateUrl: '/browser/home/home.html',
-    controller: 'HomeCtrl'
-  });
-
   $stateProvider.state('country', {
     url: '/countries/:id',
     templateUrl: '/browser/country/country.html',
