@@ -8,13 +8,13 @@ app.controller('NavbarCtrl', function($scope, $mdSidenav, facebookFactory) {
     name: 'My Journeys'
   }];
 
-  FB.init({
+/*  FB.init({
     appId      : '327010674354140',
     cookie     : true,  // enable cookies to allow the server to access 
                       // the session
     xfbml      : true,  // parse social plugins on this page
     version    : 'v2.7' // use graph api version 2.7
-  });
+  });*/
 
   FB.getLoginStatus(function(response) {
     facebookFactory.statusChangeCallback(response)
