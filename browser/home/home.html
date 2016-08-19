@@ -15,7 +15,7 @@
                 <div ng-repeat="place in country.places">
                     <div ng-repeat="friend in place.friends">
                         {{friend.name}}
-                        <img src="friend.source" alt="profilePic">
+                        <img src="{{friend.source}}" alt="profilePic">
                     </div>
                 </div>
             </md-card-content>
