@@ -6,24 +6,24 @@
 				<span class="country-header-name">{{country.name}}</span>
 			</div>
 			<div layout="row" layout-align="space-between start">
-				<div layout="column" layout-align="start start" flex="70">
+				<div layout="column" layout-align="start start" flex="65">
 					<div class="subheader">Places</div>
-					<div id="places-container" layout="row" layout-wrap>
-						<md-card ng-repeat="friend in country.friends | limitTo: maxPlacesShown" flex="30">
-							<img ng-src="{{friend.source}}" class="md-card-image img-cover" alt="Washed Out" flex>
-							<md-card-content class="places-subtitle">
-								{{friend.name}}
-							</md-card-content>
-						</md-card>
-						<md-card flex="100">
-							<md-card-actions layout="row" layout-align="center center">
+					<md-card class="subheader-content" layout-fill>
+						<md-grid-list id="places-container" md-cols="3" md-gutter="10px" md-row-height="1:1" layout-fill>
+						  <md-grid-tile ng-repeat="friend in country.friends | limitTo: maxPlacesShown">
+							  <img ng-src="{{friend.source}}" class="md-card-image img-cover" alt="Washed Out" layout-fill>
+  							<md-grid-tile-footer class="places-footer">
+  								{{friend.name}}
+  							</md-grid-tile-footer>
+						  </md-grid-tile>
+						</md-grid-list>
+						<div layout="row" layout-align="center center" layout-fill>
 								<md-button ng-click="maxPlacesShown = country.friends.length" ng-show="maxPlacesShown <= defaultPlacesShown">View More</md-button>
-								<md-button ng-click="maxPlacesShown = defaultPlacesShown" ng-show="maxPlacesShown === country.friends.length">Hide</md-button>
-							</md-card-actions>
-						</md-card>
-					</div>
+  							  <md-button ng-click="maxPlacesShown = defaultPlacesShown" ng-show="maxPlacesShown === country.friends.length">Hide</md-button>
+						</div>
+					</md-card>
 					<div class="subheader">Posts</div>
-					<md-card ng-repeat="friend in country.friends">
+					<md-card ng-repeat="friend in country.friends" class="post" layout-fill>
 						<md-card-header>
 							<md-card-avatar>
 								<img class="md-user-avatar" src="{{friend.source}}" layout-fill/>
@@ -54,15 +54,20 @@
 				</div>
 				<div layout="column" layout-align="start start" flex="30">
 					<div class="subheader">Friends</div>
-					<!-- display data for each country -->
-					<md-grid-list md-cols="3" md-row-height="1:1" md-gutter="8px" layout-fill>
+					<md-card class="subheader-content" layout-fill>
+					<md-grid-list md-cols="5" md-row-height="1:1" md-gutter="8px" layout-fill>
 						<md-grid-tile ng-repeat="friend in country.friends">
 							<img class="img-cover" src="{{friend.source}}" layout-fill/>
-							<md-grid-tile-footer>
-								<h3>{{friend.name}}</h3>
-							</md-grid-tile-footer>
+							<md-tooltip md-direction="top">
+								{{friend.name}}
+							</md-tooltip>
 						</md-grid-tile>
 					</md-grid-list>
+					<br>
+					<div>
+						Want to see more? <br>Invite your friends to Journey!
+					</div>
+				</md-card>
 				</div>
 			</div>
 		</div>
