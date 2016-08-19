@@ -12,16 +12,19 @@ app.factory('facebookFactory', function($q){
 		// for FB.getLoginStatus().
 		if (response.status === 'connected') {
 		  // Logged into your app and Facebook.
-		  document.getElementById("logInLanding").style.display = 'none';
+		  if(document.getElementById("logInLanding")!=undefined)
+			document.getElementById("logInLanding").style.display = 'none';
 		  return facebookFactory.whenConnected();
 		} else if (response.status === 'not_authorized') {
 		  // The person is logged into Facebook, but not your app.
-		  document.getElementById("logInLanding").style.display = 'block';
+		  if(document.getElementById("logInLanding")!=undefined)
+			document.getElementById("logInLanding").style.display = 'block';
 		  
 		} else {
 		  // The person is not logged into Facebook, so we're not sure if
 		  // they are logged into this app or not.
-		  document.getElementById("logInLanding").style.display = 'block';
+		  if(document.getElementById("logInLanding")!=undefined)
+			document.getElementById("logInLanding").style.display = 'block';
 		  
 		}
 	}
@@ -41,9 +44,9 @@ app.factory('facebookFactory', function($q){
 		return deferred.promise;
 	}
 
-	facebookFactory.treeFlipper = function(friends){
+	facebookFactory.treeFlipper = function(fbfriends){
          var countries = [];
-         friends.forEach(function(fbfriend){
+         fbfriends.forEach(function(fbfriend){
              if(fbfriend.feed != undefined){
                  fbfriend.feed.data.forEach(function(post){
                      if(post.place !=undefined){
