@@ -12,13 +12,16 @@ app.factory('facebookFactory', function($q){
 		// for FB.getLoginStatus().
 		if (response.status === 'connected') {
 		  // Logged into your app and Facebook.
+		  document.getElementById("logInLanding").style.display = 'none';
 		  return facebookFactory.whenConnected();
 		} else if (response.status === 'not_authorized') {
 		  // The person is logged into Facebook, but not your app.
+		  document.getElementById("logInLanding").style.display = 'block';
 		  
 		} else {
 		  // The person is not logged into Facebook, so we're not sure if
 		  // they are logged into this app or not.
+		  document.getElementById("logInLanding").style.display = 'block';
 		  
 		}
 	}
@@ -72,6 +75,13 @@ app.factory('facebookFactory', function($q){
 	  	document.getElementById("dataDiv").appendChild(document.createTextNode(pretty));
 		//console.log(countries);
 		return countries;
+	}
+	
+	facebookFactory.logIntoFb = function(){
+		checkLoginState();
+		 FB.login(function(response) {
+		   checkLoginState();
+		 }, {scope: 'public_profile,email,user_tagged_places,user_friends'});
 	}
 
 	facebookFactory.getPlacePic = function(idStr){
