@@ -4,13 +4,16 @@
         <div class="image-spread-text" layout="column" layout-align="center center" layout-fill>
             <span class="image-spread-header">LIVE THEIR MOMENTS</span>
             <span layout-padding>Keep up with your friends all over the world</span>
+			<span id="logInLanding">
+				<md-button  ng-click="logIntoFb()" class="btn-login">
+					Log in with Facebook
+				</md-button>
+			</span>
 			<!--
-            <md-button class="btn-login">
-                Log in with Facebook
-            </md-button>
-			-->
 				<fb:login-button id="logInLanding" scope="public_profile,email,user_tagged_places,user_friends" autologoutlink="false" onlogin="checkLoginState();">
 				</fb:login-button>
+			-->
+				
         </div>
     </div>
     <!-- ngRepeat here for app features -->
