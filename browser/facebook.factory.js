@@ -106,17 +106,15 @@ app.factory('facebookFactory', function($q){
 		return deferred.promise;
 	};
 
-
-
-	facebookFactory.test = function(){
-		FB.api('me/friends?fields=id,name,picture.type(large),feed.limit(1000).since(2016-08-01T00:00:00){id,created_time,place{id, name, location{country}},story,message}'
-			,function(response){
-				var countries = treeFlipper(response.data);
-				for(var i=0; i<countries.length; i++){
-					getPlacePic(countries[i].name);
-				}
-			});
-	}
+	facebookFactory.getCountries = function(){
+		var deferred = $q.defer();
+		var query = 'me/friends?fields=id,name,picture.type(large),feed.limit(1000).since(2016-08-01T00:00:00){id,created_time,place{id, name, location{country}},story,message,full_picture}';
+		FB.api(query, function(response){
+			var countries = treeFlipper(response.data);
+			deferred.resolve(countries);
+		});
+		return deferred.promise;
+	};
 
 	  // This function is called when someone finishes with the Login
 	  // Button.  See the onlogin handler attached to it in the sample
