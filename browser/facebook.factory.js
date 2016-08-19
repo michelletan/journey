@@ -74,26 +74,31 @@ app.factory('facebookFactory', function($q){
 		return countries;
 	}
 
-	function getPlacePic(idStr){
+	facebookFactory.getPlacePic = function(idStr){
+		var deferred = $q.defer(); 
 		var query = idStr+"?fields=name,cover,picture.type(large)"
-		FB.api(query ,function(response){
+		FB.api(query, function(response){
 			var place = response;
-			var toDisplay = place.name+"<br/>";
-			if(place.cover !=undefined){
-				toDisplay += "<img src='";
-				toDisplay += place.cover.source;
-				toDisplay +="'/>";
+			var name = place.name;
+			var src;
+			if(!place.cover){
+				src = place.cover.source;
 			}else if(place.picture != undefined){
-				toDisplay += "<img src='";
-				toDisplay += place.picture.data.url;
-				toDisplay +="'/>";
+				src = place.picture.data.url;
+			}else{
+				src = "";
 			}
-			toDisplay += "<br/>";
-			document.getElementById("displayDiv").innerHTML += toDisplay;
+			deferred.resolve({
+				name: name,
+				source: src
+			});
 		});
-	}
+		return deferred.promise;
+	};
 
-	function test(){
+
+
+	facebookFactory.test = function(){
 		FB.api('me/friends?fields=id,name,picture.type(large),feed.limit(1000).since(2016-08-01T00:00:00){id,created_time,place{id, name, location{country}},story,message}'
 			,function(response){
 				var countries = treeFlipper(response.data);
