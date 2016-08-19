@@ -1,6 +1,5 @@
 'use strict';
 
-/* global countries */
 // Both HomeController and CountryController use the CountryFactory
 app.controller('HomeCtrl', function($scope, $state, $stateParams, CountryFactory, facebookFactory, pixabayFactory, $q){
 	facebookFactory.getCountries()
@@ -17,5 +16,5 @@ app.controller('HomeCtrl', function($scope, $state, $stateParams, CountryFactory
 			$scope.countries = updatedCountries;
 		})
 	});
-	
+
 });
