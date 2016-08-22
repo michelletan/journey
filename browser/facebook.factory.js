@@ -136,7 +136,14 @@ app.factory('facebookFactory', function($q){
 		   checkLoginState();
 		 }, {scope: 'public_profile,email,user_tagged_places,user_friends'});
 	}
-
+	
+	facebookFactory.logOutFb = function(){
+		checkLoginState();
+		FB.logout(function(response) {
+		  //logout processing here
+		});
+	}
+	
 	facebookFactory.getPlacePic = function(idStr){
 		var deferred = $q.defer(); 
 		var query = idStr+"?fields=name,cover,picture.type(large)"
