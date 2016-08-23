@@ -1,9 +1,9 @@
-app.factory('facebookFactory', function($q){
-	var facebookFactory = {}
+app.factory('FacebookFactory', function($q){
+	var FacebookFactory = {}
 
 	var toPrint = "";
 	
-	facebookFactory.statusChangeCallback = function(response) {
+	FacebookFactory.statusChangeCallback = function(response) {
 		console.log('statusChangeCallback');
 		console.log(response);
 		// The response object is returned with a status field that lets the
@@ -14,7 +14,7 @@ app.factory('facebookFactory', function($q){
 		  // Logged into your app and Facebook.
 		  if(document.getElementById("logInLanding")!=undefined)
 			document.getElementById("logInLanding").style.display = 'none';
-		  return facebookFactory.whenConnected();
+		  return FacebookFactory.whenConnected();
 		} else if (response.status === 'not_authorized') {
 		  // The person is logged into Facebook, but not your app.
 		  if(document.getElementById("logInLanding")!=undefined)
@@ -29,7 +29,7 @@ app.factory('facebookFactory', function($q){
 		}
 	}
 
-	facebookFactory.whenConnected = function(){
+	FacebookFactory.whenConnected = function(){
 		var	deferred = $q.defer(); 
 		FB.api('me?fields=name,picture.type(large)', function(response) {
 			if(!response || response.error){
@@ -44,7 +44,7 @@ app.factory('facebookFactory', function($q){
 		return deferred.promise;
 	}
 
-	facebookFactory.treeFlipper = function(fbfriends){
+	FacebookFactory.treeFlipper = function(fbfriends){
          var countries = [];
          fbfriends.forEach(function(fbfriend){
              if(fbfriend.feed != undefined){
@@ -130,21 +130,21 @@ app.factory('facebookFactory', function($q){
    }
 
 
-	facebookFactory.logIntoFb = function(){
+	FacebookFactory.logIntoFb = function(){
 		checkLoginState();
 		 FB.login(function(response) {
 		   checkLoginState();
 		 }, {scope: 'public_profile,email,user_tagged_places,user_friends'});
 	}
 	
-	facebookFactory.logOutFb = function(){
+	FacebookFactory.logOutFb = function(){
 		checkLoginState();
 		FB.logout(function(response) {
 		  //logout processing here
 		});
 	}
 	
-	facebookFactory.getPlacePic = function(idStr){
+	FacebookFactory.getPlacePic = function(idStr){
 		var deferred = $q.defer(); 
 		var query = idStr+"?fields=name,cover,picture.type(large)"
 		FB.api(query, function(response){
@@ -166,11 +166,11 @@ app.factory('facebookFactory', function($q){
 		return deferred.promise;
 	};
 
-	facebookFactory.getCountries = function(){
+	FacebookFactory.getCountries = function(){
 		var deferred = $q.defer();
 		var query = 'me/friends?fields=id,name,picture.type(large),feed.limit(1000).since(2016-08-01T00:00:00){id,created_time,place{id, name, location{country}},story,message,full_picture}';
 		FB.api(query, function(response){
-			var countries = facebookFactory.treeFlipper(response.data);
+			var countries = FacebookFactory.treeFlipper(response.data);
 			deferred.resolve({countries: countries});
 		});
 		return deferred.promise;
@@ -196,8 +196,7 @@ app.factory('facebookFactory', function($q){
 	  }(document, 'script', 'facebook-jssdk'));
 
 
-	  return facebookFactory;
-
+	  return FacebookFactory;
 
 
 	})

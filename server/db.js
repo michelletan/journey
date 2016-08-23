@@ -68,7 +68,7 @@ Post.belongsToMany(Journey, {through: 'journeyPost'});
 
 module.exports = {
 	db: db,
-	model: {
+	models: {
 		User: User,
 		Post: Post,
 		Journey: Journey

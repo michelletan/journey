@@ -1,4 +1,4 @@
-app.controller('NavbarCtrl', function($scope, $mdSidenav, facebookFactory) {
+app.controller('NavbarCtrl', function($scope, $mdSidenav, FacebookFactory) {
   var sidenavId = 'left';
   var menuOptions = [{
     icon: 'settings',
@@ -17,7 +17,7 @@ app.controller('NavbarCtrl', function($scope, $mdSidenav, facebookFactory) {
   });*/
 
   FB.getLoginStatus(function(response) {
-    facebookFactory.statusChangeCallback(response)
+    FacebookFactory.statusChangeCallback(response)
     .then(function(nameSourceObj){
       console.log("name and profile pic is: ", nameSourceObj);
       $scope.name = nameSourceObj.name;

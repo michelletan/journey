@@ -1,7 +1,7 @@
 'use strict';
 
 // Both HomeController and CountryController use the CountryFactory
-app.controller('HomeCtrl', function($scope, $state, $stateParams, CountryFactory, facebookFactory, pixabayFactory, $q){
+app.controller('HomeCtrl', function($scope, $state, $stateParams, CountryFactory, FacebookFactory, PixabayFactory, $q){
 
 /*	var fake = [{
 		source: 'http://www.gluckman.com/UB-1658.jpg',
@@ -22,12 +22,12 @@ app.controller('HomeCtrl', function($scope, $state, $stateParams, CountryFactory
 
 	$scope.fakeCountries = fake;*/
 
-	facebookFactory.getCountries()
+	FacebookFactory.getCountries()
 	.then(function(countriesObj){
 		var countries = countriesObj.countries;
 		console.log("before finding images, countries is: ", countries);
 		return $q.map(countries, function(country){
-			return pixabayFactory.getCountryImgUrl(country.name)
+			return PixabayFactory.getCountryImgUrl(country.name)
 			.then(function(imageUrl){
 				console.log("an imageUrl was found: ", imageUrl);
 				country.source = imageUrl;
