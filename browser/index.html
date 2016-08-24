@@ -33,9 +33,8 @@
 	<script src="/browser/navbar/navbar.controller.js"></script>
 	<script src="/browser/landing/landing.controller.js"></script>
 	<script src="/browser/home/home.controller.js"></script>
-	<script src="/browser/country/country.controller.js"></script>
-	<script src="/browser/country/country.factory.js" ></script>
-	<script src="/browser/place/place.controller.js"></script>
+	<script src="/browser/friends/friends.controller.js"></script>
+	<script src="/browser/journeys/journeys.controller.js"></script>
 	<script src="/browser/journey.states.js"></script>
 
 	<script src="/browser/facebook.factory.js"></script>
@@ -51,8 +50,8 @@
 	<link rel="stylesheet" href="/browser/main.css">
 	<link rel="stylesheet" href="/browser/navbar/navbar.css">
 	<link rel="stylesheet" href="/browser/landing/landing.css">
-	<link rel="stylesheet" href="/browser/country/country.css">
-	<link rel="stylesheet" href="/browser/place/place.css">
+	<link rel="stylesheet" href="/browser/friends/friends.css">
+	<link rel="stylesheet" href="/browser/journeys/journeys.css">
 </head>
 
 <body ng-app="journeyApp">
@@ -60,12 +59,6 @@
 
 	<md-content>
 		<ui-view></ui-view>
-
-		<div class="footer" layout="row" layout-align="center center">
-			<span>©2016 Journey</span>
-			<a ui-sref="policy" layout-padding>Privacy Policy</a>
-			<a ui-sref="terms">Terms of Service</a>
-		</div>
 	</md-content>
 	<!-- <a ui-sref="home">Home</a>
 	<div>

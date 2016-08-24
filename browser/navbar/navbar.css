@@ -7,7 +7,7 @@ md-toolbar {
   color: black !important;
 }
 
-md-sidenav, md-list {
+md-sidenav md-content, md-list {
   background: #e5e5e5;
 }
 

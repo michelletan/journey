@@ -13,16 +13,16 @@ app.config(function($stateProvider){
     controller: 'HomeCtrl'
   });
 
-  $stateProvider.state('country', {
-    url: '/countries/:id',
-    templateUrl: '/browser/country/country.html',
-    controller: 'CountryCtrl'
+  $stateProvider.state('friends', {
+    url: '/friends',
+    templateUrl: '/browser/friends/friends.html',
+    controller: 'FriendsCtrl'
   });
 
-  $stateProvider.state('place', {
-    url: '/countries/:countryId/places/:placeId',
-    templateUrl: '/browser/place/place.html',
-    controller: 'PlaceCtrl'
+  $stateProvider.state('journeys', {
+    url: '/journeys',
+    templateUrl: '/browser/journeys/journeys.html',
+    controller: 'JourneysCtrl'
   });
 
   $stateProvider.state('policy', {

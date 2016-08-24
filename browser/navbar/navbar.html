@@ -4,13 +4,9 @@
         <md-toolbar class="md-whiteframe-4dp">
             <div class="md-toolbar-tools" layout="row">
                 <div layout="row" layout-align="start center" flex="33">
-                    <md-button ng-click="openSideNav()" class="md-icon-button" hide-gt-xs>
+                    <md-button ng-click="openSideNav()" class="md-icon-button">
                         <i class="material-icons">menu</i>
                     </md-button>
-                    <!-- temp navigation -->
-                    <md-button ui-sref="landing" layout-padding>Landing</md-button>
-            		<md-button ui-sref="home" layout-padding>Home</md-button>
-            		<md-button ui-sref="country({id: 4})">Explore (Country)</md-button>
                 </div>
                 <div layout="row" layout-align="center center" flex="33">
                     <img class="app-icon" src="/images/journey-icon-circle.png" />
@@ -24,18 +20,39 @@
         </md-toolbar>
         <!-- side nav menu -->
         <md-sidenav class="md-sidenav-left" md-component-id="left">
-            <md-toolbar class="md-whiteframe-4dp" layout="row" layout-align="start center" layout-padding>
+            <md-toolbar class="md-whiteframe-4dp" layout="row" layout-align="start center" layout-padding hide-gt-xs>
                 <img alt="person name" ng-src="{{userPic}}" class="md-avatar img-user img-circle" />
                 <span class="title-username">Michelle</span>
             </md-toolbar>
-            <md-content>
+            <md-content layout="column" layout-align="space-between stretch" layout-fill>
                 <md-list>
-                    <md-list-item ng-repeat="item in menu">
-                        <p> {{item.name}}</p>
+                    <md-list-item ui-sref="home">
+                        <p>Home</p>
+                    </md-list-item>
+                    <md-list-item ui-sref="friends">
+                        <p>Friends</p>
+                    </md-list-item>
+                    <md-list-item ui-sref="journeys">
+                        <p>My Journeys</p>
+                    </md-list-item>
+                    <md-list-item ui-sref="landing">
+                        <p>About Journey</p>
                     </md-list-item>
                     <md-divider></md-divider>
-                    <md-list-item>
+                    <md-list-item ng-click="logout()">
                         <p>Logout</p>
+                    </md-list-item>
+                </md-list>
+                <md-list>
+                    <md-divider></md-divider>
+                    <md-list-item ui-sref="policy">
+                        <p>Privacy Policy</p>
+                    </md-list-item>
+                    <md-list-item ui-sref="terms">
+                        <p>Terms of Service</p>
+                    </md-list-item>
+                    <md-list-item>
+                        <p>©2016 Journey</p>
                     </md-list-item>
                 </md-list>
             </md-content>
