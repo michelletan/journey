@@ -1,7 +1,7 @@
 'use strict';
 
 // Both HomeController and CountryController use the CountryFactory
-app.controller('HomeCtrl', function($scope, $state, $stateParams, CountryFactory, FacebookFactory, PixabayFactory, $q){
+app.controller('HomeCtrl', function($scope, $state, $stateParams, FacebookFactory, $q){
 
 /*	var fake = [{
 		source: 'http://www.gluckman.com/UB-1658.jpg',
@@ -22,28 +22,8 @@ app.controller('HomeCtrl', function($scope, $state, $stateParams, CountryFactory
 
 	$scope.fakeCountries = fake;*/
 
-	FacebookFactory.getCountries()
-	.then(function(countriesObj){
-		var countries = countriesObj.countries;
-		console.log("before finding images, countries is: ", countries);
-		return $q.map(countries, function(country){
-			return PixabayFactory.getCountryImgUrl(country.name)
-			.then(function(imageUrl){
-				console.log("an imageUrl was found: ", imageUrl);
-				country.source = imageUrl;
-				console.log("country with imageUrl is now: ", country);
-				return country;
-			})
-		})
-		.then(function(updatedCountries){
-			console.log("updatedCountries is now: ", updatedCountries);
-			$scope.countries = updatedCountries;
-		})
-	});
-
-	// Public functions
-	$scope.goToCountry = function(id) {
-		$state.go('country', {id: id});
-	}
+	$scope.defaultUserPic = '/images/user.png';
+	$scope.defaultSpreadPic = '/images/landing-spread.jpg';
+	$scope.defaultUserName = 'User';
 
 });

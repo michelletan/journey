@@ -1,18 +1,33 @@
 <section>
-    <!-- ngRepeat here for app features -->
     <div layout="column" layout-align="start center" layout-wrap flex-xs="100" flex-offset-gt-xs="15" flex-gt-xs="70">
-        <!-- friends' journeys -->
-        <div class="subheader" layout-fill>Explore Journeys in</div>
-        <md-grid-list id="places-container" md-cols="4" md-gutter="10px" md-row-height="1:1" layout-fill>
-            <md-grid-tile ng-repeat="country in countries" ng-click="goToCountry(country.id)"  ng-style="{'background-image':'url({{country.source}})'}" class="img-overlay country-tile mid" layout="column" layout-align="center center">
-                <h2>{{country.name}}</h2>
-            </md-grid-tile>
-        </md-grid-list>
-        <!-- my journeys -->
-        <div class="subheader" layout-fill>My Journeys</div>
-        <md-grid-list id="places-container" md-cols="4" md-gutter="10px" md-row-height="1:1" layout-fill>
-            <md-grid-tile ng-repeat="country in countries" ng-click="goToCountry(country.id)"  ng-style="{'background-image':'url({{country.source}})'}" class="img-overlay country-tile mid" layout="column" layout-align="center center">
-                <h2>{{country.name}}</h2>
-            </md-grid-tile>
-        </md-grid-list>
-    </section>
+        <div class="subheader" layout-fill></div>
+        <div layout="row" layout-align="start stretch" layout-fill>
+            <div flex="10" layout="column" layout-align="start center">
+                <img class="img-post-user img-circle" src="{{friend.source ? friend.source : defaultUserPic}}"/>
+                <span class="post-user">{{friend.name ? friend.name : defaultUserName}}</span>
+            </div>
+            <div flex="90">
+                <md-card class="post">
+                    <img ng-src="{{friend.source ? friend.source : defaultSpreadPic}}" class="md-card-image img-cover" alt="Washed Out">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">Crazy trip in China!!</span>
+                            <span class="md-subhead">7 posts, 10 - 19 Aug 2016</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button class="md-icon-button" aria-label="Like">
+                            <i class="material-icons">thumb_up</i>
+                        </md-button>
+                        <md-button class="md-icon-button" aria-label="Comment">
+                            <i class="material-icons">comment</i>
+                        </md-button>
+                        <md-button class="md-icon-button" aria-label="Share">
+                            <i class="material-icons">share</i>
+                        </md-button>
+                    </md-card-actions>
+                </md-card>
+            </div>
+        </div>
+    </div>
+</section>
