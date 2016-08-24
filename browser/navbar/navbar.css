@@ -29,3 +29,7 @@ md-sidenav md-content, md-list {
   padding-left: 8px;
   color: black !important;
 }
+
+.navbar-button {
+    cursor: pointer;
+}

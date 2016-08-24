@@ -1,12 +1,5 @@
-app.controller('NavbarCtrl', function($scope, $mdSidenav, FacebookFactory) {
+app.controller('NavbarCtrl', function($scope, $mdSidenav, $mdDialog, FacebookFactory) {
   var sidenavId = 'left';
-  var menuOptions = [{
-    icon: 'settings',
-    name: 'Explore'
-  }, {
-    icon: 'settings',
-    name: 'My Journeys'
-  }];
 
 /*  FB.init({
     appId      : '327010674354140',
@@ -25,13 +18,19 @@ app.controller('NavbarCtrl', function($scope, $mdSidenav, FacebookFactory) {
     })
   });
 
-    $scope.menu = menuOptions;
+    $scope.defaultUserPic = '/images/user.png';
+
     $scope.openSideNav = openSideNav;
+    $scope.openDropdownMenu = openDropdownMenu;
     $scope.logout = logout;
 
     // Public functions
     function openSideNav() {
       $mdSidenav(sidenavId).toggle();
+    }
+
+    function openDropdownMenu($mdOpenMenu, ev) {
+      $mdOpenMenu(ev);
     }
 
     function logout() {

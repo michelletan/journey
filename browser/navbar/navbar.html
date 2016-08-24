@@ -9,18 +9,22 @@
                     </md-button>
                 </div>
                 <div layout="row" layout-align="center center" flex="33">
-                    <img class="app-icon" src="/images/journey-icon-circle.png" />
-                    <h2 class="app-name">journey</h2>
+                    <div ui-sref="home" class="navbar-button" layout="row" layout-align="center center">
+                        <img class="app-icon" src="/images/journey-icon-circle.png" />
+                        <p class="app-name">journey</p>
+                    </div>
                 </div>
                 <div layout="row" layout-align="center center" flex="33">
-                    <img alt="person name" ng-src="{{userPic}}" class="md-avatar img-user img-circle" hide-xs/>
-                    <span class="title-username" hide-xs>{{name}}</span>
+                    <div ui-sref="profile" class="navbar-button" layout="row" layout-align="center center">
+                        <img alt="person name" ng-src="{{userPic ? userPic : defaultUserPic}}" class="md-avatar img-user img-circle" hide-xs/>
+                        <span class="title-username" hide-xs>{{name ? name : 'User'}}</span>
+                    </div>
                 </div>
             </div>
         </md-toolbar>
         <!-- side nav menu -->
         <md-sidenav class="md-sidenav-left" md-component-id="left">
-            <md-toolbar class="md-whiteframe-4dp" layout="row" layout-align="start center" layout-padding hide-gt-xs>
+            <md-toolbar ui-sref="profile" class="md-whiteframe-4dp" layout="row" layout-align="start center" layout-padding hide-gt-xs>
                 <img alt="person name" ng-src="{{userPic}}" class="md-avatar img-user img-circle" />
                 <span class="title-username">Michelle</span>
             </md-toolbar>
@@ -50,6 +54,9 @@
                     </md-list-item>
                     <md-list-item ui-sref="terms">
                         <p>Terms of Service</p>
+                    </md-list-item>
+                    <md-list-item ui-sref="credits">
+                        <p>Credits</p>
                     </md-list-item>
                     <md-list-item>
                         <p>©2016 Journey</p>

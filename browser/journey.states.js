@@ -13,6 +13,12 @@ app.config(function($stateProvider){
     controller: 'HomeCtrl'
   });
 
+  $stateProvider.state('profile', {
+    url: '/profile',
+    templateUrl: '/browser/profile/profile.html',
+    controller: 'ProfileCtrl'
+  });
+
   $stateProvider.state('friends', {
     url: '/friends',
     templateUrl: '/browser/friends/friends.html',
@@ -33,6 +39,11 @@ app.config(function($stateProvider){
   $stateProvider.state('terms', {
     url: '/terms',
     templateUrl: '/browser/terms/terms.html'
+  });
+
+  $stateProvider.state('credits', {
+    url: '/credits',
+    templateUrl: '/browser/credits/credits.html'
   });
 
 
