@@ -70,3 +70,14 @@ html, body, md-content {
     padding: 10px;
     background-color: white;
 }
+
+.loading-container {
+    margin-top: 50px;
+}
+
+.loading-title {
+    font-family: 'Dosis', sans-serif;
+    font-weight: 600 !important;
+    font-size: 28px !important;
+    color: #09a6c8;
+}

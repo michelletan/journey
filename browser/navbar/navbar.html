@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <div layout="row" layout-align="center center" flex="33">
-                    <div ui-sref="profile" class="navbar-button" layout="row" layout-align="center center">
+                    <div ui-sref="profile({id: {{userId ? userId : defaultUserId}}})" class="navbar-button" layout="row" layout-align="center center">
                         <img alt="person name" ng-src="{{userPic ? userPic : defaultUserPic}}" class="md-avatar img-user img-circle" hide-xs/>
                         <span class="title-username" hide-xs>{{name ? name : defaultUserName}}</span>
                     </div>
@@ -24,9 +24,9 @@
         </md-toolbar>
         <!-- side nav menu -->
         <md-sidenav class="md-sidenav-left" md-component-id="left">
-            <md-toolbar ui-sref="profile" class="md-whiteframe-4dp" layout="row" layout-align="start center" layout-padding hide-gt-xs>
-                <img alt="person name" ng-src="{{userPic}}" class="md-avatar img-user img-circle" />
-                <span class="title-username">Michelle</span>
+            <md-toolbar ui-sref="profile({id: {{userId ? userId : defaultUserId}}})" class="md-whiteframe-4dp" layout="row" layout-align="start center" layout-padding hide-gt-xs>
+                <img alt="person name" ng-src="{{userPic ? userPic : defaultUserPic}}" class="md-avatar img-user img-circle" />
+                <span class="title-username">{{name ? name : defaultUserName}}</span>
             </md-toolbar>
             <md-content layout="column" layout-align="space-between stretch" layout-fill>
                 <md-list>

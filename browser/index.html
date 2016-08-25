@@ -29,12 +29,14 @@
 	<!-- local JS dependencies -->
 	<script src="/browser/seed.js"></script>
 	<script src="/browser/main.js"></script>
+	<script src="/browser/index.controller.js"></script>
 	<script src="/browser/navbar/navbar.directive.js"></script>
 	<script src="/browser/navbar/navbar.controller.js"></script>
 	<script src="/browser/landing/landing.controller.js"></script>
 	<script src="/browser/home/home.controller.js"></script>
 	<script src="/browser/friends/friends.controller.js"></script>
 	<script src="/browser/journeys/journeys.controller.js"></script>
+	<script src="/browser/profile/profile.controller.js"></script>
 	<script src="/browser/journey.states.js"></script>
 
 	<script src="/browser/facebook.factory.js"></script>
@@ -56,11 +58,17 @@
 </head>
 
 <body ng-app="journeyApp">
-	<navbar></navbar>
+	<div ng-controller="IndexCtrl">
+		<navbar></navbar>
+		<div ng-show="isLoading" class="loading-container" layout="column" layout-align="center center">
+			<p class="loading-title">Loading...</p>
+			<img src="/images/loading.svg">
 
-	<md-content>
-		<ui-view></ui-view>
-	</md-content>
+		</div>
+		<md-content ng-show="!isLoading">
+			<ui-view></ui-view>
+		</md-content>
+	</div>
 	<!-- <a ui-sref="home">Home</a>
 	<div>
 	<fb:login-button scope="public_profile,email,user_tagged_places,user_friends" autologoutlink="true" onlogin="checkLoginState();">
