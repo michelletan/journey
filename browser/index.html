@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-	<title>Journey</title>
+	<title ng-bind="($title || 'Home') + ' - Journey'">Journey</title>
 
 	<!-- favicon -->
 	<link rel="apple-touch-icon" sizes="180x180" href="/browser/icons/apple-touch-icon.png">
@@ -22,6 +22,7 @@
 	<!-- external JS dependencies BOWER -->
 	<script src="bower_components/bluebird/js/browser/bluebird.js"></script>
 	<script src="bower_components/angular-bluebird-promises/dist/angular-bluebird-promises.min.js"></script>
+	<script src="bower_components/angular-ui-router-title/angular-ui-router-title.js"></script>
 
 	<!-- facebook SDK -->
 	<script src = "http://connect.facebook.net/en_US/sdk.js"></script>

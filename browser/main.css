@@ -60,6 +60,10 @@ html, body, md-content {
     border-radius: 50%;
 }
 
+.img-cover {
+    object-fit: cover;
+}
+
 .subheader {
     margin: 20px 0px 10px 0px;
     font-size: 18px;

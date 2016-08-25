@@ -1,1 +1,12 @@
-<h2>Friends</h2>
+<section>
+    <div layout="column" layout-align="start start" layout-wrap flex-xs="100" flex-offset-gt-xs="15" flex-gt-xs="70">
+        <div class="subheader">Friends</div>
+            <md-grid-list md-cols="5" md-row-height="1:1" md-gutter="8px" layout-fill>
+                <md-grid-tile ng-repeat="friend in friends" ui-sref="profile({id: {{friend.id ? friend.id : defaultUserId}}})" class="friend-tile">
+                    <img class="img-cover" src="{{friend.source ? friend.source : defaultUserPic}}" layout-fill/>
+                    <md-grid-tile-footer><h3>{{friend.name ? friend.name : defaultUserName}}</h3></md-grid-tile-footer>
+                </md-grid-tile>
+            </md-grid-list>
+            <md-button class="md-raised">Invite more friends</md-button>
+    </div>
+</section>

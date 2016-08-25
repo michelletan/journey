@@ -24,7 +24,7 @@
 
 .btn-login {
     padding: 0 10px 0 10px;
-    background-color: #3b5998;
-    color: white;
+    background-color: #3b5998 !important;
+    color: white !important;
     font-family: 'Roboto', sans-serif;
 }
