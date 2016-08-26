@@ -1,2 +1,27 @@
-<h2>Profile</h2>
-Id : {{profileId}}
+<section>
+    <div layout="row" layout-align="center start" layout-fill layout-wrap>
+        <div ng-style="{'background-image':'linear-gradient(rgba(0, 0, 0, 0.4),rgba(0, 0, 0, 0.4)),url({{user.coverSrc ? user.coverSrc : defaultCoverUrl}})'}" class="img-overlay country-header mid" layout="column" layout-align="center center" layout-fill>
+
+        </div>
+    </div>
+    <div class="user-container" layout="row" layout-align="center start">
+        <div flex="70" layout="row" layout-align="start end">
+            <img ng-src="{{user.profileSrc ? user.profileSrc : defaultUserPic}}" class="img-profile-user img-circle" />
+            <h2 class="profile-user-name">{{user.name ? user.name : defaultUserName}}</h2>
+        </div>
+    </div>
+    <div class="journeys-container" layout="row" layout-align="center start">
+        <div flex="70" layout="row" layout-align="start center" layout-wrap>
+            <md-grid-list md-cols="3" md-gutter="10px" md-row-height="1:1" layout-fill>
+                <md-grid-tile ng-click="goToJourney($index)" ng-repeat="journey in journeys" ng-style="{'background-image':'url({{journey.coverUrl ? journey.coverUrl : defaultCoverUrl}})'}" class="img-overlay">
+                    <div class="journey-tile-info" flex-offset="10" flex="80">
+                        <h2>{{journey.title ? journey.title : defaultJourneyTitle}}</h2>
+                        <p>10-19 Aug 2016</p>
+                        <p>19 posts</p>
+                    </div>
+
+                </md-grid-tile>
+            </md-grid-list>
+        </div>
+    </div>
+</section>
