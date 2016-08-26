@@ -14,7 +14,29 @@ var Promise = require('bluebird');
 // Set up Router
 var router = require('express').Router();
 
-// First time User Request
+// Retrieving User Journeys
+router.get('/:userId/journeys', function(req,res,next){
+	var userId = req.params.userId;
+	return User.findOne({ where: { id: userId } })
+	.then(function(foundUser){
+		return foundUser.getJourneys()
+	})
+	.then(function(foundJourneys){
+		return Promise.map(foundJourneys, function(foundJourney){
+			return foundJourney.getCountries()
+			.then(function(foundCountries){
+				foundJourney.countries = foundCountries 
+				return foundJourney;
+			})
+		})
+	})
+	.then(function(journeysWithCountries){
+		return res.status(200).send(journeysWithCountries);
+	})
+	.catch(next);
+})
+
+// First time User -- Persisting User Journeys
 router.post('/:userId/journeys', function(req,res,next){
 	var pixabayApiKey = '3129951-64f23563232747f3a8f3bb9b9';
 	var pixabayBaseUrl = "https://pixabay.com/api/?key="+pixabayApiKey+"&q=";
@@ -36,16 +58,15 @@ router.post('/:userId/journeys', function(req,res,next){
 			return journey;
 		})
 	})
-
 	// Check if user already exists on database
-	User.findAll({ where: { id: userId } })
+	return User.findAll({ where: { id: userId } })
 	.then(function(foundUser){
 		if(foundUser){
-			res.status(409).send("User already exists");
+			return res.status(409).send("User already exists");
 		}else{
 			// Create User
 			var userProm = User.create({ id: userId });
-			Promise.all([journeyArrProm, userProm])
+			return Promise.all([journeyArrProm, userProm])
 			.spread(function(journeyArr, newUser){	
 				// For each journey in the journeyArr
 				Promise.map(journeyArr, function(journey){
@@ -71,12 +92,12 @@ router.post('/:userId/journeys', function(req,res,next){
 							})
 						});
 					})
-					.catch(next);
 				});
-			});
+			})
 		}
-	});
-
+	})
+	.catch(next);
 });
+
 
 module.exports = router;
