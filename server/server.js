@@ -38,8 +38,8 @@ app.listen(port, function(err) {
 		// IMPORTANT: Force true clears database. Remove force true when we deploy.
     db.sync({ force: true })
     .then(function(){
-			console.log("Database restarted and models synced. Now testing...");
-			var userProm = db.model('user').create({
+			console.log("Database reset and models synced.");
+/*			var userProm = db.model('user').create({
 				id: 123
 			});
 
@@ -58,6 +58,7 @@ app.listen(port, function(err) {
 
 			return Promise.all([userProm, journeyProm, countryProm, postProm])
 			.spread(function(user, journey, country, post){
+				console.log("Now creating test instance...")
 				return user.addJourney(journey)
 				.then(function(){
 					journey.addCountry(country)
@@ -67,8 +68,8 @@ app.listen(port, function(err) {
 				})
 			})
 			.then(function(){
-				console.log('Test was created.');
-			})
+				console.log('Test instance was created.');
+			})*/
 		})
 		.then(function(){
 			console.log('Journey server is up. Listening on port: ', port);
