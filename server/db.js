@@ -19,6 +19,22 @@ var User = db.define('user', {
   }
 });
 
+
+var Journey = db.define('journey', {
+	name: {
+		type: Sequelize.STRING
+	}
+});
+
+var Country = db.define('country', {
+	name: {
+		type: Sequelize.STRING
+	},
+	source: {
+		type: Sequelize.STRING
+	}
+});
+
 var Post = db.define('post', {
 	id: {
 		type: Sequelize.INTEGER,
@@ -40,37 +56,19 @@ var Post = db.define('post', {
 	},
 	created: {
 		type: Sequelize.DATE,
-		allowNull: false
-	},
-	country: {
-		type: Sequelize.STRING,
-		allowNull: false
 	}
 });
 
-var Journey = db.define('journey', {
-	country: {
-		type: Sequelize.STRING
-	},
-	source: {
-		type: Sequelize.STRING
-	}
-});
-
-
-// One-to-many
+// One User has many Journeys 
 User.hasMany(Journey);
 Journey.belongsTo(User);
 
-// Many-to-many
-Journey.belongsToMany(Post, {through: 'journeyPost'});
-Post.belongsToMany(Journey, {through: 'journeyPost'});
+// One Journey has many Countries
+Journey.hasMany(Country);
+Country.belongsTo(Journey);
 
-module.exports = {
-	db: db,
-	models: {
-		User: User,
-		Post: Post,
-		Journey: Journey
-	}
-};
+// Each country can have many posts
+Country.belongsToMany(Post, {through: 'countrypost'});
+Post.belongsToMany(Country, {through: 'countrypost'});
+
+module.exports = db;

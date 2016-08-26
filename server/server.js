@@ -2,8 +2,8 @@
 var express = require('express');
 var app = express();
 var path = require('path');
-
-var database = require('./db.js');
+var Promise = require('bluebird');
+var db = require('./db.js');
 
 /* ---- ROUTES HERE ---- */
 // Routes for static files
@@ -33,12 +33,42 @@ app.use(function(err, req, res, next){
 var port = 8080;
 app.listen(port, function(err) {
 	if(err){
-		throw err;
+		throw err
 	}else{
-		// IMPORTANT: Remove force true when we actually deploy!
-		database.db.sync({ force: true })
-		.then(function(){
-			console.log("Database is synced.");
+		// IMPORTANT: Force true clears database. Remove force true when we deploy.
+    db.sync({ force: true })
+    .then(function(){
+			console.log("Database restarted and models synced. Now testing...");
+			var userProm = db.model('user').create({
+				id: 123
+			});
+
+			var journeyProm = db.model('journey').create({
+				name: 'Japan'
+			});
+
+			var countryProm = db.model('country').create({
+				name: 'Japan'
+			});
+
+			var postProm = db.model('post').create({
+				id: 456,
+				story: 'Ten Zhi Yang was at Tokyo, Japan.'
+			});
+
+			return Promise.all([userProm, journeyProm, countryProm, postProm])
+			.spread(function(user, journey, country, post){
+				return user.addJourney(journey)
+				.then(function(){
+					journey.addCountry(country)
+				})
+				.then(function(){
+					country.addPost(post)
+				})
+			})
+			.then(function(){
+				console.log('Test was created.');
+			})
 		})
 		.then(function(){
 			console.log('Journey server is up. Listening on port: ', port);
