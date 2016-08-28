@@ -11,13 +11,13 @@ app.controller('ProfileCtrl', function($scope, $state, $stateParams) {
     $scope.defaultJourneyTitle = 'Amazing Trip';
 
     $scope.journeys = [
-        {}, {}, {}, {}, {}, {}, {}, {}
+        {id: 1}, {id: 1}, {id: 1}, {id: 1}, {id: 1}, {id: 1}, {id: 1}, {id: 1}
     ];
 
-    $scope.goToPlace = goToPlace;
+    $scope.goToJourney = goToJourney;
 
     // Public functions
-    function goToPlace(id) {
-        $state.go('place', {countryId: $stateParams.id, placeId: id});
+    function goToJourney(id) {
+        $state.go('journey', {id: id});
     }
 });

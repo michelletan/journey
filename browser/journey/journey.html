@@ -1,0 +1,29 @@
+<section>
+    <div layout="row" layout-align="center start" layout-fill layout-wrap>
+        <div ng-style="{'background-image':'linear-gradient(rgba(0, 0, 0, 0.4),rgba(0, 0, 0, 0.4)),url({{user.coverSrc ? user.coverSrc : defaultCoverUrl}})'}" class="img-overlay country-header mid" layout="column" layout-align="center center" layout-fill>
+            <h2>{{journey.title ? journey.title : defaultJourneyTitle}}</h2>
+        </div>
+    </div>
+    <div class="user-container" layout="row" layout-align="center start">
+        <div flex="70" layout="row" layout-align="start end">
+            <img ng-src="{{user.profileSrc ? user.profileSrc : defaultUserPic}}" class="img-profile-user img-circle" />
+            <h2 class="profile-user-name">{{user.name ? user.name : defaultUserName}}</h2>
+        </div>
+    </div>
+    <div class="journey-container" layout="row" layout-align="center start">
+        <div flex="70" layout="column" layout-align="start stretch">
+            <div ng-repeat="post in journey.posts" class="journey-post" layout="row" layout-align="start start">
+                <div class="journey-post-date" flex="15">19 Aug 2015</div>
+                <div flex="85">
+                    <md-card layout-fill>
+						<img ng-src="{{post.source ? post.source : defaultPostPic}}" class="md-card-image img-cover" flex>
+						<md-card-content>
+								The titles of Washed Out's breakthrough song and the first single from Paracosm share the
+								two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
+						</md-card-content>
+					</md-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

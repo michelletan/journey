@@ -43,6 +43,15 @@ app.config(function($stateProvider){
     }
   });
 
+  $stateProvider.state('journey', {
+    url: '/journey/:id',
+    templateUrl: '/browser/journey/journey.html',
+    controller: 'JourneyCtrl',
+    resolve: {
+      $title: function() { return 'Journey'; }
+    }
+  });
+
   $stateProvider.state('policy', {
     url: '/policy',
     templateUrl: '/browser/policy/policy.html',
