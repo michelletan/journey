@@ -9,4 +9,11 @@ app.controller('FriendsCtrl', function($scope, $state, $stateParams) {
         {}, {}, {}, {}, {}, {}
     ];
 
+    $scope.inviteFriend = inviteFriend;
+
+    // Public functions
+    function inviteFriend(name) {
+        console.log('invite friend ' + name);
+    }
+
 });
