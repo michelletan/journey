@@ -17,24 +17,23 @@ var router = require('express').Router();
 // Retrieving User Journeys
 router.get('/:userId/journeys', function(req,res,next){
 	var userId = req.params.userId;
-	return User.findOne({ where: { id: userId } })
-	.then(function(foundUser){
-		return foundUser.getJourneys()
-	})
-	.then(function(foundJourneys){
-		return Promise.map(foundJourneys, function(foundJourney){
-			return foundJourney.getCountries()
-			.then(function(foundCountries){
-				foundJourney.countries = foundCountries 
-				return foundJourney;
-			})
-		})
-	})
-	.then(function(journeysWithCountries){
-		return res.status(200).send(journeysWithCountries);
+	return User.findOne({ 
+		where: { id: userId }, 
+		include: [
+			{
+				model: Journey,
+				include: [
+					{
+						model: Country,
+						include: [Post]
+					}
+				]
+			}
+		]
 	})
 	.catch(next);
-})
+});
+
 
 // First time User -- Persisting User Journeys
 router.post('/:userId/journeys', function(req,res,next){
@@ -81,7 +80,9 @@ router.post('/:userId/journeys', function(req,res,next){
 							source: journey.source
 						});
 					})
+					// For each country
 					.then(function(newCountry){
+						// Create post instances
 						return Promise.each(journey.posts, function(post){
 							newCountry.createPost({
 								id: post.id,
