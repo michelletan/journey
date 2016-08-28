@@ -35,6 +35,22 @@ router.get('/:userId/journeys', function(req,res,next){
 });
 
 
+// Retrieving One Journey
+router.get('/:userId/journeys/:journeyId', function(req,res,next){
+	var journeyId = req.params.userId;
+	return Journey.findOne({
+		where: { id: journeyId },
+		include: [
+			{
+				model: Country,
+				include: [Post]
+			}
+		]
+	})
+	.catch(next);
+});
+
+
 // First time User -- Persisting User Journeys
 router.post('/:userId/journeys', function(req,res,next){
 	var pixabayApiKey = '3129951-64f23563232747f3a8f3bb9b9';
@@ -68,7 +84,7 @@ router.post('/:userId/journeys', function(req,res,next){
 			return Promise.all([journeyArrProm, userProm])
 			.spread(function(journeyArr, newUser){	
 				// For each journey in the journeyArr
-				Promise.map(journeyArr, function(journey){
+				return Promise.map(journeyArr, function(journey){
 					// Create a journey instance
 					return newUser.createJourney({
 						name: journey.country
@@ -80,7 +96,6 @@ router.post('/:userId/journeys', function(req,res,next){
 							source: journey.source
 						});
 					})
-					// For each country
 					.then(function(newCountry){
 						// Create post instances
 						return Promise.each(journey.posts, function(post){
@@ -93,7 +108,26 @@ router.post('/:userId/journeys', function(req,res,next){
 							})
 						});
 					})
-				});
+				})
+				.then(function(){
+					return User.findOne({ 
+						where: { id: userId }, 
+						include: [
+							{
+								model: Journey,
+								include: [
+									{
+										model: Country,
+										include: [Post]
+									}
+								]
+							}
+						]
+					})
+				})
+				.then(function(persistedUserData){
+					res.status(200).send(persistedUserData);
+				})
 			})
 		}
 	})
