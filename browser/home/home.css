@@ -1,14 +1,10 @@
-.post {
+.img-post {
     height: 300px;
-}
-
-.post-content {
-    height: 100px;
+    object-fit: cover;
 }
 
 .post-user-container {
-    margin-top: -40px;
-    margin-right: 40px;
+    margin: -40px 40px -50px 0px;
     text-align: center;
 }
 
@@ -23,13 +19,4 @@
     object-fit: contain;
     margin-top: 5px;
     border: 2px solid white;
-}
-
-.post-title-container {
-    margin-left: 20px;
-}
-
-.post-title, .post-subtitle {
-    margin: 0;
-    margin-bottom: 10px;
 }
