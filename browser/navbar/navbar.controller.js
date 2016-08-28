@@ -1,4 +1,4 @@
-app.controller('NavbarCtrl', function($scope, $mdSidenav, $mdDialog, FacebookFactory) {
+app.controller('NavbarCtrl', function($scope, $rootScope, $mdSidenav, $mdDialog, FacebookFactory) {
     var sidenavId = 'left';
 
     $scope.defaultUserId = 1;
@@ -26,9 +26,18 @@ app.controller('NavbarCtrl', function($scope, $mdSidenav, $mdDialog, FacebookFac
         })
     });
 
+    $rootScope.$on('$stateChangeStart',
+        function(event, toState, toParams, fromState, fromParams){
+            closeSideNav();
+    });
+
     // Public functions
     function openSideNav() {
-        $mdSidenav(sidenavId).toggle();
+        $mdSidenav(sidenavId).open();
+    }
+
+    function closeSideNav() {
+        $mdSidenav(sidenavId).close();
     }
 
     function openDropdownMenu($mdOpenMenu, ev) {
