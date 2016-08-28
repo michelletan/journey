@@ -7,6 +7,10 @@ md-toolbar {
   color: black !important;
 }
 
+md-sidenav, md-backdrop {
+    position: fixed;
+}
+
 md-sidenav md-content, md-list {
   background: #e5e5e5;
 }
