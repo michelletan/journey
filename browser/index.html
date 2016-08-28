@@ -62,24 +62,15 @@
 </head>
 
 <body ng-app="journeyApp">
-	<div ng-controller="IndexCtrl">
+	<div ng-controller="IndexCtrl" layout="column" layout-fill>
 		<navbar></navbar>
+		<md-content ng-show="!isLoading">
+			<ui-view></ui-view>
+		</md-content>
 		<div ng-show="isLoading" class="loading-container" layout="column" layout-align="center center">
 			<p class="loading-title">Loading...</p>
 			<img src="/images/loading.svg">
 		</div>
-		<md-content ng-show="!isLoading">
-			<ui-view></ui-view>
-		</md-content>
 	</div>
-	<!-- <a ui-sref="home">Home</a>
-	<div>
-	<fb:login-button scope="public_profile,email,user_tagged_places,user_friends" autologoutlink="true" onlogin="checkLoginState();">
-</fb:login-button>
-</div>
-<div>
-<div id ="userNameDiv">name</div>
-<img alt="profilePic" id ="profileImg"/>
-</div> -->
 </body>
 </html>

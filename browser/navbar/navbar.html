@@ -1,67 +1,63 @@
-<section ng-controller="NavbarCtrl" id="navbar">
-    <!-- top nav bar -->
-    <div layout="column" layout-align="center">
-        <md-toolbar class="md-whiteframe-4dp">
-            <div class="md-toolbar-tools" layout="row">
-                <div layout="row" layout-align="start center" flex="33">
-                    <md-button ng-click="openSideNav()" class="md-icon-button">
-                        <i class="material-icons">menu</i>
-                    </md-button>
-                </div>
-                <div layout="row" layout-align="center center" flex="33">
-                    <div ui-sref="home" class="navbar-button" layout="row" layout-align="center center">
-                        <img class="app-icon" src="/images/journey-icon-circle.png" />
-                        <p class="app-name">journey</p>
-                    </div>
-                </div>
-                <div layout="row" layout-align="center center" flex="33">
-                    <div ui-sref="profile({id: {{userId ? userId : defaultUserId}}})" class="navbar-button" layout="row" layout-align="center center">
-                        <img alt="person name" ng-src="{{userPic ? userPic : defaultUserPic}}" class="md-avatar img-user img-circle" hide-xs/>
-                        <span class="title-username" hide-xs>{{name ? name : defaultUserName}}</span>
-                    </div>
+<section>
+    <md-toolbar class="md-whiteframe-4dp">
+        <div class="md-toolbar-tools" layout="row">
+            <div layout="row" layout-align="start center" flex="33">
+                <md-button ng-click="openSideNav()" class="md-icon-button">
+                    <i class="material-icons">menu</i>
+                </md-button>
+            </div>
+            <div layout="row" layout-align="center center" flex="33">
+                <div ui-sref="home" class="navbar-button" layout="row" layout-align="center center">
+                    <img class="app-icon" src="/images/journey-icon-circle.png" />
+                    <p class="app-name">journey</p>
                 </div>
             </div>
+            <div layout="row" layout-align="center center" flex="33">
+                <div ui-sref="profile({id: {{userId ? userId : defaultUserId}}})" class="navbar-button" layout="row" layout-align="center center">
+                    <img alt="person name" ng-src="{{userPic ? userPic : defaultUserPic}}" class="md-avatar img-user img-circle" hide-xs/>
+                    <span class="title-username" hide-xs>{{name ? name : defaultUserName}}</span>
+                </div>
+            </div>
+        </div>
+    </md-toolbar>
+    <!-- side nav menu -->
+    <md-sidenav class="md-sidenav-left" md-component-id="left" layout="column" layout-fill>
+        <md-toolbar ui-sref="profile({id: {{userId ? userId : defaultUserId}}})" class="md-whiteframe-4dp" layout="row" layout-align="start center" layout-padding hide-gt-xs>
+            <img alt="person name" ng-src="{{userPic ? userPic : defaultUserPic}}" class="md-avatar img-user img-circle" />
+            <span class="title-username">{{name ? name : defaultUserName}}</span>
         </md-toolbar>
-        <!-- side nav menu -->
-        <md-sidenav class="md-sidenav-left" md-component-id="left">
-            <md-toolbar ui-sref="profile({id: {{userId ? userId : defaultUserId}}})" class="md-whiteframe-4dp" layout="row" layout-align="start center" layout-padding hide-gt-xs>
-                <img alt="person name" ng-src="{{userPic ? userPic : defaultUserPic}}" class="md-avatar img-user img-circle" />
-                <span class="title-username">{{name ? name : defaultUserName}}</span>
-            </md-toolbar>
-            <md-content layout="column" layout-align="space-between stretch" layout-fill>
-                <md-list>
-                    <md-list-item ui-sref="home">
-                        <p>Home</p>
-                    </md-list-item>
-                    <md-list-item ui-sref="friends">
-                        <p>Friends</p>
-                    </md-list-item>
-                    <md-list-item ui-sref="journeys">
-                        <p>My Journeys</p>
-                    </md-list-item>
-                    <md-list-item ui-sref="landing">
-                        <p>About Journey</p>
-                    </md-list-item>
-                    <md-divider></md-divider>
-                    <md-list-item ng-click="logout()">
-                        <p>Logout</p>
-                    </md-list-item>
-                </md-list>
-                <md-list>
-                    <md-divider></md-divider>
-                    <md-list-item ui-sref="policy">
-                        <p>Privacy Policy</p>
-                    </md-list-item>
-                    <md-list-item ui-sref="terms">
-                        <p>Terms of Service</p>
-                    </md-list-item>
-                    <md-list-item ui-sref="credits">
-                        <p>Credits</p>
-                    </md-list-item>
-                    <md-list-item>
-                        <p>©2016 Journey</p>
-                    </md-list-item>
-                </md-list>
-            </md-content>
-        </md-sidenav>
-    </section>
+        <md-content layout="column" layout-align="space-between stretch">
+            <md-list>
+                <md-list-item ui-sref="home">
+                    <p>Home</p>
+                </md-list-item>
+                <md-list-item ui-sref="friends">
+                    <p>Friends</p>
+                </md-list-item>
+                <md-list-item ui-sref="journeys">
+                    <p>My Journeys</p>
+                </md-list-item>
+                <md-list-item ui-sref="landing">
+                    <p>About Journey</p>
+                </md-list-item>
+                <md-divider></md-divider>
+                <md-list-item ng-click="logout()">
+                    <p>Logout</p>
+                </md-list-item>
+                <md-divider></md-divider>
+                <md-list-item ui-sref="policy">
+                    <p>Privacy Policy</p>
+                </md-list-item>
+                <md-list-item ui-sref="terms">
+                    <p>Terms of Service</p>
+                </md-list-item>
+                <md-list-item ui-sref="credits">
+                    <p>Credits</p>
+                </md-list-item>
+                <md-list-item>
+                    <p>©2016 Journey</p>
+                </md-list-item>
+            </md-list>
+        </md-content>
+    </md-sidenav>
+</section>

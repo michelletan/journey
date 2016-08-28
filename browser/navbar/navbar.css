@@ -11,7 +11,7 @@ md-sidenav, md-backdrop {
     position: fixed;
 }
 
-md-sidenav md-content, md-list {
+md-sidenav, md-sidenav md-content, md-list {
   background: #e5e5e5;
 }
 

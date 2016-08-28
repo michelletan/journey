@@ -2,20 +2,34 @@
     height: 300px;
 }
 
-.post-user {
+.post-content {
+    height: 100px;
+}
+
+.post-user-container {
+    margin-top: -40px;
+    margin-right: 40px;
     text-align: center;
 }
 
-.img-post {
-    height: 200px;
+.post-user {
+    margin-top: 45px;
+    margin-right: 10px;
 }
 
 .img-post-user {
-    height: 60px;
-    width: 60px;
+    height: 70px;
+    width: 70px;
+    object-fit: contain;
     margin-top: 5px;
+    border: 2px solid white;
 }
 
-md-card-actions {
-    margin-top: -20px !important;
+.post-title-container {
+    margin-left: 20px;
+}
+
+.post-title, .post-subtitle {
+    margin: 0;
+    margin-bottom: 10px;
 }

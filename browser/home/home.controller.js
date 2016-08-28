@@ -26,4 +26,6 @@ app.controller('HomeCtrl', function($scope, $state, $stateParams, FacebookFactor
 	$scope.defaultSpreadPic = '/images/landing-spread.jpg';
 	$scope.defaultUserName = 'User';
 
+	$scope.posts = [1, 2, 3];
+
 });
