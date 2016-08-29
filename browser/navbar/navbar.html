@@ -1,9 +1,9 @@
 <section>
     <md-toolbar class="md-whiteframe-4dp">
         <div class="md-toolbar-tools" layout="row">
-            <div layout="row" layout-align="start center" flex="33">
+            <div layout="row" layout-align="space-between center" flex="33">
                 <md-button ng-click="openSideNav()" class="md-icon-button">
-                    <i class="material-icons">menu</i>
+                    <i class="material-icons">&#xE5D2;</i>
                 </md-button>
             </div>
             <div layout="row" layout-align="center center" flex="33">
@@ -12,7 +12,10 @@
                     <p class="app-name">journey</p>
                 </div>
             </div>
-            <div layout="row" layout-align="center center" flex="33">
+            <div layout="row" layout-align="end center" flex="33">
+                <md-button ng-click="" class="md-icon-button">
+                    <i class="material-icons">&#xE8B6;</i>
+                </md-button>
             </div>
         </div>
     </md-toolbar>
@@ -21,7 +24,6 @@
         <md-toolbar ui-sref="profile({id: {{userId ? userId : defaultUserId}}})" class="md-tall md-whiteframe-4dp" layout="row" layout-align="space-between end" layout-padding flex>
             <span class="title-username">{{name ? name : defaultUserName}}</span>
             <img alt="person name" ng-src="{{userPic ? userPic : defaultUserPic}}" class="img-user img-circle" />
-
         </md-toolbar>
         <md-content layout="column" layout-align="space-between stretch" flex="90">
             <md-list flex>
@@ -37,15 +39,12 @@
                     <i class="material-icons list-item-icon">&#xE55B;</i>
                     <p>My Journeys</p>
                 </md-list-item>
-                <md-list-item ui-sref="landing">
-                    <i class="material-icons list-item-icon">&#xE88E;</i>
-                    <p>About Journey</p>
-                </md-list-item>
                 <md-divider></md-divider>
                 <md-list-item ng-click="logout()">
                     <i class="material-icons list-item-icon">&#xE879;</i>
                     <p>Logout</p>
                 </md-list-item>
+                <md-divider></md-divider>
             </md-list>
             <md-list>
                 <md-divider></md-divider>
