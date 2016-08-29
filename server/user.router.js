@@ -72,28 +72,30 @@ router.post('/:userId/journeys', function(req,res,next){
 			var userProm = User.create({ id: userId });
 			return Promise.all([journeyArrProm, userProm])
 			.spread(function(journeyArr, newUser){
-				console.log("Journeys with source is: ", journeyArr);	
-				// For each journey in the journeyArr
+				console.log("Journeys with source are: ", journeyArr);	
 				return Promise.map(journeyArr, function(journey){
-					// Create a journey instance
 					return newUser.createJourney({
 						name: journey.name,
 						source: journey.source
 					})
-					.then(function(createdJourney){
-						return Promise.map(createdJourney.posts, function(post){
-							createdJourney.createPost({
-								fbpostid: post.id,
-								journeyid: createdJourney.id,
-								story: post.story,
-								message: post.message,
-								source: post.source,
-								country: post.country,
-								created: post.time,
-								likes: post.likes
-							})
-						});
-					})
+				})
+			})
+			.then(function(createdJourneyArr){
+				console.log("Journeys from database are: ", createdJourneyArr);
+				res.status(200).send(createdJourneyArr);
+				return Promise.map(createdJourneyArr, function(createdJourney){
+					return Promise.map(createdJourney.posts, function(post){
+						createdJourney.createPost({
+							fbpostid: post.id,
+							journeyid: createdJourney.id,
+							story: post.story,
+							message: post.message,
+							source: post.source,
+							country: post.country,
+							created: post.time,
+							likes: post.likes	
+						})
+					})	
 				})
 			})
 		}
