@@ -2,7 +2,6 @@
 var db = require('./db');
 var User = db.model('user');
 var Journey = db.model('journey');
-var Country = db.model('country');
 var Post = db.model('post');
 
 // Request Module to make Pixabay API calls 
@@ -22,12 +21,7 @@ router.get('/:userId/journeys', function(req,res,next){
 		include: [
 			{
 				model: Journey,
-				include: [
-					{
-						model: Country,
-						include: [Post]
-					}
-				]
+				include: [Post]
 			}
 		]
 	})
@@ -40,12 +34,7 @@ router.get('/:userId/journeys/:journeyId', function(req,res,next){
 	var journeyId = req.params.userId;
 	return Journey.findOne({
 		where: { id: journeyId },
-		include: [
-			{
-				model: Country,
-				include: [Post]
-			}
-		]
+		include: [Post]
 	})
 	.catch(next);
 });
@@ -61,7 +50,7 @@ router.post('/:userId/journeys', function(req,res,next){
 
 	// Adds a source to each country
 	var journeyArrProm = Promise.map(journeyArrBasic, function(journey){
-		var countryName = journey.country;
+		var countryName = journey.name;
 		var pixabayRequest = pixabayBaseUrl + countryName;  
 		return rp(pixabayRequest)
 		.then(function(response){
@@ -82,51 +71,29 @@ router.post('/:userId/journeys', function(req,res,next){
 			// Create User
 			var userProm = User.create({ id: userId });
 			return Promise.all([journeyArrProm, userProm])
-			.spread(function(journeyArr, newUser){	
+			.spread(function(journeyArr, newUser){
+				console.log("Journeys with source is: ", journeyArr);	
 				// For each journey in the journeyArr
 				return Promise.map(journeyArr, function(journey){
 					// Create a journey instance
 					return newUser.createJourney({
-						name: journey.country
+						name: journey.name,
+						source: journey.source
 					})
-					// Create a country instance
-					.then(function(newJourney){
-						return newJourney.createCountry({
-							name: journey.country,
-							source: journey.source
-						});
-					})
-					.then(function(newCountry){
-						// Create post instances
-						return Promise.each(journey.posts, function(post){
-							newCountry.createPost({
-								id: post.id,
+					.then(function(createdJourney){
+						return Promise.map(createdJourney.posts, function(post){
+							createdJourney.createPost({
+								fbpostid: post.id,
+								journeyid: createdJourney.id,
 								story: post.story,
 								message: post.message,
 								source: post.source,
-								created: post.time
+								country: post.country,
+								created: post.time,
+								likes: post.likes
 							})
 						});
 					})
-				})
-				.then(function(){
-					return User.findOne({ 
-						where: { id: userId }, 
-						include: [
-							{
-								model: Journey,
-								include: [
-									{
-										model: Country,
-										include: [Post]
-									}
-								]
-							}
-						]
-					})
-				})
-				.then(function(persistedUserData){
-					res.status(200).send(persistedUserData);
 				})
 			})
 		}

@@ -11,22 +11,15 @@ var db = new Sequelize(databaseURI, {
 });
 
 var User = db.define('user', {
-  id: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-    unique: true,
-    primaryKey: true
+  name: {
+  	type: Sequelize.INTEGER
+  },
+  source: {
+  	type: Sequelize.STRING
   }
 });
 
-
 var Journey = db.define('journey', {
-	name: {
-		type: Sequelize.STRING
-	}
-});
-
-var Country = db.define('country', {
 	name: {
 		type: Sequelize.STRING
 	},
@@ -36,11 +29,11 @@ var Country = db.define('country', {
 });
 
 var Post = db.define('post', {
-	id: {
+	fbpostid: {
+		type: Sequelize.INTEGER
+	},
+	journeyid: {
 		type: Sequelize.INTEGER,
-		allowNull: false,
-		unique: true,
-		primaryKey: true
 	},
 	story: {
 		type: Sequelize.TEXT,
@@ -54,8 +47,14 @@ var Post = db.define('post', {
 		type: Sequelize.STRING,
 		defaultValue: null
 	},
+	country: {
+		type: Sequelize.STRING
+	},
 	created: {
 		type: Sequelize.DATE,
+	},
+	likes: {
+		type: Sequelize.INTEGER
 	}
 });
 
@@ -63,12 +62,8 @@ var Post = db.define('post', {
 User.hasMany(Journey);
 Journey.belongsTo(User);
 
-// One Journey has many Countries
-Journey.hasMany(Country);
-Country.belongsTo(Journey);
-
 // Each country can have many posts
-Country.belongsToMany(Post, {through: 'countrypost'});
-Post.belongsToMany(Country, {through: 'countrypost'});
+Journey.belongsToMany(Post, {through: 'journeypost'});
+Post.belongsToMany(Journey, {through: 'journeypost'});
 
 module.exports = db;
