@@ -176,6 +176,58 @@ app.factory('FacebookFactory', function($q){
 		return deferred.promise;
 	};
 
+	FacbookFactory.generateJourney = function(){
+		var deferred = $q.defer();
+		var query ='me/feed?fields=id,created_time,story,message,likes.limit(0).summary(true),place,full_picture&since=';
+		query+=getLastYear();
+		FB.api(query, function(response) {
+			var currCountry ="";
+			var journeys = [];
+			var journeyCount = -1;
+			var posts = response.data;
+			for(i =0; i<posts.length; i++){
+				var qPost = posts[i]
+				//check if post has place
+				if(qPost.place!=undefined){
+					var qCountry = qPost.place.location.country;
+					if(qCountry != undefined){
+						var newJourney;
+						//alert(qCountry);
+						if(qCountry != currCountry){
+							journeyCount++;
+							currCountry = qCountry;
+							newJourney = {};
+							newJourney.country = qCountry;
+							newJourney.posts = [];
+							returnObj.push(newJourney);
+						}else{
+							
+						}
+						var newPost = {};
+						newPost.id = qPost.id;
+						newPost.time = qPost.created_time;
+						newPost.story = qPost.story;
+						newPost.message = qPost.message;
+						if(qPost.full_picture!= undefined){
+							newPost.src = qPost.full_picture;
+						}
+						newPost.likes = qPost.likes.summary.total_count;
+						newPost.country = qCountry;
+						newJourney.posts.push(newPost);
+					}
+				}
+			}
+			deferred.resolve({journeys: journeys});
+		});
+		
+		return deferred.promise;
+	}
+	function getLastYear(){
+		var lastYear = new Date(new Date().setFullYear(new Date().getFullYear() - 1));
+		var returnVal = lastYear.getFullYear()+"-"+lastYear.getMonth()+"-"+lastYear.getDate()+"T00:00:00";
+		//alert(returnVal);
+		return returnVal;
+	}
 	  // This function is called when someone finishes with the Login
 	  // Button.  See the onlogin handler attached to it in the sample
 	  // code below.
