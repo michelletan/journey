@@ -1,3 +1,9 @@
 .journey-post {
     margin-bottom: 20px;
 }
+
+.journey-post-date {
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: 300;
+}

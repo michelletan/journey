@@ -13,8 +13,8 @@
     <div class="journey-container" layout="row" layout-align="center start">
         <div flex-xs="100" flex-sm="80" flex="70" layout="column" layout-align="start stretch">
             <div ng-repeat="post in journey.posts" class="journey-post" layout="row" layout-align="start start" layout-wrap>
-                <div class="journey-post-date" flex="100" flex-gt-sm="15">19 Aug 2015</div>
-                <div flex="100" flex-gt-sm="85">
+                <div class="journey-post-date" flex="100" layout="row" layout-align="center center">19 Aug 2015 </div>
+                <div flex="100">
                     <md-card layout-fill>
 						<img ng-src="{{post.source ? post.source : defaultPostPic}}" class="md-card-image img-cover" flex>
 						<md-card-content>

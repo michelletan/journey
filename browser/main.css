@@ -80,3 +80,12 @@ html, body, md-content {
     font-size: 28px !important;
     color: #09a6c8;
 }
+
+.img-subheader {
+    height: 200px;
+    margin-bottom: 20px;
+}
+
+.text-container {
+    margin-bottom: 50px;
+}
