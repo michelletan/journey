@@ -1,6 +1,6 @@
 var journeyArrBasic = [
   {
-	"country": "Singapore",
+	"name": "Singapore",
 	"posts": [
   	{
     	"id": "1144958495559554_1147631028625634",
@@ -13,7 +13,7 @@ var journeyArrBasic = [
 	]
   },
   {
-	"country": "Malaysia",
+	"name": "Malaysia",
 	"posts": [
   	{
     	"id": "1144958495559554_1147630815292322",
@@ -26,7 +26,7 @@ var journeyArrBasic = [
 	]
   },
   {
-	"country": "Singapore",
+	"name": "Singapore",
 	"posts": [
   	{
     	"id": "1144958495559554_1146911085364295",
