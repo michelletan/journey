@@ -11,7 +11,7 @@ md-sidenav, md-backdrop {
     position: fixed;
 }
 
-md-sidenav, md-sidenav md-content, md-list {
+md-sidenav, md-sidenav md-content, md-list, md-subheader {
   background: #e5e5e5;
 }
 
@@ -28,12 +28,21 @@ md-sidenav, md-sidenav md-content, md-list {
   color: #09a6c8;
 }
 
+.img-user {
+    height: 100px;
+    width: 100px;
+}
+
 .title-username {
-  font-size: 14px;
+  font-size: 20px;
   padding-left: 8px;
   color: black !important;
 }
 
 .navbar-button {
     cursor: pointer;
+}
+
+.list-item-icon {
+    margin-right: 8px;
 }

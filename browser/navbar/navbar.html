@@ -13,37 +13,41 @@
                 </div>
             </div>
             <div layout="row" layout-align="center center" flex="33">
-                <div ui-sref="profile({id: {{userId ? userId : defaultUserId}}})" class="navbar-button" layout="row" layout-align="center center">
-                    <img alt="person name" ng-src="{{userPic ? userPic : defaultUserPic}}" class="md-avatar img-user img-circle" hide-xs/>
-                    <span class="title-username" hide-xs>{{name ? name : defaultUserName}}</span>
-                </div>
             </div>
         </div>
     </md-toolbar>
     <!-- side nav menu -->
     <md-sidenav class="md-sidenav-left" md-component-id="left" layout="column" layout-fill>
-        <md-toolbar ui-sref="profile({id: {{userId ? userId : defaultUserId}}})" class="md-whiteframe-4dp" layout="row" layout-align="start center" layout-padding hide-gt-xs>
-            <img alt="person name" ng-src="{{userPic ? userPic : defaultUserPic}}" class="md-avatar img-user img-circle" />
+        <md-toolbar ui-sref="profile({id: {{userId ? userId : defaultUserId}}})" class="md-tall md-whiteframe-4dp" layout="row" layout-align="space-between end" layout-padding flex>
             <span class="title-username">{{name ? name : defaultUserName}}</span>
+            <img alt="person name" ng-src="{{userPic ? userPic : defaultUserPic}}" class="img-user img-circle" />
+
         </md-toolbar>
-        <md-content layout="column" layout-align="space-between stretch">
-            <md-list>
+        <md-content layout="column" layout-align="space-between stretch" flex="90">
+            <md-list flex>
                 <md-list-item ui-sref="home">
+                    <i class="material-icons list-item-icon">&#xE88A;</i>
                     <p>Home</p>
                 </md-list-item>
                 <md-list-item ui-sref="friends">
+                    <i class="material-icons list-item-icon">&#xE7FB;</i>
                     <p>Friends</p>
                 </md-list-item>
                 <md-list-item ui-sref="journeys">
+                    <i class="material-icons list-item-icon">&#xE55B;</i>
                     <p>My Journeys</p>
                 </md-list-item>
                 <md-list-item ui-sref="landing">
+                    <i class="material-icons list-item-icon">&#xE88E;</i>
                     <p>About Journey</p>
                 </md-list-item>
                 <md-divider></md-divider>
                 <md-list-item ng-click="logout()">
+                    <i class="material-icons list-item-icon">&#xE879;</i>
                     <p>Logout</p>
                 </md-list-item>
+            </md-list>
+            <md-list>
                 <md-divider></md-divider>
                 <md-list-item ui-sref="policy">
                     <p>Privacy Policy</p>
@@ -54,10 +58,9 @@
                 <md-list-item ui-sref="credits">
                     <p>Credits</p>
                 </md-list-item>
-                <md-list-item>
-                    <p>©2016 Journey</p>
-                </md-list-item>
+                <md-subheader class="md-no-sticky">©2016 Journey</md-subheader>
             </md-list>
-        </md-content>
-    </md-sidenav>
+        </md-list>
+    </md-content>
+</md-sidenav>
 </section>
