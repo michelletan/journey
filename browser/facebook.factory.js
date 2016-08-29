@@ -112,7 +112,7 @@ app.factory('FacebookFactory', function($q){
 							journeyCount++;
 							currCountry = qCountry;
 							newJourney = {};
-							newJourney.country = qCountry;
+							newJourney.name = "My Journey in "+qCountry;
 							newJourney.posts = [];
 							returnObj.push(newJourney);
 						}else{
