@@ -95,6 +95,7 @@ app.factory('FacebookFactory', function($q){
 		var deferred = $q.defer();
 		var query ='me/feed?fields=id,created_time,story,message,likes.limit(0).summary(true),place,full_picture&since=';
 		query+=getLastYear();
+		query+='&limit=1000';
 		FB.api(query, function(response) {
 			var currCountry ="";
 			var journeys = [];
@@ -114,7 +115,7 @@ app.factory('FacebookFactory', function($q){
 							newJourney = {};
 							newJourney.name = "My Journey in "+qCountry;
 							newJourney.posts = [];
-							returnObj.push(newJourney);
+							journeys.push(newJourney);
 						}else{
 							
 						}
