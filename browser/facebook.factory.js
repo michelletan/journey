@@ -31,104 +31,19 @@ app.factory('FacebookFactory', function($q){
 
 	FacebookFactory.whenConnected = function(){
 		var	deferred = $q.defer(); 
-		FB.api('me?fields=name,picture.type(large)', function(response) {
+		FB.api('me?fields=name,id,picture.type(large)', function(response) {
 			if(!response || response.error){
 				deferred.reject('Error occurred');
 			}else{
 				deferred.resolve({
 					name: response.name,
-					source: response.picture.data.url
+					source: response.picture.data.url,
+					id: response.id
 				});
 			}	
 		});
 		return deferred.promise;
 	}
-
-	FacebookFactory.treeFlipper = function(fbfriends){
-         var countries = [];
-         fbfriends.forEach(function(fbfriend){
-             if(fbfriend.feed != undefined){
-                 fbfriend.feed.data.forEach(function(post){
-                     if(post.place !=undefined){
-                         if(post.place.location != undefined){
-                                var country;
-                                var found = -1;
-                                for(n =0; n<countries.length; n++){
-                                    var check = countries[n].name;
-                                    if(check == post.place.location.country){
-                                        found = n;
-                                    }
-                                }
-                                if(found>=0){
-                                    country = countries[found];
-                                }
-                                else{
-                                    country = {}
-                                    country.name = post.place.location.country;
-                                    country.places = [];
-                                    countries.push(country);
-                                }
-                                
-                                var place;
-                                found = -1;
-                                for(n=0; n<country.places.length; n++){
-                                    var check = country.places[n].id;
-                                    if(check == post.place.id){
-                                        found = n;
-                                    }
-                                }
-                                if(found>=0){
-                                    place = country.places[found];
-                                }else{
-                                    place = {};
-                                    place.id = post.place.id;
-                                    place.name = post.place.name;
-                                    place.friends = [];                              
-                                    country.places.push(place); 
-                                }
-                                console.log(place);
-                                var friend;
-                                found = -1;
-                                for(n=0; n<place.friends.length; n++){
-                                    var check = place.friends[n].id;
-                                    if(check == fbfriend.id){
-                                        found = n;
-                                    }
-                                }
-                                if(found>=0){
-                                    friend = place.friends[found];
-                                }else{
-                                	friend = {};
-                                    friend.name = fbfriend.name;
-                                    friend.id = fbfriend.id;
-                                    friend.source = fbfriend.picture.data.url;
-                                    friend.posts = [];
-                                    place.friends.push(friend);
-                                }
-                                
-                                console.log(friend);
-                           
-                                var pst = {}
-                                pst.id = post.id;
-                                pst.time = post.created_time;
-                                if (post.story != undefined)
-                                    pst.story = post.story;
-                                if (post.message != undefined)
-                                    pst.message = post.message;
-                                if(post.full_picture != undefined)
-                                    pst.src = post.full_picture;
-                                friend.posts.push(pst); 
-                         }
-                     }
-                 });
-             }
-         });
-         var pretty = JSON.stringify(countries, null, "\t") ;
-         //document.getElementById("dataDiv").appendChild(document.createTextNode(pretty));
-       console.log(countries);
-       return countries;
-   }
-
 
 	FacebookFactory.logIntoFb = function(){
 		checkLoginState();
