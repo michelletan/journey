@@ -4,13 +4,13 @@
         </div>
     </div>
     <div class="user-container" layout="row" layout-align="center start">
-        <div flex-xs="100" flex-sm="80" flex="70"  layout="row" layout-align="start end">
+        <div layout="row" layout-align="start end" flex-xs="100" flex-sm="80" flex="70"  >
             <img ng-src="{{user.profileSrc ? user.profileSrc : defaultUserPic}}" class="img-profile-user img-circle" />
             <h2 class="profile-user-name">{{user.name ? user.name : defaultUserName}}</h2>
         </div>
     </div>
     <div class="journeys-container" layout="row" layout-align="center start">
-        <div flex-xs="100" flex-sm="80" flex="70"  layout="row" layout-align="start center" layout-wrap>
+        <div layout="row" layout-align="start center" layout-wrap flex-xs="100" flex-sm="80" flex="70"  >
             <md-grid-list md-cols-xs="1" md-cols-sm="2" md-cols="3" md-gutter="0px" md-gutter-gt-xs="10px" md-row-height-xs="2:1" md-row-height-sm="2:2" md-row-height-gt-sm="3:3" layout-fill>
                 <md-grid-tile ng-click="goToJourney(journey.id)" ng-repeat="journey in journeys" ng-style="{'background-image':'url({{journey.coverUrl ? journey.coverUrl : defaultCoverUrl}})'}" class="img-overlay">
                     <div class="journey-tile-info" flex-offset="10" flex="80">
