@@ -1,130 +1,58 @@
-/* The following seed array replaces the functionality of the CountryFactory.
-It does not include posts. */
-var countries = [
-	{ 
-		id: 1,
-		name: "Mongolia",
-		source: "http://www.gluckman.com/UB-1658.jpg",
-		friends: [
-			{
-				id: 1,
-				name: "Ten Zhi Yang",
-				source: "https://i.ytimg.com/vi/s1ctSDLRUwE/maxresdefault.jpg",
-				posts: [
-					{
-						id: 1,		
-						type: "tagged_location",
-						name: "Mongolian Temple",
-						lat: 100,
-						lng: 100
-					},
-					{
-						id: 2,
-						type: "post",
-						name: "Mongolian Temple 2",
-						source: "http://www.gluckman.com/UB-1658.jpg",
-						content: "I love this temple!",
-						lat: 110, 
-						lng: 110
-					}
-				]
-			},
-			{
-				id: 3,
-				name: "Lee Kai Yi",
-				source: "http://www.eng.nus.edu.sg/ugrad/images/gepcandidates/ay1415/leeky.jpg"
-			},
-			{
-				id: 4,
-				name: "Chua Yao Hui",
-				source: "https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/6/005/078/1fd/36999a1.jpg"
-			}
-		]
-	},
-	{
-		id: 2,
-		name: "Russia",
-		source: "http://goldenvipworld.com/images/prodotti/russia/16.jpg",
-		friends: [
-			{
-				id: 1,
-				name: "Ten Zhi Yang",
-				source: "https://i.ytimg.com/vi/s1ctSDLRUwE/maxresdefault.jpg"
-			},
-			{
-				id: 2,
-				name: "Michelle Tan",
-				source: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/624693/profile/profile-512_1.jpg"
-			}
-		]
-	},
-	{
-		id: 3,
-		name: "United States",
-		source: "http://cdn.lolwot.com/wp-content/uploads/2015/02/18-must-see-places-in-the-world-1.jpg",
-		friends: [
-			{
-				id: 1,
-				name: "Ten Zhi Yang",
-				source: "https://i.ytimg.com/vi/s1ctSDLRUwE/maxresdefault.jpg"
-			},
-			{
-				id: 2,
-				name: "Michelle Tan",
-				source: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/624693/profile/profile-512_1.jpg"
-			},
-			{
-				id: 3,
-				name: "Lee Kai Yi",
-				source: "http://www.eng.nus.edu.sg/ugrad/images/gepcandidates/ay1415/leeky.jpg"
-			},
-			{
-				id: 4,
-				name: "Chua Yao Hui",
-				source: "https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/6/005/078/1fd/36999a1.jpg"
-			}
-		]
-	},
-	{
-		id: 4,
-		name: "Singapore",
-		source: "https://www.singaporeair.com/saar5/images/navigation/plan-travel/packages/singapore-stopover-holiday.jpg",
-		friends: [
-			{
-				id: 1,
-				name: "Ten Zhi Yang",
-				source: "https://i.ytimg.com/vi/s1ctSDLRUwE/maxresdefault.jpg"
-			},
-			{
-				id: 2,
-				name: "Michelle Tan",
-				source: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/624693/profile/profile-512_1.jpg"
-			},
-			{
-				id: 3,
-				name: "Lee Kai Yi",
-				source: "http://www.eng.nus.edu.sg/ugrad/images/gepcandidates/ay1415/leeky.jpg"
-			},
-			{
-				id: 4,
-				name: "Chua Yao Hui",
-				source: "https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/6/005/078/1fd/36999a1.jpg"
-			},
-			{
-				id: 5,
-				name: "Barack Obama",
-				source: "https://lh6.googleusercontent.com/-2lJYGtfXKwQ/AAAAAAAAAAI/AAAAAAAB2HQ/QSmIw0nQN_c/photo.jpg"
-			},
-			{
-				id: 6,
-				name: "Joseph Schooling",
-				source: "https://swimmingworld.azureedge.net/news/wp-content/uploads/2015/02/joseph-schooling-2015-e1470971580411-720x500.jpg"
-			},
-			{
-				id: 7,
-				name: "Lee Hsien Loong",
-				source: "http://mothership.sg/wp-content/uploads/2014/08/lee-hsien-loong-fb.jpg"
-			}
-		]
-	},	
-];
+var journeyArrBasic = [
+  {
+	"country": "Singapore",
+	"posts": [
+  	{
+    	"id": "1144958495559554_1147631028625634",
+    	"time": "2016-08-26T04:04:38+0000",
+    	"story": "Ten Zhi-Yang at National University of Singapore.",
+    	"message": "teleport back to nus",
+    	"likes": 0,
+    	"country": "Singapore"
+  	}
+	]
+  },
+  {
+	"country": "Malaysia",
+	"posts": [
+  	{
+    	"id": "1144958495559554_1147630815292322",
+    	"time": "2016-08-26T04:04:19+0000",
+    	"story": "Ten Zhi-Yang at Kuching Museum.",
+    	"message": "cat museum",
+    	"likes": 0,
+    	"country": "Malaysia"
+  	}
+	]
+  },
+  {
+	"country": "Singapore",
+	"posts": [
+  	{
+    	"id": "1144958495559554_1146911085364295",
+    	"time": "2016-08-25T11:36:42+0000",
+    	"story": "Ten Zhi-Yang with Ng Xiao Hui at Saveur at Cathay.",
+    	"message": "Test data",
+    	"src": "https://scontent.xx.fbcdn.net/v/t1.0-9/s720x720/14088595_1146911065364297_6541244813022274907_n.jpg?oh=2f6b123962ba195f332015ae0fd568b2&oe=584AA9ED",
+    	"likes": 0,
+    	"country": "Singapore"
+  	},
+  	{
+    	"id": "1144958495559554_1145877815467622",
+    	"time": "2016-08-24T10:37:21+0000",
+    	"story": "Ten Zhi-Yang at NUS School of Computing.",
+    	"message": "test",
+    	"likes": 5,
+    	"country": "Singapore"
+  	},
+  	{
+    	"id": "1144958495559554_1136479309740806",
+    	"time": "2016-08-14T05:06:21+0000",
+    	"story": "Ten Zhi-Yang at Ah Hoe Mee Pok - 阿和麺薄 - Food Stall.",
+    	"message": "Literally the best bak chor mee I ever had. Ng Xiao Hui Yuan Shan Chan Qin Ying",
+    	"likes": 1,
+    	"country": "Singapore"
+  	}
+	]
+  }
+]
