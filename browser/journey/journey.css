@@ -5,5 +5,11 @@
 .journey-post-date {
     margin-bottom: 20px;
     font-size: 18px;
-    font-weight: 300;
+    font-weight: 500;
+}
+
+.journey-post-content {
+    margin: 8px;
+    padding: 8px;
+    background-color: white;
 }

@@ -43,6 +43,12 @@ app.config(function($stateProvider){
     controller: 'JourneyCreateCtrl'
   });
 
+  $stateProvider.state('edit', {
+    url: '/edit',
+    templateUrl: '/browser/journey-create/journey-create.html',
+    controller: 'JourneyCreateCtrl'
+  });
+
   $stateProvider.state('policy', {
     url: '/policy',
     templateUrl: '/browser/policy/policy.html'
