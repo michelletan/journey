@@ -108,8 +108,6 @@ app.factory('FacebookFactory', function($q, PixabayFactory){
 							newJourney.source = PixabayFactory.getCountryImgUrl(qCountry);
 							newJourney.posts = [];
 							journeys.push(newJourney);
-						}else{
-							
 						}
 						var newPost = FacebookFactory.copyPost(qPost);
 						newJourney.posts.push(newPost);
