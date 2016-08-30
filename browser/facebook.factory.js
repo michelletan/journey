@@ -2,8 +2,13 @@
 app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $rootScope){
 	var FacebookFactory = {}
 
-	var toPrint = "";
+	// Declaring "global window" variables, so that we can rapidly grab user info on front-end
+	$rootScope.userId = null;
+	$rootScope.userName = null;
+	$rootScope.userSource = null;
 
+	var toPrint = "";
+	
 	FacebookFactory.statusChangeCallback = function(response) {
 		console.log('statusChangeCallback');
 		console.log(response);
@@ -15,30 +20,54 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 		  // Logged into your app and Facebook.
 		  if(document.getElementById("logInLanding")!=undefined)
 			document.getElementById("logInLanding").style.display = 'none';
+		  // When we are connected,
 		  return FacebookFactory.whenConnected()
-		  // Sets window variables
+		  // We set global variables 
 		  .then(function(userObj){
 		  	$rootScope.userId = userObj.id;
 		  	$rootScope.userName = userObj.name;
 		  	$rootScope.userSource = userObj.source;
-		  	return userObj;
-		  });
+		  })
+		  // Check if user already exists on our db
+		  .then(function(){
+		  	return DatabaseFactory.checkExistence($rootScope.userId)
+		  	.then(function(userExists){
+		  		if(!userExists){
+		  			// Generate and Persist (POST) Journeys 
+		  			return FacebookFactory.generateJourneyWS()
+		  			.then(function(journeys){
+		  				return DatabaseFactory.persistJourneys($rootScope.userId, journeys);
+		  			})
+		  			// Grab (GET) Journeys
+		  			.then(function(){
+		  				return DatabaseFactory.getAllJourneys($rootScope.userId)
+		  				.then(function(journeys){
+		  					console.log("From db, we received the journeys: ", journeys);
+		  					$rootScope.journeys = journeys;
+		  				});
+		  			})
+		  		}else{
+		  			// If user already exists, do something else
+		  		}
+		  	})
+		  })
+
 		} else if (response.status === 'not_authorized') {
 		  // The person is logged into Facebook, but not your app.
 		  if(document.getElementById("logInLanding")!=undefined)
 			document.getElementById("logInLanding").style.display = 'block';
-
+		  
 		} else {
 		  // The person is not logged into Facebook, so we're not sure if
 		  // they are logged into this app or not.
 		  if(document.getElementById("logInLanding")!=undefined)
 			document.getElementById("logInLanding").style.display = 'block';
-
+		  
 		}
 	}
 
 	FacebookFactory.whenConnected = function(){
-		var	deferred = $q.defer();
+		var	deferred = $q.defer(); 
 		FB.api('me?fields=name,id,picture.type(large)', function(response) {
 			if(!response || response.error){
 				deferred.reject('Error occurred');
@@ -48,7 +77,7 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 					source: response.picture.data.url,
 					id: response.id
 				});
-			}
+			}	
 		});
 		return deferred.promise;
 	}
@@ -60,20 +89,20 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 		   checkLoginState();
 		 }, {scope: 'public_profile,email,user_tagged_places,user_friends'});
 	}
-
+	
 	FacebookFactory.logOutFb = function(){
 		checkLoginState();
 		FB.logout(function(response) {
 		  //logout processing here
 		  //Clearing rootscope variables
-	  	$rootScope.userId = "";
-	  	$rootScope.userName = "";
-	  	$rootScope.userSource = "";
+	  	$rootScope.userId = null;
+	  	$rootScope.userName = null;
+	  	$rootScope.userSource = null;
 		});
 	}
-
+	
 	FacebookFactory.getPlacePic = function(idStr){
-		var deferred = $q.defer();
+		var deferred = $q.defer(); 
 		var query = idStr+"?fields=name,cover,picture.type(large)"
 		FB.api(query, function(response){
 			var place = response;
@@ -94,7 +123,7 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 		return deferred.promise;
 	};
 
-	FacebookFactory.generateJourney = function(){
+	var generateJourney = function(){
 		var deferred = $q.defer();
 		var query ='me/feed?fields=id,created_time,story,message,likes.limit(0).summary(true),place,full_picture&since=';
 		query+= FacbookFactory.getLastYear();
@@ -117,7 +146,6 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 							currCountry = qCountry;
 							newJourney = {};
 							newJourney.name = "My Journey in "+qCountry;
-							newJourney.source = PixabayFactory.getCountryImgUrl(qCountry);
 							newJourney.posts = [];
 							journeys.push(newJourney);
 						}
@@ -126,11 +154,25 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 					}
 				}
 			}
-			deferred.resolve({journeys: journeys});
+			deferred.resolve(journeys);
 		});
-
 		return deferred.promise;
 	}
+
+	FacebookFactory.generateJourneyWS = function(){
+		return generateJourney()
+		.then(function(journeys){ 
+			return $q.map(journeys, function(journey){ 
+				return PixabayFactory.getCountryImgUrl(journey.name)
+				.then(function(url){
+					journey.source = url;
+					return journey
+				});
+			});
+		});
+	}
+
+
 	FacebookFactory.getLastYear = function(){
 		var lastYear = new Date(new Date().setFullYear(new Date().getFullYear() - 1));
 		var returnVal = lastYear.getFullYear()+"-"+lastYear.getMonth()+"-"+lastYear.getDate()+"T00:00:00";
@@ -174,3 +216,4 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 
 
 	})
+
