@@ -1,3 +1,7 @@
+.home-container {
+    margin-bottom: 50vh;
+}
+
 .img-post {
     height: 300px;
     object-fit: cover;

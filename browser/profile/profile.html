@@ -1,6 +1,6 @@
-<section>
-    <div layout="row" layout-align="center start" layout-fill layout-wrap>
-        <div ng-style="{'background-image':'linear-gradient(rgba(0, 0, 0, 0.4),rgba(0, 0, 0, 0.4)),url({{user.coverSrc ? user.coverSrc : defaultCoverUrl}})'}" class="img-overlay country-header mid" layout="column" layout-align="center center" layout-fill>
+<md-content class="scroll-container">
+    <div layout="row" layout-align="center start" layout-wrap>
+        <div ng-style="{'background-image':'linear-gradient(rgba(0, 0, 0, 0.4),rgba(0, 0, 0, 0.4)),url({{user.coverSrc ? user.coverSrc : defaultCoverUrl}})'}" class="img-overlay img-subheader mid" layout="column" layout-align="center center" layout-fill>
         </div>
     </div>
     <div class="user-container" layout="row" layout-align="center start">
@@ -22,4 +22,4 @@
             </md-grid-list>
         </div>
     </div>
-</section>
+</md-content>

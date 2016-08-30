@@ -1,18 +1,18 @@
 <section>
     <div layout="row" layout-align="center start" layout-fill layout-wrap>
-        <div ng-style="{'background-image':'linear-gradient(rgba(0, 0, 0, 0.4),rgba(0, 0, 0, 0.4)),url({{user.coverSrc ? user.coverSrc : defaultCoverUrl}})'}" class="img-overlay country-header mid" layout="column" layout-align="center center" layout-fill>
+        <div ng-style="{'background-image':'linear-gradient(rgba(0, 0, 0, 0.4),rgba(0, 0, 0, 0.4)),url({{user.coverSrc ? user.coverSrc : defaultCoverUrl}})'}" class="img-overlay img-subheader mid" layout="column" layout-align="center center" layout-fill>
             <h2>{{journey.title ? journey.title : defaultJourneyTitle}}</h2>
         </div>
     </div>
     <div class="user-container" layout="row" layout-align="center start">
-        <div flex-xs="95" flex-sm="80" flex="70" layout="row" layout-align="start end">
+        <div layout="row" layout-align="start end" flex-xs="95" flex-sm="80" flex="70" >
             <img ng-src="{{user.profileSrc ? user.profileSrc : defaultUserPic}}" class="img-profile-user img-circle" />
             <h2 class="profile-user-name">{{user.name ? user.name : defaultUserName}}</h2>
         </div>
     </div>
-    <div class="journey-container" layout="row" layout-align="center start">
-        <div flex-xs="100" flex-sm="80" flex="70" layout="column" layout-align="start stretch">
-            <div ng-repeat="post in journey.posts" class="journey-post" layout="row" layout-align="start start" layout-wrap>
+    <md-content class="journey-container" layout="row" layout-align="center start">
+        <div layout="row" layout-align="center start" flex-xs="100" flex-sm="80" flex="70" layout-wrap>
+            <div ng-repeat="post in journey.posts" class="journey-post" layout="row" layout-align="start start" layout-wrap flex="100">
                 <div class="journey-post-date" flex="100" layout="row" layout-align="center center">19 Aug 2015 </div>
                 <div layout="row" layout-align="center start" layout-wrap>
                     <md-card flex-xs="100" flex-sm="40" flex="50">
@@ -27,5 +27,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </md-content>
 </section>

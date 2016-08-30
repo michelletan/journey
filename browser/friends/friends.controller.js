@@ -6,7 +6,7 @@ app.controller('FriendsCtrl', function($scope, $state, $stateParams) {
 	$scope.defaultUserName = 'User';
 
     $scope.friends = [
-        {}, {}, {}, {}, {}, {}
+        {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}
     ];
 
     $scope.inviteFriend = inviteFriend;

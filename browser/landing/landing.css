@@ -1,25 +1,5 @@
-.image-spread-container {
-    height: 400px;
-    margin-bottom: 15px;
-    background-image: url('http://dl.dropboxusercontent.com/s/9x8tfh5hy8go4wk/landing-photo.jpg?dl=0');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-.image-spread, .image-feature {
-    object-fit: cover;
-}
-
-.image-spread-text {
-    color: white;
-    font-size: 24px;
-    text-align: center;
-}
-
-.image-spread-header {
-    font-weight: 600;
-    font-size: 52px;
+.landing-buffer {
+    padding-bottom: 50px;
 }
 
 .btn-login {

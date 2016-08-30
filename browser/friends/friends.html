@@ -1,8 +1,8 @@
-<section>
-    <div ng-style="{'background-image':'linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.3)),url(/images/friends-spread.jpg)'}" class="img-overlay img-subheader mid" layout="column" layout-align="center center" layout-fill>
+<md-content class="scroll-container">
+    <div ng-style="{'background-image':'linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.3)),url(/images/friends-spread.jpg)'}" class="img-overlay img-subheader mid" layout="column" layout-align="center center">
         <h2>Friends</h2>
     </div>
-    <div layout="column" layout-align="center start" flex-xs="100" flex-offset-gt-xs="15" flex-gt-xs="70">
+    <div class="friends-container" layout="column" layout-align="center start" flex-xs="100" flex-offset-gt-xs="15" flex-gt-xs="70">
         <div class="friend-search-bar" layout="row" layout-align="space-between center" layout-fill>
             <md-autocomplete
             ng-disabled="ctrl.isDisabled"
@@ -23,22 +23,22 @@
                 No friends matching "{{ctrl.searchText}}" were found.
                 <a ng-click="inviteFriend(ctrl.searchText)">Invite your friend {{ctrl.searchText}}!</a>
             </md-not-found>
-        </md-autocomplete>
+            </md-autocomplete>
+        </div>
+        <div layout="row" layout-align="center start" layout-fill layout-wrap>
+            <md-card ng-repeat="friend in friends" flex="100" flex-sm="45" flex-gt-sm="30">
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">{{friend.name ? friend.name : defaultUserName}}</span>
+                        <span class="md-subhead">3 journeys</span>
+                    </md-card-title-text>
+                    <md-card-title-media>
+                        <div class="md-media-sm card-media">
+                            <img class="img-cover" src="{{friend.source ? friend.source : defaultUserPic}}" layout-fill/>
+                        </div>
+                    </md-card-title-media>
+                </md-card-title>
+            </md-card>
+        </div>
     </div>
-    <div layout="row" layout-align="center start" layout-fill layout-wrap>
-        <md-card ng-repeat="friend in friends" flex="100" flex-sm="45" flex-gt-sm="30">
-            <md-card-title>
-                <md-card-title-text>
-                    <span class="md-headline">{{friend.name ? friend.name : defaultUserName}}</span>
-                    <span class="md-subhead">3 journeys</span>
-                </md-card-title-text>
-                <md-card-title-media>
-                    <div class="md-media-sm card-media">
-                        <img class="img-cover" src="{{friend.source ? friend.source : defaultUserPic}}" layout-fill/>
-                    </div>
-                </md-card-title-media>
-            </md-card-title>
-        </md-card>
-    </div>
-</div>
-</section>
+</md-content>

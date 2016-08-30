@@ -66,9 +66,7 @@
 <body ng-app="journeyApp">
 	<div ng-controller="IndexCtrl" layout="column" layout-fill>
 		<navbar></navbar>
-		<md-content ng-show="!isLoading">
-			<ui-view></ui-view>
-		</md-content>
+		<ui-view></ui-view>
 		<div ng-show="isLoading" class="loading-container" layout="column" layout-align="center center">
 			<p class="loading-title">Loading...</p>
 			<img src="/images/loading.svg">

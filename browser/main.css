@@ -2,6 +2,11 @@ html, body, md-content {
     background: #e5e5e5;
 }
 
+body {
+    width: 100vw;
+    position: fixed;
+}
+
 .img-overlay {
     background:
     linear-gradient(
@@ -26,10 +31,6 @@ html, body, md-content {
     height: 300px;
 }
 
-.country-header {
-    height: 200px;
-}
-
 .mid {
     color: white;
     text-align: center;
@@ -45,10 +46,6 @@ html, body, md-content {
     margin: 0;
     font-weight: 300;
     font-size: 24px;
-}
-
-.country-tile h2 {
-    font-size: 48px !important;
 }
 
 .img-circle {
@@ -82,10 +79,16 @@ html, body, md-content {
 }
 
 .img-subheader {
-    height: 200px;
+    height: 20vh;
     margin-bottom: 20px;
 }
 
+.scroll-container {
+    height: 100vh;
+    position: relative;
+    padding-bottom: 100px;
+}
+
 .text-container {
-    margin-bottom: 50px;
+    margin-bottom: 100px;
 }

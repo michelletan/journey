@@ -1,16 +1,18 @@
 <section layout="row" layout-align="center stretch" layout-wrap>
     <div layout="column" flex="75" hide-xs>
-        <div layout="row" layout-align="center center" layout-wrap>
+        <md-content class="scroll-container" layout="row" layout-align="center start" layout-wrap>
             <md-card ng-repeat="post in posts" ng-click="post.selected = !post.selected" ng-class="{'create-post-selected' : post.selected}" class="create-post" flex-sm="45" flex="30">
-                <img ng-src="{{post.source ? post.source : defaultPostPic}}" class="md-card-image img-cover" flex>
+                <div layout="row" layout-align="center center">
+                    <img ng-src="{{post.source ? post.source : defaultPostPic}}" class="md-card-image img-cover" flex>
+                </div>
                 <md-card-content>
-                    The titles of Washed Out's breakthrough song and the first single from Paracosm share the
+                    {{$index}} The titles of Washed Out's breakthrough song and the first single from Paracosm share the
                     two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
                 </md-card-content>
             </md-card>
-        </div>
+        </md-content>
     </div>
-    <div class="create-filter-container" flex="25" hide-xs>
+    <div class="create-filter-container" flex="25" hide-xs sticky>
         <div class="create-actions-container" layout-sm="column" layout="row" layout-align="end center">
                 <md-button class="md-raised">Save Draft</md-button>
                 <md-button class="md-raised md-primary">Done</md-button>
@@ -18,11 +20,11 @@
         <md-subheader class="md-no-sticky">Display Posts</md-subheader>
         <div class="datepicker-container" layout="row" layout-align="start center" layout-wrap>
             <div flex-sm="100" flex-md="100" flex="30">Start date</div>
-            <md-datepicker ng-model="startDate" md-placeholder="Select date" md-open-on-focus flex-sm="100" flex-md="100" flex="70"></md-datepicker>
+            <md-datepicker ng-model="startDate" md-max-date="endDate" md-placeholder="Select date" md-open-on-focus flex-sm="100" flex-md="100" flex="70"></md-datepicker>
         </div>
         <div class="datepicker-container" layout="row" layout-align="start center" layout-wrap>
             <div flex-sm="100" flex-md="100" flex="30">End date</div>
-            <md-datepicker ng-model="endDate" md-placeholder="Select date" md-open-on-focus flex-sm="100" flex-md="100" flex="70"></md-datepicker>
+            <md-datepicker ng-model="endDate" md-min-date="startDate" md-placeholder="Select date" md-open-on-focus flex-sm="100" flex-md="100" flex="70"></md-datepicker>
         </div>
         <md-list>
             <md-subheader class="md-no-sticky">Filter by Country</md-subheader>
