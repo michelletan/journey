@@ -4,9 +4,6 @@ var User = db.model('user');
 var Journey = db.model('journey');
 var Post = db.model('post');
 
-// Request Module to make Pixabay API calls 
-var rp = require('request-promise');
-
 // Bluebird Module to handle Async calls
 var Promise = require('bluebird');
 
@@ -66,9 +63,15 @@ router.post('/:userId/journeys', function(req,res,next){
 	var userId = req.params.userId;
 	// Journey Array Basic = journey array without country sources added 
 	var journeyArr = req.body.journeys;
+	var userName = req.body.userName;
+	var userSource = req.body.userSource;
 	console.log("Journeys sent by client: ", req.body.journeys);
 	// Create User
-	return User.create({ id: userId })
+	return User.create({ 
+		id: userId,
+		name: userName,
+		source: userSource
+		 })
 	.then(function(newUser){
 		console.log("Journeys with source are: ", journeyArr);	
 		return Promise.map(journeyArr, function(journey){

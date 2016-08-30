@@ -1,4 +1,4 @@
-app.factory('DatabaseFactory', function($http){
+app.factory('DatabaseFactory', function($http, $rootScope){
 	var DatabaseFactory = {};
 
 	DatabaseFactory.getAllJourneys = function(userId){
@@ -23,7 +23,10 @@ app.factory('DatabaseFactory', function($http){
 	}
 
 	DatabaseFactory.persistJourneys = function(userId, journeyArr){
-		return $http.post('/user/' + userId + '/journeys', {journeys: journeyArr})
+		return $http.post('/user/' + userId + '/journeys', {journeys: journeyArr,
+			userName: $rootScope.userName,
+			userSource: $rootScope.userSource
+		})
 		.then(function(response){
 			return response.data;
 		})
