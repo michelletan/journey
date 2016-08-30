@@ -8,6 +8,13 @@ app.factory('DatabaseFactory', function($http){
 		})
 	}
 
+	DatabaseFactory.checkExistence = function(userId){
+		return $http.get('/user/' + userId + '/exists')
+		.then(function(response){
+			return response.data.userExists;
+		})
+	}
+
 	DatabaseFactory.getJourney = function(userId,journeyId){
 		return $http.get('/user/' + userId + '/journeys' + journeyId)
 		.then(function(response){
@@ -15,10 +22,9 @@ app.factory('DatabaseFactory', function($http){
 		})
 	}
 
-	DatabaseFactory.createJourneys = function(userId, journeyArr){
+	DatabaseFactory.persistJourneys = function(userId, journeyArr){
 		return $http.post('/user/' + userId + '/journeys', {journeys: journeyArr})
 		.then(function(response){
-			console.log("Newly persisted data is: ", response.data);
 			return response.data;
 		})
 	}

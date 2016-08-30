@@ -62,7 +62,7 @@ var Post = db.define('post', {
 User.hasMany(Journey);
 Journey.belongsTo(User);
 
-db.define('journeypost', {
+var JourneyPost = db.define('journeypost', {
 	order: {
 		type: Sequelize.INTEGER,
 		defaultValue: null
