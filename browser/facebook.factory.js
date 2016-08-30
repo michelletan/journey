@@ -1,5 +1,5 @@
 
-app.factory('FacebookFactory', function($q, PixabayFactory){
+app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $rootScope){
 	var FacebookFactory = {}
 
 	var toPrint = "";
@@ -15,7 +15,14 @@ app.factory('FacebookFactory', function($q, PixabayFactory){
 		  // Logged into your app and Facebook.
 		  if(document.getElementById("logInLanding")!=undefined)
 			document.getElementById("logInLanding").style.display = 'none';
-		  return FacebookFactory.whenConnected();
+		  return FacebookFactory.whenConnected()
+		  // Sets window variables 
+		  .then(function(userObj){
+		  	$rootScope.userId = userObj.id;
+		  	$rootScope.userName = userObj.name;
+		  	$rootScope.userSource = userObj.source;
+		  	return userObj;
+		  });
 		} else if (response.status === 'not_authorized') {
 		  // The person is logged into Facebook, but not your app.
 		  if(document.getElementById("logInLanding")!=undefined)
@@ -46,6 +53,7 @@ app.factory('FacebookFactory', function($q, PixabayFactory){
 		return deferred.promise;
 	}
 
+
 	FacebookFactory.logIntoFb = function(){
 		checkLoginState();
 		 FB.login(function(response) {
@@ -57,6 +65,10 @@ app.factory('FacebookFactory', function($q, PixabayFactory){
 		checkLoginState();
 		FB.logout(function(response) {
 		  //logout processing here
+		  //Clearing rootscope variables
+	  	$rootScope.userId = "";
+	  	$rootScope.userName = "";
+	  	$rootScope.userSource = "";
 		});
 	}
 	

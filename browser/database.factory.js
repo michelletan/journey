@@ -15,8 +15,8 @@ app.factory('DatabaseFactory', function($http){
 		})
 	}
 
-	DatabaseFactory.createJourneys = function(userId, journeyArrBasic){
-		return $http.post('/user/' + userId + '/journeys', journeyArrBasic)
+	DatabaseFactory.createJourneys = function(userId, journeyArr){
+		return $http.post('/user/' + userId + '/journeys', {journeys: journeyArr})
 		.then(function(response){
 			console.log("Newly persisted data is: ", response.data);
 			return response.data;
