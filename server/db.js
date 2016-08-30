@@ -30,7 +30,7 @@ var Journey = db.define('journey', {
 
 var Post = db.define('post', {
 	fbpostid: {
-		type: Sequelize.INTEGER
+		type: Sequelize.STRING
 	},
 	journeyid: {
 		type: Sequelize.INTEGER,

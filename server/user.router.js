@@ -13,6 +13,19 @@ var Promise = require('bluebird');
 // Set up Router
 var router = require('express').Router();
 
+// Checking if User Exists
+router.get('/:userId', function(req,res,next){
+	var userId = req.params.userId;
+	return User.find({ where: {id: userId} })
+	.then(function(user){
+		if(user !== null){
+			return res.send("User exists");
+		}else{
+			return res.send("User doesn't exist");
+		}
+	})
+});
+
 // Retrieving User Journeys
 router.get('/:userId/journeys', function(req,res,next){
 	var userId = req.params.userId;
@@ -59,26 +72,33 @@ router.post('/:userId/journeys', function(req,res,next){
 				return Promise.map(journeyArr, function(journey){
 					return newUser.createJourney({
 						name: journey.name,
-						source: journey.source || "123"
+						source: journey.source || "No Source"
+					})
+					.then(function(createdJourney){
+						journey.id = createdJourney.id
+						return journey;
 					})
 				})
 			})
-			.then(function(createdJourneyArr){
-				console.log("Journeys from database are: ", createdJourneyArr);
-				res.status(200).send(createdJourneyArr);
-				return Promise.map(createdJourneyArr, function(createdJourney){
-					return Promise.map(createdJourney.posts, function(post){
-						createdJourney.createPost({
-							fbpostid: post.id,
-							journeyid: createdJourney.id,
-							story: post.story,
-							message: post.message,
-							source: post.source,
-							country: post.country,
-							created: post.time,
-							likes: post.likes	
-						})
-					})	
+			.then(function(updatedJourneyArr){
+				console.log("Journeys with db ids are: ", updatedJourneyArr);
+				res.status(200).send(updatedJourneyArr);
+				return Promise.map(updatedJourneyArr, function(updatedJourney){
+					return Journey.findOne({ where: { id: updatedJourney.id } })
+					.then(function(foundJourney){
+						return Promise.map(updatedJourney.posts, function(post){
+							foundJourney.createPost({
+								fbpostid: post.id,
+								journeyid: foundJourney.id,
+								story: post.story,
+								message: post.message,
+								source: post.source,
+								country: post.country,
+								created: post.time,
+								likes: post.likes	
+							})
+						})	
+					})
 				})
 			})
 		}
