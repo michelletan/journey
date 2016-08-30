@@ -10,70 +10,52 @@ app.config(function($stateProvider){
   $stateProvider.state('home', {
     url: '/home',
     templateUrl: '/browser/home/home.html',
-    controller: 'HomeCtrl',
-    resolve: {
-      $title: function() { return 'Home'; }
-    }
+    controller: 'HomeCtrl'
   });
 
   $stateProvider.state('profile', {
     url: '/profile/:id',
     templateUrl: '/browser/profile/profile.html',
-    controller: 'ProfileCtrl',
-    resolve: {
-      $title: function() { return 'Profile'; }
-    }
+    controller: 'ProfileCtrl'
   });
 
   $stateProvider.state('friends', {
     url: '/friends',
     templateUrl: '/browser/friends/friends.html',
-    controller: 'FriendsCtrl',
-    resolve: {
-      $title: function() { return 'Friends'; }
-    }
+    controller: 'FriendsCtrl'
   });
 
   $stateProvider.state('journeys', {
     url: '/journeys',
     templateUrl: '/browser/journeys/journeys.html',
-    controller: 'JourneysCtrl',
-    resolve: {
-      $title: function() { return 'Journeys'; }
-    }
+    controller: 'JourneysCtrl'
   });
 
   $stateProvider.state('journey', {
     url: '/journey/:id',
     templateUrl: '/browser/journey/journey.html',
-    controller: 'JourneyCtrl',
-    resolve: {
-      $title: function() { return 'Journey'; }
-    }
+    controller: 'JourneyCtrl'
+  });
+
+  $stateProvider.state('create', {
+    url: '/create',
+    templateUrl: '/browser/journey-create/journey-create.html',
+    controller: 'JourneyCreateCtrl'
   });
 
   $stateProvider.state('policy', {
     url: '/policy',
-    templateUrl: '/browser/policy/policy.html',
-    resolve: {
-      $title: function() { return 'Privacy Policy'; }
-    }
+    templateUrl: '/browser/policy/policy.html'
   });
 
   $stateProvider.state('terms', {
     url: '/terms',
-    templateUrl: '/browser/terms/terms.html',
-    resolve: {
-      $title: function() { return 'Terms of Service'; }
-    }
+    templateUrl: '/browser/terms/terms.html'
   });
 
   $stateProvider.state('credits', {
     url: '/credits',
-    templateUrl: '/browser/credits/credits.html',
-    resolve: {
-      $title: function() { return 'Credits'; }
-    }
+    templateUrl: '/browser/credits/credits.html'
   });
 
 
