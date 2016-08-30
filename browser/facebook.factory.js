@@ -3,7 +3,7 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 	var FacebookFactory = {}
 
 	var toPrint = "";
-	
+
 	FacebookFactory.statusChangeCallback = function(response) {
 		console.log('statusChangeCallback');
 		console.log(response);
@@ -16,7 +16,7 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 		  if(document.getElementById("logInLanding")!=undefined)
 			document.getElementById("logInLanding").style.display = 'none';
 		  return FacebookFactory.whenConnected()
-		  // Sets window variables 
+		  // Sets window variables
 		  .then(function(userObj){
 		  	$rootScope.userId = userObj.id;
 		  	$rootScope.userName = userObj.name;
@@ -27,18 +27,18 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 		  // The person is logged into Facebook, but not your app.
 		  if(document.getElementById("logInLanding")!=undefined)
 			document.getElementById("logInLanding").style.display = 'block';
-		  
+
 		} else {
 		  // The person is not logged into Facebook, so we're not sure if
 		  // they are logged into this app or not.
 		  if(document.getElementById("logInLanding")!=undefined)
 			document.getElementById("logInLanding").style.display = 'block';
-		  
+
 		}
 	}
 
 	FacebookFactory.whenConnected = function(){
-		var	deferred = $q.defer(); 
+		var	deferred = $q.defer();
 		FB.api('me?fields=name,id,picture.type(large)', function(response) {
 			if(!response || response.error){
 				deferred.reject('Error occurred');
@@ -48,7 +48,7 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 					source: response.picture.data.url,
 					id: response.id
 				});
-			}	
+			}
 		});
 		return deferred.promise;
 	}
@@ -60,7 +60,7 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 		   checkLoginState();
 		 }, {scope: 'public_profile,email,user_tagged_places,user_friends'});
 	}
-	
+
 	FacebookFactory.logOutFb = function(){
 		checkLoginState();
 		FB.logout(function(response) {
@@ -71,9 +71,9 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 	  	$rootScope.userSource = "";
 		});
 	}
-	
+
 	FacebookFactory.getPlacePic = function(idStr){
-		var deferred = $q.defer(); 
+		var deferred = $q.defer();
 		var query = idStr+"?fields=name,cover,picture.type(large)"
 		FB.api(query, function(response){
 			var place = response;
@@ -94,7 +94,7 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 		return deferred.promise;
 	};
 
-	FacbookFactory.generateJourney = function(){
+	FacebookFactory.generateJourney = function(){
 		var deferred = $q.defer();
 		var query ='me/feed?fields=id,created_time,story,message,likes.limit(0).summary(true),place,full_picture&since=';
 		query+= FacbookFactory.getLastYear();
@@ -128,7 +128,7 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 			}
 			deferred.resolve({journeys: journeys});
 		});
-		
+
 		return deferred.promise;
 	}
 	FacebookFactory.getLastYear = function(){
@@ -174,4 +174,3 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 
 
 	})
-
