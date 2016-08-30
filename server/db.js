@@ -12,7 +12,7 @@ var db = new Sequelize(databaseURI, {
 
 var User = db.define('user', {
   name: {
-  	type: Sequelize.INTEGER
+  	type: Sequelize.STRING
   },
   source: {
   	type: Sequelize.STRING
