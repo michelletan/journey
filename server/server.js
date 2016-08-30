@@ -4,6 +4,12 @@ var app = express();
 var path = require('path');
 var Promise = require('bluebird');
 var db = require('./db.js');
+var bodyParser = require('body-parser')
+
+/* ---- BODYPARSER BOILERPLATE ---- */
+// Lets us use parse POST request bodies as JSON
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 /* ---- ROUTES HERE ---- */
 // Routes for static files

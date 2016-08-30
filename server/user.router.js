@@ -42,41 +42,24 @@ router.get('/:userId/journeys/:journeyId', function(req,res,next){
 
 // First time User -- Persisting User Journeys
 router.post('/:userId/journeys', function(req,res,next){
-	var pixabayApiKey = '3129951-64f23563232747f3a8f3bb9b9';
-	var pixabayBaseUrl = "https://pixabay.com/api/?key="+pixabayApiKey+"&q=";
 	var userId = req.params.userId;
 	// Journey Array Basic = journey array without country sources added 
-	var journeyArrBasic = req.body;
-
-	// Adds a source to each country
-	var journeyArrProm = Promise.map(journeyArrBasic, function(journey){
-		var countryName = journey.name;
-		var pixabayRequest = pixabayBaseUrl + countryName;  
-		return rp(pixabayRequest)
-		.then(function(response){
-			if(response.data.hits.length>0){
-				journey.source = response.data.hits[0].webformatURL;
-			}else{
-				journey.source = "http://moneysavingdude.com/wp-content/uploads/2014/03/save-money-by-traveling-by-plane.jpg"
-			}
-			return journey;
-		})
-	})
+	var journeyArr = req.body.journeys;
+	console.log("Journeys sent by client: ", req.body.journeys);
 	// Check if user already exists on database
-	return User.findAll({ where: { id: userId } })
+	return User.findOne({ where: { id: userId } })
 	.then(function(foundUser){
-		if(foundUser){
+		if(foundUser !== null){
 			return res.status(409).send("User already exists");
 		}else{
 			// Create User
-			var userProm = User.create({ id: userId });
-			return Promise.all([journeyArrProm, userProm])
-			.spread(function(journeyArr, newUser){
+			User.create({ id: userId })
+			.then(function(newUser){
 				console.log("Journeys with source are: ", journeyArr);	
 				return Promise.map(journeyArr, function(journey){
 					return newUser.createJourney({
 						name: journey.name,
-						source: journey.source
+						source: journey.source || "123"
 					})
 				})
 			})
