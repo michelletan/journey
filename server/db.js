@@ -11,6 +11,11 @@ var db = new Sequelize(databaseURI, {
 });
 
 var User = db.define('user', {
+	id : {
+		type: Sequelize.STRING,
+		primaryKey: true,
+		unique: true
+	},
   name: {
   	type: Sequelize.STRING
   },
@@ -61,13 +66,6 @@ var Post = db.define('post', {
 // One User has many Journeys 
 User.hasMany(Journey);
 Journey.belongsTo(User);
-
-db.define('journeypost', {
-	order: {
-		type: Sequelize.INTEGER,
-		defaultValue: null
-	}
-})
 
 // Each country can have many posts
 Journey.belongsToMany(Post, {through: 'journeypost'});

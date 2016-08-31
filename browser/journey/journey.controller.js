@@ -1,6 +1,12 @@
 'use strict';
 
-app.controller('JourneyCtrl', function($scope, $state, $stateParams) {
+app.controller('JourneyCtrl', function($scope, $state, $stateParams, DatabaseFactory, $rootScope) {
+
+    DatabaseFactory.getJourney($rootScope.userId,$stateParams.id)
+    .then(function(journey){
+        $scope.journey = journey;
+    });
+
     $scope.profileId = $stateParams.id;
 
     $scope.defaultUserId = 1;
@@ -11,7 +17,4 @@ app.controller('JourneyCtrl', function($scope, $state, $stateParams) {
     $scope.defaultJourneyTitle = 'Amazing Trip';
     $scope.defaultPostPic = '/images/landing-feature2.jpg';
 
-    $scope.journey = {
-        posts: [1, 2, 3]
-    };
 });

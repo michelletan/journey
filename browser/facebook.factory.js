@@ -8,7 +8,8 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 	$rootScope.userSource = null;
 
 	var toPrint = "";
-	
+
+  
 	FacebookFactory.statusChangeCallback = function(response) {
 		console.log('statusChangeCallback');
 		console.log(response);
@@ -24,30 +25,24 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 		  return FacebookFactory.whenConnected()
 		  // We set global variables 
 		  .then(function(userObj){
+		  	console.log("whenConnected resolves with the value: ", userObj);
 		  	$rootScope.userId = userObj.id;
 		  	$rootScope.userName = userObj.name;
 		  	$rootScope.userSource = userObj.source;
 		  })
 		  // Check if user already exists on our db
 		  .then(function(){
+		  	console.log("Going to check existence of userId: ", $rootScope.userId);
 		  	return DatabaseFactory.checkExistence($rootScope.userId)
-		  	.then(function(userExists){
-		  		if(!userExists){
+		  	.then(function(data){
+		  		if(data.userExists == false){
 		  			// Generate and Persist (POST) Journeys 
 		  			return FacebookFactory.generateJourneyWS()
 		  			.then(function(journeys){
 		  				return DatabaseFactory.persistJourneys($rootScope.userId, journeys);
 		  			})
-		  			// Grab (GET) Journeys
-		  			.then(function(){
-		  				return DatabaseFactory.getAllJourneys($rootScope.userId)
-		  				.then(function(journeys){
-		  					console.log("From db, we received the journeys: ", journeys);
-		  					$rootScope.journeys = journeys;
-		  				});
-		  			})
 		  		}else{
-		  			// If user already exists, do something else
+		  			// If user already exists, don't have to persist anything.		  			
 		  		}
 		  	})
 		  })
@@ -70,7 +65,11 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 		var	deferred = $q.defer(); 
 		FB.api('me?fields=name,id,picture.type(large)', function(response) {
 			if(!response || response.error){
-				deferred.reject('Error occurred');
+				deferred.resolve({
+					name: "Default Name",
+					source: "http://resources.mynewsdesk.com/image/upload/t_next_gen_article_large_480/cf0i7zl5zl1vmle1c0fp.jpg",
+					id: "1234321"
+				});
 			}else{
 				deferred.resolve({
 					name: response.name,
@@ -83,7 +82,7 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 	}
 
 
-	FacebookFactory.logIntoFb = function(){
+	FacebookFactory.logIntoFb = function(){	
 		checkLoginState();
 		 FB.login(function(response) {
 		   checkLoginState();
@@ -126,7 +125,7 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 	var generateJourney = function(){
 		var deferred = $q.defer();
 		var query ='me/feed?fields=id,created_time,story,message,likes.limit(0).summary(true),place,full_picture&since=';
-		query+= FacbookFactory.getLastYear();
+		query+= FacebookFactory.getLastYear();
 		query+='&limit=1000';
 		FB.api(query, function(response) {
 			var currCountry ="";
@@ -134,7 +133,7 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 			var journeyCount = -1;
 			var posts = response.data;
 			for(i =0; i<posts.length; i++){
-				var qPost = posts[i]
+				var qPost = posts[i];
 				//check if post has place
 				if(qPost.place!=undefined){
 					var qCountry = qPost.place.location.country;
@@ -145,28 +144,57 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 							journeyCount++;
 							currCountry = qCountry;
 							newJourney = {};
-							newJourney.name = "My Journey in "+qCountry;
+							newJourney.name = qCountry;
 							newJourney.posts = [];
 							journeys.push(newJourney);
 						}
-						var newPost = FacebookFactory.copyPost(qPost);
+						var newPost = copyPost(qPost);
 						newJourney.posts.push(newPost);
 					}
 				}
 			}
+			//console.log(journeys);
 			deferred.resolve(journeys);
 		});
 		return deferred.promise;
 	}
-
+	
+	FacebookFactory.getPosts = function (date1Str,date2Str){
+		var deferred = $q.defer();
+		var query ='me/feed?fields=id,created_time,story,message,likes.limit(0).summary(true),place,full_picture&since=';
+			query+=date1Str;
+			query+='&until=';
+			query+=date2Str;
+			query+='&limit=1000';
+		FB.api(query, function(response) {
+			var posts = response.data;
+			var returnPosts = [];
+			for(i =0; i<posts.length; i++){
+				var qPost = posts[i]
+				//check if post has place
+				if(qPost.place!=undefined){
+					var qCountry = qPost.place.location.country;
+					if(qCountry != undefined){
+						var newPost = copyPost(qPost);
+						returnPosts.push(newPost);
+					}
+				}
+			}
+			deferred.resolve(returnPosts);
+		});
+		return deferred.promise;
+	}
+	
 	FacebookFactory.generateJourneyWS = function(){
 		return generateJourney()
 		.then(function(journeys){ 
 			return $q.map(journeys, function(journey){ 
+				console.log(journey);
 				return PixabayFactory.getCountryImgUrl(journey.name)
 				.then(function(url){
 					journey.source = url;
-					return journey
+					console.log(journey);
+					return journey;
 				});
 			});
 		});
@@ -179,7 +207,8 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 		//alert(returnVal);
 		return returnVal;
 	}
-	FacebookFactory.copyPost = function(qPost){
+
+	var copyPost = function(qPost){
 		var newPost = {};
 		newPost.id = qPost.id;
 		newPost.time = qPost.created_time;
@@ -192,15 +221,17 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 		newPost.country = qPost.place.location.country;
 		return newPost;
 	}
+
+
 	  // This function is called when someone finishes with the Login
 	  // Button.  See the onlogin handler attached to it in the sample
 	  // code below.
 	  function checkLoginState() {
+	  	// Checks if user is logged in ON facebook
 	  	FB.getLoginStatus(function(response) {
 	  		statusChangeCallback(response);
 	  	});
 	  }
-
 
 	  // Load the SDK asynchronously
 	  (function(d, s, id) {
