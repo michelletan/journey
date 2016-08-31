@@ -72,8 +72,6 @@ body {
 }
 
 .loading-title {
-    font-family: 'Dosis', sans-serif;
-    font-weight: 600 !important;
     font-size: 28px !important;
     color: #09a6c8;
 }

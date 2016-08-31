@@ -1,6 +1,6 @@
 <section layout="row" layout-align="center stretch" layout-wrap>
     <div layout="column" flex="75" hide-xs>
-        <md-content class="scroll-container" layout="row" layout-align="center start" layout-wrap>
+        <md-content class="post-scroll-container" layout="row" layout-align="center start" layout-wrap>
             <md-card ng-repeat="post in posts" ng-click="post.selected = !post.selected" ng-class="{'create-post-selected' : post.selected}" class="create-post" flex-sm="45" flex="30">
                 <div layout="row" layout-align="center center">
                     <img ng-src="{{post.source ? post.source : defaultPostPic}}" class="md-card-image img-cover" flex>
@@ -14,8 +14,22 @@
     </div>
     <div class="create-filter-container" flex="25" hide-xs sticky>
         <div class="create-actions-container" layout-sm="column" layout="row" layout-align="end center">
-                <md-button class="md-raised">Save Draft</md-button>
-                <md-button class="md-raised md-primary">Done</md-button>
+            <md-button class="md-raised md-primary">Done</md-button>
+        </div>
+        <div class="input-container">
+            <md-input-container class="md-block">
+                <label>Journey Name</label>
+                <input ng-model="journeyName">
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Cover Photo Country</label>
+                <img class="img-select-option" src="{{getCountryImage(journeyCover)}}">
+                <md-select placeholder="Cover Photo" ng-model="journeyCover">
+                    <md-option ng-value="country.name" ng-repeat="country in countries">
+                        {{country.name}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
         </div>
         <md-subheader class="md-no-sticky">Display Posts</md-subheader>
         <div class="datepicker-container" layout="row" layout-align="start center" layout-wrap>
