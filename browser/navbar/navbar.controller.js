@@ -9,20 +9,14 @@ app.controller('NavbarCtrl', function($scope, $rootScope, $mdSidenav, $mdDialog,
     $scope.openDropdownMenu = openDropdownMenu;
     $scope.logout = logout;
 
-    /*  FB.init({
-    appId      : '327010674354140',
-    cookie     : true,  // enable cookies to allow the server to access
-    // the session
-    xfbml      : true,  // parse social plugins on this page
-    version    : 'v2.7' // use graph api version 2.7
-    });*/
-
+    // Prepare important scope variables for the navbar
     FB.getLoginStatus(function(response) {
         FacebookFactory.statusChangeCallback(response)
-        .then(function(nameSourceObj){
-            console.log("name and profile pic is: ", nameSourceObj);
-            $scope.name = nameSourceObj.name;
-            $scope.userPic = nameSourceObj.source;
+        .then(function(userObj){
+            console.log("Displayed user info on navbar should be: ", userObj);
+            $scope.userName = userObj.name;
+            $scope.userSource = userObj.source;
+            $scope.userId = userObj.id;
         })
     });
 
@@ -49,3 +43,13 @@ app.controller('NavbarCtrl', function($scope, $rootScope, $mdSidenav, $mdDialog,
     }
 
 });
+
+
+
+    /*  FB.init({
+    appId      : '327010674354140',
+    cookie     : true,  // enable cookies to allow the server to access
+    // the session
+    xfbml      : true,  // parse social plugins on this page
+    version    : 'v2.7' // use graph api version 2.7
+    });*/
