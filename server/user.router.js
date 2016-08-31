@@ -63,8 +63,8 @@ router.get('/:userId/journeys', function(req,res,next){
 		]
 	})
 	.then(function(allUserData){
-			return res.status(200).send(allUserData);
-		})
+		return res.status(200).send(allUserData);
+	})
 	.catch(next);
 });
 

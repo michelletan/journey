@@ -11,6 +11,11 @@ var db = new Sequelize(databaseURI, {
 });
 
 var User = db.define('user', {
+	id : {
+		type: Sequelize.STRING,
+		primaryKey: true,
+		unique: true
+	},
   name: {
   	type: Sequelize.STRING
   },
