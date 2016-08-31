@@ -3,30 +3,13 @@
         <h2>Friends</h2>
     </div>
     <div class="friends-container" layout="column" layout-align="center start" flex-xs="95" flex-gt-xs="70">
-        <div class="friend-search-bar" layout="row" layout-align="space-between center" layout-fill>
-            <md-autocomplete
-            ng-disabled="ctrl.isDisabled"
-            md-no-cache="ctrl.noCache"
-            md-selected-item="ctrl.selectedItem"
-            md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
-            md-search-text="ctrl.searchText"
-            md-selected-item-change="ctrl.selectedItemChange(item)"
-            md-items="item in ctrl.querySearch(ctrl.searchText)"
-            md-item-text="item.display"
-            md-min-length="0"
-            placeholder="Search friends..."
-            flex>
-            <md-item-template>
-                <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
-            </md-item-template>
-            <md-not-found>
-                No friends matching "{{ctrl.searchText}}" were found.
-                <a ng-click="inviteFriend(ctrl.searchText)">Invite your friend {{ctrl.searchText}}!</a>
-            </md-not-found>
-            </md-autocomplete>
+        <div class="friend-search-bar-container" layout="row" layout-align="space-between center" layout-fill>
+            <div class="friend-search-bar-wrap md-whiteframe-1dp" layout-fill>
+                <input type="search" ng-model="searchQuery" class="friend-search-bar" placeholder="Search friends...">
+            </div>
         </div>
-        <div layout="row" layout-align="center start" layout-fill layout-wrap>
-            <md-card ng-repeat="friend in friends" flex="100" flex-sm="45" flex-gt-sm="30">
+        <div layout="row" layout-align="start center" layout-fill layout-wrap>
+            <md-card ng-repeat="friend in friends | searchFriends:searchQuery track by $index " flex="100" flex-sm="45" flex-gt-sm="30">
                 <md-card-title>
                     <md-card-title-text>
                         <span class="md-headline">{{friend.name ? friend.name : defaultUserName}}</span>
