@@ -1,6 +1,6 @@
 // request.body 
 {
-  "journeys": [
+  journeys: [
     {
       "name": "My Journey in Singapore",
       "posts": [
