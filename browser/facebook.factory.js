@@ -8,15 +8,7 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 	$rootScope.userSource = null;
 
 	var toPrint = "";
-	
-  // This function is called when someone finishes with the Login
-  // Button.  See the onlogin handler attached to it in the sample
-  // code below.
-  function checkLoginState() {
-  	FB.getLoginStatus(function(response) {
-  		statusChangeCallback(response);
-  	});
-  }
+
   
 	FacebookFactory.statusChangeCallback = function(response) {
 		console.log('statusChangeCallback');
@@ -71,7 +63,11 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 		var	deferred = $q.defer(); 
 		FB.api('me?fields=name,id,picture.type(large)', function(response) {
 			if(!response || response.error){
-				deferred.reject('Error occurred');
+				deferred.resolve({
+					name: "Default Name",
+					source: "http://resources.mynewsdesk.com/image/upload/t_next_gen_article_large_480/cf0i7zl5zl1vmle1c0fp.jpg",
+					id: "1234321"
+				});
 			}else{
 				deferred.resolve({
 					name: response.name,
@@ -124,7 +120,7 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 		return deferred.promise;
 	};
 
-	var generateJourney = function(){
+	FacebookFactory.generateJourney = function(){
 		var deferred = $q.defer();
 		var query ='me/feed?fields=id,created_time,story,message,likes.limit(0).summary(true),place,full_picture&since=';
 		query+= FacbookFactory.getLastYear();
@@ -135,7 +131,7 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 			var journeyCount = -1;
 			var posts = response.data;
 			for(i =0; i<posts.length; i++){
-				var qPost = posts[i]
+				var qPost = posts[i];
 				//check if post has place
 				if(qPost.place!=undefined){
 					var qCountry = qPost.place.location.country;
@@ -150,7 +146,7 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 							newJourney.posts = [];
 							journeys.push(newJourney);
 						}
-						var newPost = FacebookFactory.copyPost(qPost);
+						var newPost = copyPost(qPost);
 						newJourney.posts.push(newPost);
 					}
 				}
@@ -180,7 +176,8 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 		//alert(returnVal);
 		return returnVal;
 	}
-	FacebookFactory.copyPost = function(qPost){
+
+	var copyPost = function(qPost){
 		var newPost = {};
 		newPost.id = qPost.id;
 		newPost.time = qPost.created_time;
@@ -195,6 +192,14 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 	}
 
 
+	  // This function is called when someone finishes with the Login
+	  // Button.  See the onlogin handler attached to it in the sample
+	  // code below.
+	  function checkLoginState() {
+	  	FB.getLoginStatus(function(response) {
+	  		statusChangeCallback(response);
+	  	});
+	  }
 
 	  // Load the SDK asynchronously
 	  (function(d, s, id) {

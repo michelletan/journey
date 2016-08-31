@@ -1,6 +1,13 @@
 'use strict';
 
-app.controller('JourneyCtrl', function($scope, $state, $stateParams, $rootScope) {
+app.controller('JourneyCtrl', function($scope, $state, $stateParams, DatabaseFactory) {
+
+    DatabaseFactory.getJourney($rootScope.userId,$stateParams.id)
+    .then(function(journey){
+        $scope.journey = journey;
+    });
+
+
 
     $scope.profileId = $stateParams.id;
 
