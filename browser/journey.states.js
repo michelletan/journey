@@ -32,7 +32,7 @@ app.config(function($stateProvider){
   });
 
   $stateProvider.state('journey', {
-    url: '/journey/:id',
+    url: '/journey/:journeyId',
     templateUrl: '/browser/journey/journey.html',
     controller: 'JourneyCtrl'
   });

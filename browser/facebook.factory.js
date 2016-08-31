@@ -80,7 +80,7 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 	}
 
 
-	FacebookFactory.logIntoFb = function(){
+	FacebookFactory.logIntoFb = function(){	
 		checkLoginState();
 		 FB.login(function(response) {
 		   checkLoginState();
@@ -123,7 +123,7 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 	FacebookFactory.generateJourney = function(){
 		var deferred = $q.defer();
 		var query ='me/feed?fields=id,created_time,story,message,likes.limit(0).summary(true),place,full_picture&since=';
-		query+= FacbookFactory.getLastYear();
+		query+= FacebookFactory.getLastYear();
 		query+='&limit=1000';
 		FB.api(query, function(response) {
 			var currCountry ="";
@@ -196,6 +196,7 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 	  // Button.  See the onlogin handler attached to it in the sample
 	  // code below.
 	  function checkLoginState() {
+	  	// Checks if user is logged in ON facebook
 	  	FB.getLoginStatus(function(response) {
 	  		statusChangeCallback(response);
 	  	});

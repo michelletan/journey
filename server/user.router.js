@@ -16,14 +16,38 @@ router.get('/:userId/exists', function(req,res,next){
 	return User.find({ where: {id: userId} })
 	.then(function(user){
 		if(user !== null){
-			return res.send({userExists: true});
+			return res.status(200).send({userExists: true});
 		}else{
-			return res.send({userExists: false});
+			return res.status(200).send({userExists: false});
 		}
 	})
 	.catch(next);
 });
 
+// Retrieving User Posts, GET request
+router.get('/:userId/posts', function(req,res,next){
+	var userId = req.params.userId;
+	return User.findOne({ 
+		where: { id : userId },
+		include: [
+			{
+				model: Journey,
+				include: [Post]
+			}
+		]
+	})
+	.then(function(allUserData){
+		var posts = [];
+		var journeys = allUserData.journeys;
+		journeys.forEach(function(journey){
+			journey.posts.forEach(function(post){
+				posts.push(post);
+			})
+		});
+		return res.status(200).send(posts);
+	})
+	.catch(next);
+})
 
 
 // Retrieving User Journeys, GET request
@@ -38,8 +62,8 @@ router.get('/:userId/journeys', function(req,res,next){
 			}
 		]
 	})
-	.then(function(userJourneysPosts){
-		return res.send(userJourneysPosts)
+	.then(function(allUserData){
+		return res.status(200).send(allUserData);
 	})
 	.catch(next);
 });
@@ -78,7 +102,7 @@ router.post('/:userId/journeys', function(req,res,next){
 		return Promise.map(journeyArr, function(journey){
 			return newUser.createJourney({
 				name: journey.name,
-				source: journey.source || "No Source"
+				source: journey.source || journey.posts[0].source
 			})
 			.then(function(createdJourney){
 				journey.id = createdJourney.id
@@ -88,7 +112,6 @@ router.post('/:userId/journeys', function(req,res,next){
 	})
 	.then(function(updatedJourneyArr){
 		console.log("Journeys with db ids are: ", updatedJourneyArr);
-		res.status(200).send(updatedJourneyArr);
 		return Promise.map(updatedJourneyArr, function(updatedJourney){
 			return Journey.findOne({ where: { id: updatedJourney.id } })
 			.then(function(foundJourney){
@@ -107,8 +130,40 @@ router.post('/:userId/journeys', function(req,res,next){
 			})
 		})
 	})
+	.then(function(){
+		return res.status(200).send("Journeys created");
+	})
 	.catch(next);
 });
 
+
+// Creating one journey, POST request
+router.post('/:userId/createJourney', function(req,res,next){
+	var posts = req.body.posts;
+	var name = req.body.name;
+	var source = posts[0].source;
+	return Journey.create({
+		name: name,
+		source: source
+	})
+	.then(function(createdJourney){
+		return Promise.map(posts, function(post){
+			return createdJourney.createPost({
+				fbpostid: post.id,
+				journeyid: createdJourney.id,
+				story: post.story,
+				message: post.message,
+				source: post.source,
+				country: post.country,
+				created: post.time,
+				likes: post.likes				
+			})
+		})
+	})
+	.then(function(){
+		return res.status(200).send("Journey Created");
+	})
+	.catch(next);
+});
 
 module.exports = router;
