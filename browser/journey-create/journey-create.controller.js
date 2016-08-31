@@ -1,6 +1,9 @@
 'use strict';
 
 app.controller('JourneyCreateCtrl', function($scope, $state, $stateParams, DatabaseFactory, PixabayFactory, FacebookFactory, $rootScope) {
+    // Redirect users if they haven't logged in
+    if($rootScope.userId == null) $state.go('landing');
+
     $scope.defaultPostPic = '/images/landing-feature2.jpg';
 
     $scope.todayDate = new Date();
