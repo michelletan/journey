@@ -1,14 +1,17 @@
 'use strict';
 
 app.controller('JourneyCtrl', function($scope, $state, $stateParams, DatabaseFactory, $rootScope) {
+    // Redirect users if they haven't logged in
+    if($rootScope.userId == null) $state.go('landing');
 
-    $scope.id = $rootScope.userId;
+
+    $scope.userId = $rootScope.userId;
     $scope.userName = $rootScope.userName;
     $scope.userSource = $rootScope.userSource;
 
     DatabaseFactory.getJourney($rootScope.userId,$stateParams.journeyId)
     .then(function(journey){
-        console.log("IMPT: Journey to be displayed is:", journey);
+        console.log("Journey to be displayed is:", journey);
         $scope.journey = journey;
     });
 
