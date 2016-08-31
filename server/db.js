@@ -62,13 +62,6 @@ var Post = db.define('post', {
 User.hasMany(Journey);
 Journey.belongsTo(User);
 
-db.define('journeypost', {
-	order: {
-		type: Sequelize.INTEGER,
-		defaultValue: null
-	}
-})
-
 // Each country can have many posts
 Journey.belongsToMany(Post, {through: 'journeypost'});
 Post.belongsToMany(Journey, {through: 'journeypost'});

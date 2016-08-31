@@ -1,6 +1,7 @@
 'use strict';
 
-app.controller('JourneyCtrl', function($scope, $state, $stateParams) {
+app.controller('JourneyCtrl', function($scope, $state, $stateParams, $rootScope) {
+
     $scope.profileId = $stateParams.id;
 
     $scope.defaultUserId = 1;

@@ -9,6 +9,15 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 
 	var toPrint = "";
 	
+  // This function is called when someone finishes with the Login
+  // Button.  See the onlogin handler attached to it in the sample
+  // code below.
+  function checkLoginState() {
+  	FB.getLoginStatus(function(response) {
+  		statusChangeCallback(response);
+  	});
+  }
+  
 	FacebookFactory.statusChangeCallback = function(response) {
 		console.log('statusChangeCallback');
 		console.log(response);
@@ -37,14 +46,6 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 		  			return FacebookFactory.generateJourneyWS()
 		  			.then(function(journeys){
 		  				return DatabaseFactory.persistJourneys($rootScope.userId, journeys);
-		  			})
-		  			// Grab (GET) Journeys
-		  			.then(function(){
-		  				return DatabaseFactory.getAllJourneys($rootScope.userId)
-		  				.then(function(journeys){
-		  					console.log("From db, we received the journeys: ", journeys);
-		  					$rootScope.journeys = journeys;
-		  				});
 		  			})
 		  		}else{
 		  			// If user already exists, do something else
@@ -192,14 +193,7 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 		newPost.country = qPost.place.location.country;
 		return newPost;
 	}
-	  // This function is called when someone finishes with the Login
-	  // Button.  See the onlogin handler attached to it in the sample
-	  // code below.
-	  function checkLoginState() {
-	  	FB.getLoginStatus(function(response) {
-	  		statusChangeCallback(response);
-	  	});
-	  }
+
 
 
 	  // Load the SDK asynchronously
