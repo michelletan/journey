@@ -8,6 +8,13 @@ app.factory('DatabaseFactory', function($http, $rootScope){
 		})
 	}
 
+	DatabaseFactory.getAllPosts = function(userId){
+		return $http.get('/user/' + userId + '/posts')
+		.then(function(response){
+			return response.data;
+		})
+	}
+
 	DatabaseFactory.checkExistence = function(userId){
 		return $http.get('/user/' + userId + '/exists')
 		.then(function(response){
@@ -27,6 +34,13 @@ app.factory('DatabaseFactory', function($http, $rootScope){
 			userName: $rootScope.userName,
 			userSource: $rootScope.userSource
 		})
+		.then(function(response){
+			return response.data;
+		})
+	}
+
+	DatabaseFactory.createJourney = function(userId, name, posts, source){
+		return $http.post('/user' + userId + '/createJourney', {name: name, posts: posts, source: source})
 		.then(function(response){
 			return response.data;
 		})

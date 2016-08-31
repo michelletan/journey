@@ -1,28 +1,26 @@
 'use strict';
 
-app.controller('JourneysCtrl', function($scope, $state, $stateParams, DatabaseFactory){
-	$scope.userId = 123; // Placeholder, we need the actual user's facebook ID to get journeys
-	DatabaseFactory.getAllJourneys($scope.userId)
+app.controller('JourneysCtrl', function($scope, $state, $stateParams, DatabaseFactory, $rootScope){
+	$scope.userId = $rootScope.userId;
+    $scope.userName = $rootScope.userName;
+    $scope.userSource = $rootScope.userSource;
+	DatabaseFactory.getAllJourneys($rootScope.userId)
 	.then(function(journeys){
-		$scope.journeys = journeys;
+        if(journeys !== null){
+            $scope.journeys = journeys;
+        }else{
+            $scope.journeys = [{id: 1}, {id: 1}, {id: 1}, {id: 1}, {id: 1}, {id: 1}, {id: 1}, {id: 1}];
+        }
 	});
-
+    
 	$scope.defaultUserId = 1;
     $scope.defaultUserPic = '/images/user.png';
     $scope.defaultUserName = 'User';
     $scope.defaultCoverUrl = '/images/landing-feature2.jpg';
-
     $scope.defaultJourneyTitle = 'Amazing Trip';
 
-    $scope.journeys = [
-        {id: 1}, {id: 1}, {id: 1}, {id: 1}, {id: 1}, {id: 1}, {id: 1}, {id: 1}
-    ];
-
-    $scope.goToJourney = goToJourney;
-
-    // Public functions
-    function goToJourney(id) {
-        $state.go('journey', {id: id});
+    $scope.goToJourney = function(journeyId){
+        $state.go('journey', {journeyId: journeyId});
     }
 
 });
