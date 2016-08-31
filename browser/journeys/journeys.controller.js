@@ -9,7 +9,7 @@ app.controller('JourneysCtrl', function($scope, $state, $stateParams, DatabaseFa
         var journeys = allUserData.journeys;
         journeys = journeys.map(function(journey){
             journey.posts = journey.posts.map(function(post){
-                post.created = post.created.slice(6,11);
+                post.created = post.created.slice(5,10);
                 return post;
             })
             return journey; 

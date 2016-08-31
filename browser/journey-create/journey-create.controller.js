@@ -1,26 +1,37 @@
 'use strict';
 
-app.controller('JourneyCreateCtrl', function($scope, $state, $stateParams, DatabaseFactory, FacebookFactory, $rootScope) {
+app.controller('JourneyCreateCtrl', function($scope, $state, $stateParams, DatabaseFactory, PixabayFactory, FacebookFactory, $rootScope) {
     $scope.defaultPostPic = '/images/landing-feature2.jpg';
 
     $scope.todayDate = new Date();
 
     $scope.countries = [{}, {}, {}];
 
-    $scope.posts = []; // <-- Ten will provide some async function here
-
+    // Michelle: Define date1 and date2
+    var date1;
+    var date2;
+    FacebookFactory.getPosts(date1,date2)
+    .then(function(posts){
+        $scope.posts = posts; 
+    })
+    
+    // Michelle: Define selectedposts
     $scope.selectedPosts = [];
 
-    $scope.journeyName = "";
-    
+    // Michelle: Should be called when user is done typing in the name field
     $scope.updateJourneyName = function(name){
         $scope.journeyName = name;
     }
 
-    $scope.journeySource = "";
+    // Michelle: Define coverPhotoCountry
+    $scope.coverPhotoCountry;
+
+    PixabayFactory.getCountryImgUrl($scope.coverPhotoCountry)
+    .then(function(url){
+        $scope.journeySource = url;
+    });
 
     $scope.createJourney = function(){
-        // Michelle: You can call createJourney, but you have to make sure to pass the correct journeyName, journeySource, and selectedPosts (an array of posts the user wants)  
     	DatabaseFactory.createJourney($rootScope.userId, $scope.journeyName, $scope.selectedPosts, $scope.journeySource);
    	}
 });
