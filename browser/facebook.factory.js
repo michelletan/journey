@@ -185,6 +185,24 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 		return deferred.promise;
 	}
 	
+	FacebookFactory.getFriends = function(){
+		var deferred = $q.defer();
+		var query ='me/friends?fields=id,name,picture.type(large)';
+		FB.api(query, function(response) {
+			var qfriends = response.data;
+			var friends = [];
+			for (i=0; i<qfriends.length; i++){
+				var friend = {};
+				friend.id = qfriends[i].id;
+				friend.name = qfriends[i].name;
+				friend.source = qfriends[i].picture.data.url;
+				friends.push(friend);
+			}
+			deferred.resolve(friends);
+		});
+		return deferred.promise;
+	}
+	
 	FacebookFactory.generateJourneyWS = function(){
 		return generateJourney()
 		.then(function(journeys){ 
