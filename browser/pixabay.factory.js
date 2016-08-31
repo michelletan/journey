@@ -19,13 +19,12 @@ app.factory('PixabayFactory', function($q, $http){
 				//console.log(response.data.hits[0].webformatURL);
 
 			}else{
-				deferred.reject('PIXABAY SEARCH ERROR: no hits for the country'+country);
+				deferred.resolve(null);
 				//console.log('PIXABAY SEARCH ERROR: no hits for the country'+country);
 			}
 		});
 		return deferred.promise;
 	}
-
-
+	
 	return PixabayFactory;
 });

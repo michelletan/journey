@@ -122,7 +122,7 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 		return deferred.promise;
 	};
 
-	FacebookFactory.generateJourney = function(){
+	var generateJourney = function(){
 		var deferred = $q.defer();
 		var query ='me/feed?fields=id,created_time,story,message,likes.limit(0).summary(true),place,full_picture&since=';
 		query+= FacebookFactory.getLastYear();
@@ -144,7 +144,7 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 							journeyCount++;
 							currCountry = qCountry;
 							newJourney = {};
-							newJourney.name = "My Journey in "+qCountry;
+							newJourney.name = qCountry;
 							newJourney.posts = [];
 							journeys.push(newJourney);
 						}
@@ -153,6 +153,7 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 					}
 				}
 			}
+			//console.log(journeys);
 			deferred.resolve(journeys);
 		});
 		return deferred.promise;
@@ -162,10 +163,12 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 		return generateJourney()
 		.then(function(journeys){ 
 			return $q.map(journeys, function(journey){ 
+				console.log(journey);
 				return PixabayFactory.getCountryImgUrl(journey.name)
 				.then(function(url){
 					journey.source = url;
-					return journey
+					console.log(journey);
+					return journey;
 				});
 			});
 		});
