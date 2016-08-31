@@ -13,7 +13,7 @@ var router = require('express').Router();
 // Checking if User Exists, GET request
 router.get('/:userId/exists', function(req,res,next){
 	var userId = req.params.userId;
-	return User.find({ where: {id: userId} })
+	return User.findOne({ where: {id: userId} })
 	.then(function(user){
 		if(user !== null){
 			return res.status(200).send({userExists: true});
@@ -63,8 +63,8 @@ router.get('/:userId/journeys', function(req,res,next){
 		]
 	})
 	.then(function(allUserData){
-		return res.status(200).send(allUserData);
-	})
+			return res.status(200).send(allUserData);
+		})
 	.catch(next);
 });
 
