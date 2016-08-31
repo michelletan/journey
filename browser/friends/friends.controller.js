@@ -1,19 +1,14 @@
 'use strict';
 
-app.controller('FriendsCtrl', function($scope, $state, $stateParams) {
-    $scope.defaultUserId = 1;
-    $scope.defaultUserPic = '/images/user.png';
-	$scope.defaultUserName = 'User';
+app.controller('FriendsCtrl', function($scope, $state, $stateParams, FacebookFactory) {
 
-    $scope.friends = [
-        {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}
-    ];
+    $scope.id = $rootScope.userId;
+    $scope.userName = $rootScope.userName;
+    $scope.userSource = $rootScope.userSource;
 
-    $scope.inviteFriend = inviteFriend;
-
-    // Public functions
-    function inviteFriend(name) {
-        console.log('invite friend ' + name);
-    }
+    FacebookFactory.getFriends()
+    .then(function(friends){
+        $scope.friends = friends;
+    });
 
 });
