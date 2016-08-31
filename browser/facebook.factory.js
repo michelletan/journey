@@ -11,38 +11,41 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 
   
 	FacebookFactory.statusChangeCallback = function(response) {
-		console.log('statusChangeCallback');
-		console.log(response);
 		// The response object is returned with a status field that lets the
 		// app know the current login status of the person.
 		// Full docs on the response object can be found in the documentation
 		// for FB.getLoginStatus().
+
+		// If the user is connected to our app
 		if (response.status === 'connected') {
-		  // Logged into your app and Facebook.
 		  if(document.getElementById("logInLanding")!=undefined)
 			document.getElementById("logInLanding").style.display = 'none';
-		  // When we are connected,
+		  // We grab the user's id, name, source
 		  return FacebookFactory.whenConnected()
-		  // We set global variables 
+		  // and set them as rootScope variables
 		  .then(function(userObj){
-		  	console.log("whenConnected resolves with the value: ", userObj);
 		  	$rootScope.userId = userObj.id;
 		  	$rootScope.userName = userObj.name;
 		  	$rootScope.userSource = userObj.source;
+		  	return userObj;
 		  })
-		  // Check if user already exists on our db
-		  .then(function(){
-		  	console.log("Going to check existence of userId: ", $rootScope.userId);
+		  /* We keep passing the {id name source} object down the promise chain, and we check if user already exists on our db */
+		  .then(function(sameUserObj){
 		  	return DatabaseFactory.checkExistence($rootScope.userId)
 		  	.then(function(data){
+		  		// If user does not exist, form journeys and persist them onto our db
 		  		if(data.userExists == false){
-		  			// Generate and Persist (POST) Journeys 
 		  			return FacebookFactory.generateJourneyWS()
 		  			.then(function(journeys){
 		  				return DatabaseFactory.persistJourneys($rootScope.userId, journeys);
 		  			})
+		  			// Resolve the promise as the {id name source} object
+		  			.then(function(){
+		  				return sameUserObj;
+		  			})
+		  		// If user already exists, just resolve the promise as the {id name source} object
 		  		}else{
-		  			// If user already exists, don't have to persist anything.		  			
+		  			return sameUserObj;
 		  		}
 		  	})
 		  })
@@ -181,6 +184,24 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 				}
 			}
 			deferred.resolve(returnPosts);
+		});
+		return deferred.promise;
+	}
+	
+	FacebookFactory.getFriends = function(){
+		var deferred = $q.defer();
+		var query ='me/friends?fields=id,name,picture.type(large)';
+		FB.api(query, function(response) {
+			var qfriends = response.data;
+			var friends = [];
+			for (i=0; i<qfriends.length; i++){
+				var friend = {};
+				friend.id = qfriends[i].id;
+				friend.name = qfriends[i].name;
+				friend.source = qfriends[i].picture.data.url;
+				friends.push(friend);
+			}
+			deferred.resolve(friends);
 		});
 		return deferred.promise;
 	}

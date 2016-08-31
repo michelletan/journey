@@ -36,7 +36,7 @@ app.use(function(err, req, res, next){
 
 
 // All routes have already been defined, server is ready to listen
-var port = 8080;
+var port = 80;
 app.listen(port, function(err) {
 	if(err){
 		throw err

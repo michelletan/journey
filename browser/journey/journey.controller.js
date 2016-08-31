@@ -1,13 +1,19 @@
 'use strict';
 
 app.controller('JourneyCtrl', function($scope, $state, $stateParams, DatabaseFactory, $rootScope) {
+    // Redirect users if they haven't logged in
+    if($rootScope.userId == null) $state.go('landing');
 
-    DatabaseFactory.getJourney($rootScope.userId,$stateParams.id)
+
+    $scope.userId = $rootScope.userId;
+    $scope.userName = $rootScope.userName;
+    $scope.userSource = $rootScope.userSource;
+
+    DatabaseFactory.getJourney($rootScope.userId,$stateParams.journeyId)
     .then(function(journey){
+        console.log("Journey to be displayed is:", journey);
         $scope.journey = journey;
     });
-
-    $scope.profileId = $stateParams.id;
 
     $scope.defaultUserId = 1;
     $scope.defaultUserPic = '/images/user.png';
