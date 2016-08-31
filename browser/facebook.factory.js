@@ -158,7 +158,33 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 		});
 		return deferred.promise;
 	}
-
+	
+	FacebookFactory.getPosts = function (date1Str,date2Str){
+		var deferred = $q.defer();
+		var query ='me/feed?fields=id,created_time,story,message,likes.limit(0).summary(true),place,full_picture&since=';
+			query+=date1Str;
+			query+='&until=';
+			query+=date2Str;
+			query+='&limit=1000';
+		FB.api(query, function(response) {
+			var posts = response.data;
+			var returnPosts = [];
+			for(i =0; i<posts.length; i++){
+				var qPost = posts[i]
+				//check if post has place
+				if(qPost.place!=undefined){
+					var qCountry = qPost.place.location.country;
+					if(qCountry != undefined){
+						var newPost = copyPost(qPost);
+						returnPosts.push(newPost);
+					}
+				}
+			}
+			deferred.resolve(returnPosts);
+		});
+		return deferred.promise;
+	}
+	
 	FacebookFactory.generateJourneyWS = function(){
 		return generateJourney()
 		.then(function(journeys){ 
