@@ -2,14 +2,18 @@
     <div ng-style="{'background-image':'linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.3)),url(/images/journeys-spread.jpg)'}" class="img-overlay img-subheader mid" layout="column" layout-align="center center">
         <h2>My Journeys</h2>
     </div>
+    <div ng-show="{{journeys.length === 0}}" layout="row" layout-align="center start" layout-wrap flex="100">
+        <img class="img-static" src="/images/travel.png" flex="100">
+        <p class="static-text" flex="90">Oops, you don't have any journeys!</p>
+        <md-button ui-sref="create" class="md-raised md-primary">Create Journey</md-button>
     </div>
-    <div class="journeys-container" layout="row" layout-align="center start">
+    <div ng-show="{{journeys.length > 0}}" class="journeys-container" layout="row" layout-align="center start">
         <div layout="row" layout-align="start center" layout-wrap flex-xs="100" flex-sm="80" flex="70"  >
             <md-grid-list md-cols-xs="1" md-cols-sm="2" md-cols="3" md-gutter="0px" md-gutter-gt-xs="10px" md-row-height-xs="2:1" md-row-height-sm="2:2" md-row-height-gt-sm="3:3" layout-fill>
                 <md-grid-tile ng-click="goToJourney(journey.id)" ng-repeat="journey in journeys" ng-style="{'background-image':'url({{journey.source ? journey.source : defaultCoverUrl}})'}" class="img-overlay">
                     <div class="journey-tile-info" flex-offset="10" flex="80">
                         <h2>{{journey.name ? journey.name : defaultJourneyTitle}}</h2>
-                        <p>From {{ journey.posts[0].created }} to 
+                        <p>From {{ journey.posts[0].created }} to
                                 {{ journey.posts[journey.posts.length-1].created }} </p>
                         <p>{{ journey.posts.length }} posts</p>
                     </div>

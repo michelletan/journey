@@ -10,9 +10,11 @@ app.controller('ProfileCtrl', function($scope, $state, $stateParams) {
 
     $scope.defaultJourneyTitle = 'Amazing Trip';
 
-    $scope.journeys = [
-        {id: 1}, {id: 1}, {id: 1}, {id: 1}, {id: 1}, {id: 1}, {id: 1}, {id: 1}
-    ];
+    $scope.journeys = [];
+
+    // $scope.journeys = [
+    //     {id: 1}, {id: 1}, {id: 1}, {id: 1}, {id: 1}, {id: 1}, {id: 1}, {id: 1}
+    // ];
 
     $scope.goToJourney = goToJourney;
 

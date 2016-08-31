@@ -11,6 +11,9 @@ FB.init({
   version    : 'v2.7' // use graph api version 2.7
 });
 
-app.config(function ($urlRouterProvider) {
+app.config(function ($urlRouterProvider, $mdThemingProvider) {
   $urlRouterProvider.when('','/');
+
+  $mdThemingProvider.theme('default')
+    .primaryPalette('blue');
 });
