@@ -12,6 +12,17 @@
     outline: none;
 }
 
+.create-date-range-container {
+    height: 63px;
+    margin: 0;
+    background-color: white;
+        border-bottom: 5px solid #D9D9D9;
+}
+
+.create-date-container {
+    margin-left: 10px;
+}
+
 .create-filter-container {
     background-color: white;
 }
@@ -30,8 +41,13 @@
     padding: 10px;
 }
 
+md-input-container {
+    margin-bottom: 0;
+}
+
 .img-select-option {
-    width: 100px;
+    height: 100px;
+    object-fit: cover;
 }
 
 .datepicker-container {

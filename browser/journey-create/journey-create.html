@@ -1,6 +1,20 @@
 <section layout="row" layout-align="center stretch" layout-wrap>
-    <div layout="column" flex="75" hide-xs>
-        <md-content class="post-scroll-container" layout="row" layout-align="center start" layout-wrap>
+    <div layout="row" layout-align="center start" layout-wrap flex="100" hide-gt-xs>
+        <img class="img-static" src="/images/oops.png" flex="100">
+        <p class="static-text" flex="90">Oops, you can't create journeys on mobile. Try it out on a tablet or a desktop computer instead!</p>
+    </div>
+    <div flex="75" layout-wrap hide-xs>
+        <div class="create-date-range-container" layout="row" layout-align="center end" flex="100">
+            <div class="create-date-container">
+                <label>Display posts from </label>
+                <md-datepicker ng-model="startDate" md-max-date="todayDate" md-placeholder="Select date" md-open-on-focus></md-datepicker>
+            </div>
+            <div class="create-date-container">
+                <label>to</label>
+                <md-datepicker ng-model="endDate" md-min-date="startDate" md-max-date="todayDate" md-placeholder="Select date" md-open-on-focus></md-datepicker>
+            </div>
+        </div>
+        <md-content class="post-scroll-container" layout="row" layout-align="start start" layout-wrap>
             <md-card ng-repeat="post in posts" ng-click="post.selected = !post.selected" ng-class="{'create-post-selected' : post.selected}" class="create-post" flex-sm="45" flex="30">
                 <div layout="row" layout-align="center center">
                     <img ng-src="{{post.source ? post.source : defaultPostPic}}" class="md-card-image img-cover" flex>
@@ -13,8 +27,8 @@
         </md-content>
     </div>
     <div class="create-filter-container" flex="25" hide-xs sticky>
-        <div class="create-actions-container" layout-sm="column" layout="row" layout-align="end center">
-            <md-button class="md-raised md-primary">Done</md-button>
+        <div class="create-actions-container" layout-sm="column" layout="row" layout-align="center center">
+            <md-button class="md-raised md-primary" flex="100">Done</md-button>
         </div>
         <div class="input-container">
             <md-input-container class="md-block">
@@ -23,22 +37,15 @@
             </md-input-container>
             <md-input-container class="md-block">
                 <label>Cover Photo Country</label>
-                <img class="img-select-option" src="{{getCountryImage(journeyCover)}}">
-                <md-select placeholder="Cover Photo" ng-model="journeyCover">
+                <md-select placeholder="Cover Photo" ng-model="journeyCoverCountry" ng-change="getJourneyCoverPhoto()" ng-init="getJourneyCoverPhoto()">
                     <md-option ng-value="country.name" ng-repeat="country in countries">
                         {{country.name}}
                     </md-option>
                 </md-select>
             </md-input-container>
-        </div>
-        <md-subheader class="md-no-sticky">Display Posts</md-subheader>
-        <div class="datepicker-container" layout="row" layout-align="start center" layout-wrap>
-            <div flex-sm="100" flex-md="100" flex="30">Start date</div>
-            <md-datepicker ng-model="startDate" md-max-date="endDate" md-placeholder="Select date" md-open-on-focus flex-sm="100" flex-md="100" flex="70"></md-datepicker>
-        </div>
-        <div class="datepicker-container" layout="row" layout-align="start center" layout-wrap>
-            <div flex-sm="100" flex-md="100" flex="30">End date</div>
-            <md-datepicker ng-model="endDate" md-min-date="startDate" md-max-date="todayDate" md-placeholder="Select date" md-open-on-focus flex-sm="100" flex-md="100" flex="70"></md-datepicker>
+            <div class="img-select-option-container">
+                <img class="img-select-option" ng-src="{{journeyCoverPhoto}}" layout-fill>
+            </div>
         </div>
         <md-list>
             <md-subheader class="md-no-sticky">Filter by Country</md-subheader>

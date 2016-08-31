@@ -90,3 +90,11 @@ body {
 .text-container {
     margin-bottom: 20px;
 }
+
+.img-static {
+    object-fit: contain;
+}
+
+.static-text {
+    text-align: center;
+}
