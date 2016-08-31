@@ -18,7 +18,8 @@ app.factory('DatabaseFactory', function($http, $rootScope){
 	DatabaseFactory.checkExistence = function(userId){
 		return $http.get('/user/' + userId + '/exists')
 		.then(function(response){
-			return response.data.userExists;
+			console.log("checkExistence responds with: ", response.data);
+			return response.data;
 		})
 	}
 

@@ -34,8 +34,8 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 		  .then(function(){
 		  	console.log("Going to check existence of userId: ", $rootScope.userId);
 		  	return DatabaseFactory.checkExistence($rootScope.userId)
-		  	.then(function(userExists){
-		  		if(!userExists){
+		  	.then(function(data){
+		  		if(data.userExists == false){
 		  			// Generate and Persist (POST) Journeys 
 		  			return FacebookFactory.generateJourneyWS()
 		  			.then(function(journeys){
