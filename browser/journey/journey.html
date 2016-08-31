@@ -1,6 +1,6 @@
-<section>
-    <div layout="row" layout-align="center start" layout-fill layout-wrap>
-        <div ng-style="{'background-image':'linear-gradient(rgba(0, 0, 0, 0.4),rgba(0, 0, 0, 0.4)),url({{user.coverSrc ? user.coverSrc : defaultCoverUrl}})'}" class="img-overlay img-subheader mid" layout="column" layout-align="center center" layout-fill>
+<md-content class="scroll-container">
+    <div layout="row" layout-align="center start">
+        <div ng-style="{'background-image':'linear-gradient(rgba(0, 0, 0, 0.4),rgba(0, 0, 0, 0.4)),url({{user.coverSrc ? user.coverSrc : defaultCoverUrl}})'}" class="img-overlay img-subheader mid" layout="column" layout-align="center center" flex>
             <h2>{{journey.title ? journey.title : defaultJourneyTitle}}</h2>
         </div>
     </div>
@@ -10,7 +10,7 @@
             <h2 class="profile-user-name">{{user.name ? user.name : defaultUserName}}</h2>
         </div>
     </div>
-    <md-content class="journey-container" layout="row" layout-align="center start">
+    <div class="journey-container" layout="row" layout-align="center start">
         <div layout="row" layout-align="center start" flex-xs="100" flex-sm="80" flex="70" layout-wrap>
             <div ng-repeat="post in journey.posts" class="journey-post" layout="row" layout-align="start start" layout-wrap flex="100">
                 <div class="journey-post-date" flex="100" layout="row" layout-align="center center">19 Aug 2015 </div>
@@ -27,5 +27,5 @@
                 </div>
             </div>
         </div>
-    </md-content>
-</section>
+    </div>
+</md-content>

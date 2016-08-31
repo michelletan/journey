@@ -3,6 +3,8 @@
 app.controller('JourneyCreateCtrl', function($scope, $state, $stateParams, DatabaseFactory, FacebookFactory, $rootScope) {
     $scope.defaultPostPic = '/images/landing-feature2.jpg';
 
+    $scope.todayDate = new Date();
+
     $scope.countries = [{}, {}, {}];
 
     $scope.posts = []; // <-- Ten will provide some async function here
