@@ -148,16 +148,23 @@ router.post('/:userId/createJourney', function(req,res,next){
 	})
 	.then(function(createdJourney){
 		return Promise.map(posts, function(post){
-			return createdJourney.createPost({
-				fbpostid: post.id,
-				journeyid: createdJourney.id,
-				story: post.story,
-				message: post.message,
-				source: post.source,
-				country: post.country,
-				created: post.time,
-				likes: post.likes				
-			})
+			return Post.findOne({ where: { fbid: post.id } })
+			.then(function(foundPost){
+				if(foundPost!==null){
+					return createdJourney.createPost({
+						fbpostid: post.id,
+						journeyid: createdJourney.id,
+						story: post.story,
+						message: post.message,
+						source: post.source,
+						country: post.country,
+						created: post.time,
+						likes: post.likes				
+					});
+				}else{
+					return foundPost.addJourney(createdJourney)
+				}
+			});
 		})
 	})
 	.then(function(){

@@ -42,7 +42,7 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 		  				return DatabaseFactory.persistJourneys($rootScope.userId, journeys);
 		  			})
 		  		}else{
-		  			// If user already exists, do something else
+		  			// If user already exists, don't have to persist anything.		  			
 		  		}
 		  	})
 		  })

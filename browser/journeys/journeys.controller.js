@@ -6,11 +6,8 @@ app.controller('JourneysCtrl', function($scope, $state, $stateParams, DatabaseFa
     $scope.userSource = $rootScope.userSource;
 	DatabaseFactory.getAllJourneys($rootScope.userId)
 	.then(function(journeys){
-        if(journeys !== null){
-            $scope.journeys = journeys;
-        }else{
-            $scope.journeys = [{id: 1}, {id: 1}, {id: 1}, {id: 1}, {id: 1}, {id: 1}, {id: 1}, {id: 1}];
-        }
+        console.log("Journey to be displayed are:", journeys);
+        $scope.journeys = journeys;
 	});
     
 	$scope.defaultUserId = 1;
