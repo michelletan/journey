@@ -6,15 +6,18 @@ app.controller('JourneysCtrl', function($scope, $state, $stateParams, DatabaseFa
     $scope.userSource = $rootScope.userSource;
 	DatabaseFactory.getAllJourneys($rootScope.userId)
 	.then(function(allUserData){
-        console.log("Journey to be displayed are:", allUserData.journeys);
         var journeys = allUserData.journeys;
-        journeys.map(function(journey){
-            journey.created = journey.created.slice(6,11);
+        journeys = journeys.map(function(journey){
+            journey.posts = journey.posts.map(function(post){
+                post.created = post.created.slice(6,11);
+                return post;
+            })
             return journey; 
         }) 
+        console.log("Journeys to be displayed are:", journeys);
         $scope.journeys = journeys;
 	});
-    
+
 	$scope.defaultUserId = 1;
     $scope.defaultUserPic = '/images/user.png';
     $scope.defaultUserName = 'User';
@@ -26,4 +29,3 @@ app.controller('JourneysCtrl', function($scope, $state, $stateParams, DatabaseFa
     }
 
 });
-
