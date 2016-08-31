@@ -21,6 +21,7 @@ router.get('/:userId/exists', function(req,res,next){
 			return res.send({userExists: false});
 		}
 	})
+	.catch(next);
 });
 
 
@@ -46,13 +47,13 @@ router.get('/:userId/journeys', function(req,res,next){
 
 // Retrieving One Journey, GET request
 router.get('/:userId/journeys/:journeyId', function(req,res,next){
-	var journeyId = req.params.userId;
+	var journeyId = req.params.journeyId;
 	return Journey.findOne({
 		where: { id: journeyId },
 		include: [Post]
 	})
-	.then(function(journeyPosts){
-		return res.send(journeyPosts)
+	.then(function(journey){
+		return res.status(200).send(journey);
 	})
 	.catch(next);
 });
