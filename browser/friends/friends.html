@@ -2,9 +2,9 @@
     <div ng-style="{'background-image':'linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.3)),url(/images/friends-spread.jpg)'}" class="img-overlay img-subheader mid" layout="column" layout-align="center center" flex="100">
         <h2>Friends</h2>
     </div>
-    <div ng-show="{{friends.length === 0}}" layout="row" layout-align="center start" layout-wrap flex="100">
-        <img class="img-static" src="/images/invite.png" flex="100">
-        <p class="static-text" flex="90">Oops, none of your friends are using Journey.</p>
+    <div ng-show="{{friends.length === 0}}" layout="column" layout-align="start center" layout-wrap flex="100">
+        <img class="img-static" src="/images/invite.png">
+        <p class="static-text" layout-padding>Oops, none of your friends are using Journey.</p>
         <md-button class="md-raised md-primary">Invite Friends</md-button>
     </div>
     <div ng-show="{{friends.length > 0}}" class="friends-container" layout="column" layout-align="center start" flex-xs="95" flex-gt-xs="70">

@@ -2,9 +2,9 @@
     <div ng-style="{'background-image':'linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.3)),url(/images/journeys-spread.jpg)'}" class="img-overlay img-subheader mid" layout="column" layout-align="center center">
         <h2>My Journeys</h2>
     </div>
-    <div ng-show="{{journeys.length === 0}}" layout="row" layout-align="center start" layout-wrap flex="100">
-        <img class="img-static" src="/images/travel.png" flex="100">
-        <p class="static-text" flex="90">Oops, you don't have any journeys!</p>
+    <div ng-show="{{journeys.length === 0}}" layout="column" layout-align="start center" layout-wrap flex="100">
+        <img class="img-static" src="/images/travel.png">
+        <p class="static-text" layout-padding>Oops, you don't have any journeys yet.</p>
         <md-button ui-sref="create" class="md-raised md-primary">Create Journey</md-button>
     </div>
     <div ng-show="{{journeys.length > 0}}" class="journeys-container" layout="row" layout-align="center start">

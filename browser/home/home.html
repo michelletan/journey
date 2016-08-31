@@ -1,7 +1,7 @@
 <md-content class="scroll-container" layout="row" layout-align="center start">
-    <div ng-show="{{posts.length === 0}}" layout="row" layout-align="center start" layout-wrap flex="100">
-        <img class="img-static" src="/images/invite.png" flex="100">
-        <p class="static-text" flex="90">Oops, none of your friends are using Journey, or they haven't posted anything.</p>
+    <div ng-show="{{posts.length === 0}}" layout="column" layout-align="start center" layout-wrap flex="100">
+        <img class="img-static" src="/images/invite.png">
+        <p class="static-text" layout-padding>Oops, none of your friends are using Journey, or they haven't posted anything.</p>
         <md-button class="md-raised md-primary">Invite Friends</md-button>
     </div>
     <div ng-show="{{posts.length > 0}}" class="home-container" layout="row" layout-align="center start" layout-wrap flex-xs="100" flex-sm="80" flex-gt-sm="70">
