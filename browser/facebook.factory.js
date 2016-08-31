@@ -25,12 +25,14 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 		  return FacebookFactory.whenConnected()
 		  // We set global variables 
 		  .then(function(userObj){
+		  	console.log("whenConnected resolves with the value: ", userObj);
 		  	$rootScope.userId = userObj.id;
 		  	$rootScope.userName = userObj.name;
 		  	$rootScope.userSource = userObj.source;
 		  })
 		  // Check if user already exists on our db
 		  .then(function(){
+		  	console.log("Going to check existence of userId: ", $rootScope.userId);
 		  	return DatabaseFactory.checkExistence($rootScope.userId)
 		  	.then(function(userExists){
 		  		if(!userExists){
