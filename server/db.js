@@ -40,9 +40,6 @@ var Post = db.define('post', {
 	fbpostid: {
 		type: Sequelize.STRING
 	},
-	journeyid: {
-		type: Sequelize.INTEGER,
-	},
 	story: {
 		type: Sequelize.TEXT,
 		defaultValue: null
