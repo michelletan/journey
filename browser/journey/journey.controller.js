@@ -2,7 +2,11 @@
 
 app.controller('JourneyCtrl', function($scope, $state, $stateParams, DatabaseFactory, $rootScope) {
 
-    DatabaseFactory.getJourney($rootScope.userId,$stateParams.id)
+    $scope.userId = $rootScope.userId;
+    $scope.userName = $rootScope.userName;
+    $scope.userSource = $rootScope.userSource;
+
+    DatabaseFactory.getJourney($rootScope.userId,$stateParams.journeyId)
     .then(function(journey){
         $scope.journey = journey;
     });
