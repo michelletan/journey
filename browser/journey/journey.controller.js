@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('JourneyCtrl', function($scope, $state, $stateParams, DatabaseFactory, $rootScope) {
+app.controller('JourneyCtrl', function($scope, $state, $stateParams, DatabaseFactory, $rootScope,FacebookFactory) {
 
     DatabaseFactory.getUserBasicData($stateParams.userId)
     .then(function(user){
@@ -22,5 +22,9 @@ app.controller('JourneyCtrl', function($scope, $state, $stateParams, DatabaseFac
 
     $scope.defaultJourneyTitle = 'Amazing Trip';
     $scope.defaultPostPic = '/images/landing-feature2.jpg';
+	
+	$scope.shareJourney = function(jID,jName,jSrc, posts){
+		FacebookFactory.shareJourney(jID,jName,jSrc,posts);
+}
 
 });

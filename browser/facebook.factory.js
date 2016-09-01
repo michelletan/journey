@@ -221,7 +221,26 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 			});
 		});
 	}
-
+	FacebookFactory.shareJourney = function(jID,jName,jSrc,posts){
+		
+		var dates = [];
+		for(i=0;i<posts.length; i++){
+			var date = posts[i].created;
+			dates.push(date);
+		}
+		dates.sort();
+		var input = 'http://journey.ddns.net/#/journey/'+jID;
+		var desc = 'Trip from '+dates[0].substring(5,10)+" to "+dates[dates.length-1].substring(5,10);
+		FB.ui({
+			display: 'popup',
+			method: 'share',
+			title: jName,
+			href: input,
+			picture: jSrc,
+			caption: 'shared from Journey',
+			description: desc,
+		});
+	}
 
 	FacebookFactory.getLastYear = function(){
 		var lastYear = new Date(new Date().setFullYear(new Date().getFullYear() - 1));

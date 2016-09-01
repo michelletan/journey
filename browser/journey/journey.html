@@ -12,7 +12,7 @@
         </div>
         <div flex="30">
             <md-button ui-sref="edit(journey.id)" class="md-raised md-secondary">Edit</md-button>
-            <md-button class="md-raised md-primary">Share</md-button>
+            <md-button ng-click="shareJourney(journey.id,journey.name,journey.source,journey.posts)" class="md-raised md-primary">Share</md-button>
         </div>
         </div>
     </div>
