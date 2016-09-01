@@ -10,7 +10,7 @@
         md-gutter-xs="0px" md-gutter="12px"
         flex="100" layout-fill>
         <md-grid-tile ng-repeat="journey in journeys" ng-style="{'background-image':'url({{journey.source ? journey.source : defaultSpreadPic}})'}" class="md-whiteframe-2dp home-post" layout="column" layout-align="end start">
-            <div ui-sref="journey({journeyId: journey.id})" class="home-post-anim-overlay" layout="row" layout-align="center start" layout-fill>
+            <div ui-sref="journey({userId: journey.user.id, journeyId: journey.id})" class="home-post-anim-overlay" layout="row" layout-align="center start" layout-fill>
                 View Journey
             </div>
             <md-grid-tile-footer class="home-post-img-overlay" layout="column" layout-align="start stretch">
