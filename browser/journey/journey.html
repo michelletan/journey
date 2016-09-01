@@ -1,13 +1,13 @@
 <md-content class="scroll-container">
     <div layout="row" layout-align="center start">
         <div ng-style="{'background-image':'linear-gradient(rgba(0, 0, 0, 0.4),rgba(0, 0, 0, 0.4)),url({{user.coverSrc ? user.coverSrc : defaultCoverUrl}})'}" class="img-overlay img-subheader mid" layout="column" layout-align="center center" flex>
-            <h2>{{journey.title ? journey.title : defaultJourneyTitle}}</h2>
+            <h2>{{journey.name ? journey.name : defaultJourneyTitle}}</h2>
         </div>
     </div>
     <div class="user-container" layout="row" layout-align="center start">
         <div layout="row" layout-align="start end" flex-xs="95" flex-sm="80" flex="70" >
-            <img ng-src="{{user.profileSrc ? user.profileSrc : defaultUserPic}}" class="img-profile-user img-circle" />
-            <h2 class="profile-user-name">{{user.name ? user.name : defaultUserName}}</h2>
+            <img ng-src="{{userSource ? userSource : defaultUserPic}}" class="img-profile-user img-circle" />
+            <h2 class="profile-user-name">{{userName ? userName : defaultUserName}}</h2>
         </div>
     </div>
     <div class="journey-container" layout="row" layout-align="center start">
