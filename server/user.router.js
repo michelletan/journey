@@ -24,6 +24,24 @@ router.get('/:userId/exists', function(req,res,next){
 	.catch(next);
 });
 
+// Grabbing Basic User Data, GET Request,
+router.get('/:userId', function(req,res,next){
+	var userId = req.params.userId;
+	return User.findOne({ where: { id: userId} })
+	.then(function(user){
+		if(!user){
+			return res.status(200).send({
+				id: "Non-User",
+				name: "User does not exist",
+				source: "123"
+			});
+		}else{
+			return res.status(200).send(user);
+		}
+	})
+	.catch(next);
+})
+
 
 // Retrieving User Journeys, GET request
 router.get('/:userId/journeys', function(req,res,next){
@@ -77,7 +95,8 @@ router.post('/:userId/journeys', function(req,res,next){
 		return Promise.map(journeyArr, function(journey){
 			return newUser.createJourney({
 				name: journey.name,
-				source: journey.source || journey.posts[0].source
+				source: journey.source || journey.posts[0].source,
+				created: journey.posts[0].time || null
 			})
 			.then(function(createdJourney){
 				journey.id = createdJourney.id
@@ -149,7 +168,7 @@ router.post('/:userId/createJourney', function(req,res,next){
 });
 
 // Deleting all user data, DELETE request
-router.delete('/:userId/deleteAll', function(req,res,next){
+router.delete('/:userId', function(req,res,next){
 	var userId = req.params.userId;
 	return User.findOne({ where: { id: userId } })
 	.then(function(foundUser){

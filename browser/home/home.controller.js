@@ -12,13 +12,7 @@ app.controller('HomeCtrl', function($scope, $state, $stateParams, DatabaseFactor
 	DatabaseFactory.getFeed()
 	.then(function(journeys){
 		console.log("Feed is: ", journeys);
-		journeys = journeys.map(function(journey){
-		  journey.posts = journey.posts.map(function(post){
-		  	post.created = post.created.slice(5,10);
-		    return post;
-		  })
-			return journey;
-		})
+		journeys.created = journeys.created.slice(0,10);
 		$scope.journeys = journeys;
 	})
 
