@@ -16,6 +16,13 @@ app.factory('DatabaseFactory', function($http, $rootScope){
 		})
 	}
 
+	DatabaseFactory.getUserBasicData = function(userId){
+		return $http.get('/user/' + userId)
+		.then(function(response){
+			return response.data;
+		})
+	}
+
 	DatabaseFactory.getAllPosts = function(userId){
 		return $http.get('/user/' + userId + '/posts')
 		.then(function(response){
@@ -39,7 +46,7 @@ app.factory('DatabaseFactory', function($http, $rootScope){
 	}
 
 	DatabaseFactory.deleteUser = function(userId){
-		return $http.delete('/user/' + userId + '/deleteAll')
+		return $http.delete('/user/' + userId)
 		.then(function(response){
 			console.log(response.data);
 			return response.data;

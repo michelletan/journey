@@ -16,7 +16,7 @@
             <md-grid-tile-footer class="home-post-img-overlay" layout="column" layout-align="start stretch">
                 <div class="home-post-user-container" layout="row" layout-align="end end">
                     <p class="post-user">{{journey.user.name ? journey.user.name : defaultUserName}}</p>
-                    <div ng-style="{'background-image':'url({{journey.source ? journey.source : defaultUserPic}})'}" class="img-post-user img-circle">
+                    <div ng-style="{'background-image':'url({{journey.user.source ? journey.user.source : defaultUserPic}})'}" class="img-post-user img-circle">
                         <div ui-sref="journeys({userId: journey.user.id})" class="home-post-anim-overlay img-circle" layout="row" layout-align="center start" layout-fill>
                             <p></p>
                         </div>
@@ -26,8 +26,7 @@
                     <span class="md-headline">{{journey.name}}</span>
                     <span class="md-subhead">
                         {{journey.posts.length}} post(s), 
-                        {{ journey.posts[0].created }} to 
-                        {{ journey.posts[journey.posts.length-1].created }}
+                        {{ journey.posts[0].created }} 
                     </span>
                 </div>
             </md-grid-tile-footer>
