@@ -5,8 +5,6 @@ app.controller('NavbarCtrl', function($scope, $rootScope, $mdMedia, $mdSidenav, 
     $scope.defaultUserPic = '/images/user.png';
     $scope.defaultUserName = 'User';
 
-    $scope.isScreenSmall = $mdMedia('xs') || $mdMedia('sm');
-
     $scope.openSideNav = openSideNav;
     $scope.openDropdownMenu = openDropdownMenu;
     $scope.logout = logout;

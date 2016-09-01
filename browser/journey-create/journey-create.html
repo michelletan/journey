@@ -4,18 +4,23 @@
         <p class="static-text" flex="90">Oops, you can't create journeys on mobile. Try it out on a tablet or a desktop computer instead!</p>
     </div>
     <div layout-wrap flex="75"  hide-xs>
-        <div class="create-date-range-container" layout="row" layout-align="center end" flex="100">
-            <div class="create-date-container">
-                <label>Display posts from </label>
-                <md-datepicker ng-model="startDate" md-max-date="todayDate" md-placeholder="Select date" md-open-on-focus></md-datepicker>
+        <div class="create-date-range-container" layout="row" layout-align="space-between end" flex="100">
+            <div layout="row">
+                <div class="create-date-container">
+                    <label>Display posts from </label>
+                    <md-datepicker ng-model="startDate" md-max-date="todayDate" md-placeholder="Select date" md-open-on-focus></md-datepicker>
+                </div>
+                <div class="create-date-container">
+                    <label>to</label>
+                    <md-datepicker ng-model="endDate" md-min-date="startDate" md-max-date="todayDate" md-placeholder="Select date" md-open-on-focus></md-datepicker>
+                </div>
             </div>
-            <div class="create-date-container">
-                <label>to</label>
-                <md-datepicker ng-model="endDate" md-min-date="startDate" md-max-date="todayDate" md-placeholder="Select date" md-open-on-focus></md-datepicker>
+            <div layout="row" layout-align="start center" layout-padding>
+                <i class="material-icons">&#xE5CA;</i> {{selectedPostCount}} posts selected
             </div>
         </div>
         <md-content class="post-scroll-container" layout="row" layout-align="start start" layout-wrap>
-            <md-card ng-repeat="post in posts | countryPost:getSelectedCountryNames()" ng-click="post.isSelected = !post.isSelected" ng-show="post.isVisible" ng-class="{'create-post-selected' : post.isSelected}" class="create-post" flex-sm="45" flex="30">
+            <md-card ng-repeat="post in posts | countryPost:getSelectedCountryNames()" ng-click="updatePostStatus(post)" ng-show="post.isVisible" ng-class="{'create-post-selected' : post.isSelected}" class="create-post" flex-sm="45" flex="30">
                 <div layout="row" layout-align="center center">
                     <img ng-src="{{post.source ? post.source : defaultPostPic}}" class="md-card-image img-cover" flex>
                 </div>
@@ -28,7 +33,7 @@
     </div>
     <div ng-init="getAllCountriesFromPosts()" class="create-filter-container" flex="25" hide-xs sticky>
         <div class="create-actions-container" layout-sm="column" layout="row" layout-align="center center">
-            <md-button class="md-raised md-primary" flex="100">Done</md-button>
+            <md-button ng-disabled="journeyName === '' || selectedPostCount < 1" class="md-raised md-primary" flex="100">Done</md-button>
         </div>
         <div class="input-container">
             <md-input-container class="md-block">
