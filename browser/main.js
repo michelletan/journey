@@ -7,9 +7,8 @@ var app = angular.module('journeyApp', ['ui.router', 'ngMaterial', 'mwl.bluebird
     $mdThemingProvider.theme('default')
     .primaryPalette('blue');
 })
-.run(['$rootScope', '$location', '$window', function($rootScope, $location, $window){
-    $rootScope.$on('$stateChangeSuccess', function(event){
-        if (!$window.ga) return;
-        $window.ga('send', 'pageview', { page: $location.path() });
+.run(['$rootScope', '$location', '$window', function($rootScope, $location){
+    $rootScope.$on('$stateChangeSuccess', function(){
+      ga('send', 'pageview', { page: $location.path() });
     });
 }]);
