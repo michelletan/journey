@@ -173,4 +173,37 @@ router.post('/:userId/createJourney', function(req,res,next){
 	.catch(next);
 });
 
+// Deleting all user data, DELETE request
+router.delete('/:userId/deleteAll', function(req,res,next){
+	var userId = req.params.userId;
+	return User.findOne({ where: { id: userId } })
+	.then(function(foundUser){
+		if(foundUser == null){
+			return res.status(200).send("User was not found. No deletion required.");
+		}else{
+			return foundUser.getJourneys()
+			.then(function(foundJourneys){
+				return Promise.each(foundJourneys, function(foundJourney){
+					return foundJourney.getPosts()
+					.then(function(foundPosts){
+						return Promise.each(foundPosts, function(foundPost){
+							return foundPost.destroy();
+						})
+					})
+					.then(function(){
+						return foundJourney.destroy();
+					})
+				})
+			})
+			.then(function(){
+				foundUser.destroy();
+			})
+			.then(function(){
+				return res.status(200).send("User was found and associated data destroyed.");
+			})
+		}
+	})
+	.catch(next);
+});
+
 module.exports = router;

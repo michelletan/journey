@@ -30,6 +30,14 @@ app.factory('DatabaseFactory', function($http, $rootScope){
 		})
 	}
 
+	DatabaseFactory.deleteUser = function(userId){
+		return $http.delete('/user/' + userId + '/deleteAll')
+		.then(function(response){
+			console.log(response.data);
+			return response.data;
+		})
+	}
+
 	DatabaseFactory.persistJourneys = function(userId, journeyArr){
 		return $http.post('/user/' + userId + '/journeys', {journeys: journeyArr,
 			userName: $rootScope.userName,
