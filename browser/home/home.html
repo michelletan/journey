@@ -18,7 +18,7 @@
                     <p class="post-user">{{journey.name ? journey.name : defaultUserName}}</p>
                     <div ng-style="{'background-image':'url({{journey.source ? journey.source : defaultUserPic}})'}" class="img-post-user img-circle">
                         <div ui-sref="profile({id: 1})" class="home-post-anim-overlay img-circle" layout="row" layout-align="center start" layout-fill>
-                            <p>Profile</p>
+                            <p>{{friend.name ? friend.name : defaultUserName}}</p>
                         </div>
                     </div>
                 </div>
@@ -34,5 +34,4 @@
         </md-grid-tile>
     </md-grid-list>
 </div>
-
 </md-content>

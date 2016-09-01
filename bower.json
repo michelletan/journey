@@ -19,7 +19,6 @@
   ],
   "dependencies": {
     "angular-bluebird-promises": "^1.0.1",
-    "angular-websocket": "angular-bluebird#^2.0.0",
-    "angular-md-content": "^0.0.4"
+    "angular-websocket": "angular-bluebird#^2.0.0"
   }
 }

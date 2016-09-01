@@ -7,13 +7,14 @@ app.controller('JourneyCreateCtrl', function($scope, $rootScope, $state, $stateP
     // Display params
     $scope.todayDate = new Date();
     $scope.countries = [];
+    $scope.selectedPostCount = 0;
 
     // Post data
     $scope.posts = [{country: 'China'}, {country: 'Malaysia'},{country: 'Malaysia'},{country: 'England'}, {country: 'Russia'},{country: 'Malaysia'},{country: 'Malaysia'}]; // <-- Ten will provide some async function here
     $scope.selectedPosts = [];
 
     // Journey params
-    $scope.journeyName = "Singapore";
+    $scope.journeyName = "";
     $scope.journeyCoverCountry;
 
     // Functions
@@ -28,9 +29,15 @@ app.controller('JourneyCreateCtrl', function($scope, $rootScope, $state, $stateP
         });
     }
 
-    $scope.createJourney = function(){
+    $scope.createJourney = function() {
         // Michelle: You can call createJourney, but you have to make sure to pass the correct journeyName, journeySource, and selectedPosts (an array of posts the user wants)
         DatabaseFactory.createJourney($rootScope.userId, $scope.journeyName, $scope.selectedPosts, $scope.journeyCoverPhoto);
+    }
+
+    $scope.selectAllPosts = function() {
+        $scope.posts.map(function(post) {
+            post.isSelected = true;
+        });
     }
 
     $scope.getAllCountriesFromPosts = function() {
@@ -58,5 +65,25 @@ app.controller('JourneyCreateCtrl', function($scope, $rootScope, $state, $stateP
         });
 
         return selectedCountries;
+    }
+
+    $scope.updatePostStatus = function(post) {
+        if (post) {
+            post.isSelected = !post.isSelected;
+        }
+        $scope.selectedPostCount = getSelectedPostCount();
+    }
+
+    // Init actions
+    $scope.selectAllPosts();
+
+    $scope.$watch('posts', $scope.updatePostStatus, true);
+    $scope.$watch('journeyName', function() {console.log($scope.journeyName);}, true);
+
+    // Private functions
+    function getSelectedPostCount() {
+        return $scope.posts.reduce(function(count, post) {
+            return count + (post.isSelected ? 1 : 0)
+        }, 0);
     }
 });

@@ -1,4 +1,4 @@
-app.controller('NavbarCtrl', function($scope, $rootScope, $mdSidenav, $mdDialog, FacebookFactory) {
+app.controller('NavbarCtrl', function($scope, $rootScope, $mdMedia, $mdSidenav, $mdDialog, FacebookFactory) {
     var sidenavId = 'left';
 
     $scope.defaultUserId = 1;
@@ -43,4 +43,3 @@ app.controller('NavbarCtrl', function($scope, $rootScope, $mdSidenav, $mdDialog,
     }
 
 });
-
