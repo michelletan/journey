@@ -112,7 +112,6 @@ router.post('/:userId/journeys', function(req,res,next){
 				return Promise.map(updatedJourney.posts, function(post){
 					foundJourney.createPost({
 						fbpostid: post.id,
-						journeyid: foundJourney.id,
 						story: post.story,
 						message: post.message,
 						source: post.source,
@@ -147,7 +146,6 @@ router.post('/:userId/createJourney', function(req,res,next){
 				if(foundPost!==null){
 					return createdJourney.createPost({
 						fbpostid: post.id,
-						journeyid: createdJourney.id,
 						story: post.story,
 						message: post.message,
 						source: post.source,
@@ -156,7 +154,7 @@ router.post('/:userId/createJourney', function(req,res,next){
 						likes: post.likes				
 					});
 				}else{
-					return foundPost.addJourney(createdJourney)
+					return foundPost.addJourney(createdJourney);
 				}
 			});
 		})
