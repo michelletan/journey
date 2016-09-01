@@ -3,9 +3,21 @@
 }
 
 .journey-tile-info {
-    position: absolute;
-    width: 70%;
-    margin: auto;
+    height: 100px;
+    background-color: white;
+    padding-bottom: 20px;
+}
+
+.journey-tile-info h2 {
+    margin-bottom: 0;
+    color: black;
+    text-align: center;
+}
+
+.journey-tile-info p {
+    margin: 0;
+    color: grey;
+    text-align: center;
 }
 
 .journey-tile-overlay {

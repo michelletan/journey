@@ -19,14 +19,14 @@
                 <md-grid-tile ng-repeat="journey in journeys" ui-sref="journey({journeyId: journey.id})" ng-style="{'background-image':'url({{journey.source ? journey.source : defaultCoverUrl}})'}" class="img-overlay" layout="column" layout-align="center center" layout-wrap>
                     <div class="journey-tile-overlay" layout="row" layout-align="center start" flex="100" layout-fill>
                     </div>
-                    <div class="journey-tile-info" flex="100">
+                    <md-grid-tile-footer class="journey-tile-info" layout="column" layout-align="center center" flex="100">
                         <h2>{{journey.name ? journey.name : defaultJourneyTitle}}</h2>
                         <p>From {{ journey.posts[0].created }} to
-                                {{ journey.posts[journey.posts.length-1].created }} </p>
-                        <p>{{ journey.posts.length }} post(s)</p>
-                    </div>
-                </md-grid-tile>
-            </md-grid-list>
+                            {{ journey.posts[journey.posts.length-1].created }} </p>
+                            <p>{{ journey.posts.length }} post(s)</p>
+                        </md-grid-tile-footer>
+                    </md-grid-tile>
+                </md-grid-list>
+            </div>
         </div>
-    </div>
-</md-content>
+    </md-content>

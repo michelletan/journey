@@ -7,6 +7,8 @@ app.controller('HomeCtrl', function($scope, $state, $stateParams, DatabaseFactor
 	$scope.defaultSpreadPic = '/images/landing-spread.jpg';
 	$scope.defaultUserName = 'User';
 
+	// $scope.journeys = [{user: 'User', name: 'Amazing Trip', posts: [{}, {}, {}]}, {user: 'User', name: 'Amazing Trip', posts: [{}, {}, {}]},{user: 'User', name: 'Amazing Trip', posts: [{}, {}, {}]}];
+
 	DatabaseFactory.getFeed()
 	.then(function(journeys){
 		console.log("Feed is: ", journeys);

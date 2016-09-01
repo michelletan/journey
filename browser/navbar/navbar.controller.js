@@ -1,6 +1,8 @@
 app.controller('NavbarCtrl', function($scope, $rootScope, $mdMedia, $mdSidenav, $mdDialog, FacebookFactory) {
     var sidenavId = 'left';
 
+    $scope.userId = '1';
+
     $scope.defaultUserId = 1;
     $scope.defaultUserPic = '/images/user.png';
     $scope.defaultUserName = 'User';
