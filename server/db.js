@@ -30,6 +30,9 @@ var Journey = db.define('journey', {
 	},
 	source: {
 		type: Sequelize.STRING
+	},
+	created: {
+		type: Sequelize.DATE
 	}
 });
 
