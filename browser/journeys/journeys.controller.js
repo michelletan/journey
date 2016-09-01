@@ -2,11 +2,8 @@
 
 app.controller('JourneysCtrl', function($scope, $state, $stateParams, DatabaseFactory, $rootScope){
     // Redirect users if they haven't logged in
-    if($rootScope.userId == null) $state.go('landing');
 
-    $scope.userId = $rootScope.userId;
-    $scope.userName = $rootScope.userName;
-    $scope.userSource = $rootScope.userSource;
+    if($rootScope.userId == null) $state.go('landing');
 
     // We use stateParams.userId because we're not necessarily rendering the user's own journeys -- we could be displaying his/her friend's journeys
     DatabaseFactory.getAllJourneys($stateParams.userId)
@@ -17,10 +14,20 @@ app.controller('JourneysCtrl', function($scope, $state, $stateParams, DatabaseFa
                 post.created = post.created.slice(5,10);
                 return post;
             })
-            return journey;
-        })
-        console.log("Journeys to be displayed are:", journeys);
+            return journey; 
+        }) 
+        console.log("Journeys Page Traveller Info:", allUserData);
         $scope.journeys = journeys;
+        /* IMPORTANT: Note that the following variables could be filled with the FRIEND'S data rather than the user's own data */
+        $scope.userId = allUserData.id;
+        $scope.userName = allUserData.name;
+        $scope.userSource = allUserData.source;
+        // Checks again if the displayed traveller is the user or a friend 
+        if($stateParams.id == $rootScope.userId){
+            $scope.travellerName = "My";
+        }else{
+            $scope.travellerName = $scope.userName + "'s";
+        }
     });
 
     $scope.defaultUserId = 1;
