@@ -2,9 +2,7 @@
 
 app.controller('JourneysCtrl', function($scope, $state, $stateParams, DatabaseFactory, $rootScope){
     // Redirect users if they haven't logged in
-    // if($rootScope.userId == null) $state.go('landing');
-
-    $scope.journeys = [{}, {}, {}];
+    if($rootScope.userId == null) $state.go('landing');
 
     $scope.userId = $rootScope.userId;
     $scope.userName = $rootScope.userName;

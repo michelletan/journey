@@ -44,7 +44,7 @@ app.config(function($stateProvider){
   });
 
   $stateProvider.state('edit', {
-    url: '/edit',
+    url: '/edit/:journeyId',
     templateUrl: '/browser/journey-create/journey-create.html',
     controller: 'JourneyCreateCtrl'
   });
