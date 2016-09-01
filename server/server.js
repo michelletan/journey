@@ -5,11 +5,15 @@ var path = require('path');
 var Promise = require('bluebird');
 var db = require('./db.js');
 var bodyParser = require('body-parser')
+var morgan = require('morgan')
 
 /* ---- BODYPARSER BOILERPLATE ---- */
 // Lets us use parse POST request bodies as JSON
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+/* ---- LOGGING BOILERPLATE ---- */
+app.use(morgan('dev'));
 
 /* ---- ROUTES HERE ---- */
 // Routes for static files
