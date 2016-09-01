@@ -14,8 +14,6 @@ app.controller('JourneyCtrl', function($scope, $state, $stateParams, DatabaseFac
         $scope.journey = journey;
     });
 
-    $scope.journey = {posts: [{}, {}, {}]};
-
     $scope.defaultUserId = 1;
     $scope.defaultUserPic = '/images/user.png';
     $scope.defaultUserName = 'User';

@@ -15,19 +15,30 @@ router.get('/', function(req,res,next){
 		include: [Post]
 	})
 	.then(function(journeys){
-		// Gives journeys a date taken from the first post of the journey
+		// Updates journeys with a date taken from the first post of the journey
 		journeys = journeys.map(function(journey){
 			journey.created = journey.posts[0].created;
 			return journey;
 		});
 		// Sorts them by date
 		journeys.sort(function(a, b) {
-    	return a.created - b.created;
+    	return b.created - a.created;
 		});
-		console.log("Server sending feed: ", journeys);
-		res.status(200).send(journeys);
-	});
+		return journeys;
+	})
+	.then(function(updatedJourneys){
+		return Promise.map(updatedJourneys, function(updatedJourney){
+			return updatedJourney.getUser()
+			.then(function(user){
+				updatedJourney.user = user;
+				return updatedJourney;
+			})
+		})
+	})
+	.then(function(updatedJourneysWithUsers){
+		console.log("Server sending feed: ", updatedJourneysWithUsers);
+		res.status(200).send(updatedJourneysWithUsers);
+	})
 })
-
 
 module.exports = router;
