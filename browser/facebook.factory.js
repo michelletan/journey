@@ -241,7 +241,7 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 		});
 	}
 
-	FacebookFactory.postOpenGraph= function( jID,jName, imageSrc,posts){
+	FacebookFactory.postOpenGraph= function(uName, jID,jName, imageSrc,posts){
 		var dates = [];
 		for(i=0;i<posts.length; i++){
 			var date = posts[i].created;
@@ -250,13 +250,14 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 		dates.sort();
 		var journeyUrl = 'http://journey.ddns.net/#/journey/'+jID;
 		var desc = 'Trip from '+dates[0].substring(5,10)+" to "+dates[dates.length-1].substring(5,10);
+		var title = uName+"'s journey : " +jName
 		FB.ui({
 			method: 'share_open_graph',
 			action_type: 'journey_app:view',
 			action_properties: JSON.stringify({
 				journey:{
 					'og:url': journeyUrl,
-					'og:title': jName,
+					'og:title': title,
 					'og:description': desc,
 					'og:image': imageSrc
 				},

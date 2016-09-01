@@ -27,7 +27,7 @@ app.controller('JourneyCtrl', function($scope, $state, $stateParams, DatabaseFac
 		if (uName == $rootScope.userName){
 			FacebookFactory.shareJourney(jID,jName,jSrc,posts);
 		}else{
-			FacebookFactory.postOpenGraph( jID,jName, jSrc,posts);
+			FacebookFactory.postOpenGraph(uName, jID,jName, jSrc,posts);
 		}
 	}
 
