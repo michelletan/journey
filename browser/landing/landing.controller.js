@@ -1,6 +1,9 @@
 'use strict';
 
-app.controller('LandingCtrl', function($scope, $state, $stateParams, FacebookFactory) {
+app.controller('LandingCtrl', function($scope, $rootScope, $state, $stateParams, FacebookFactory) {
+    // If logged in, redirect to home
+    if($rootScope.userId !== null) $state.go('home');
+
     $scope.spreadImagePath = '/images/landing-spread.jpg';//'https://dl.dropboxusercontent.com/s/34vnqzdl7k1x6ak/spread.jpg?dl=0';
 
     $scope.imageFeature1Path = '/images/landing-feature1.jpg';
