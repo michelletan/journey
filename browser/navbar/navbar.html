@@ -1,5 +1,5 @@
 <section>
-    <md-toolbar class="md-whiteframe-4dp">
+    <md-toolbar ng-class="{md-tall : isScreenSmall}" class="md-whiteframe-4dp">
         <div class="md-toolbar-tools" layout="row">
             <div layout="row" layout-align="space-between center" flex="33">
                 <md-button ng-click="openSideNav()" class="md-icon-button">
@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div layout="row" layout-align="end center" flex="33">
-                <md-button ui-sref="create" hide-xs>Create Journey</md-button>
+                <md-button ng-show="userId != null" ui-sref="create" hide-xs>Create Journey</md-button>
             </div>
             <div flex></div>
         </div>

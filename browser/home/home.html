@@ -15,10 +15,9 @@
             </div>
             <md-grid-tile-footer class="home-post-img-overlay" layout="column" layout-align="start stretch">
                 <div class="home-post-user-container" layout="row" layout-align="end end">
-                    <p class="post-user">{{friend.name ? friend.name : defaultUserName}}</p>
                     <div ng-style="{'background-image':'url({{friend.source ? friend.source : defaultUserPic}})'}" class="img-post-user img-circle">
                         <div ui-sref="profile({id: 1})" class="home-post-anim-overlay img-circle" layout="row" layout-align="center start" layout-fill>
-                            <p>Profile</p>
+                            <p>{{friend.name ? friend.name : defaultUserName}}</p>
                         </div>
                     </div>
                 </div>

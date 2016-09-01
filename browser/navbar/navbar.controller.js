@@ -1,9 +1,11 @@
-app.controller('NavbarCtrl', function($scope, $rootScope, $mdSidenav, $mdDialog, FacebookFactory) {
+app.controller('NavbarCtrl', function($scope, $rootScope, $mdMedia, $mdSidenav, $mdDialog, FacebookFactory) {
     var sidenavId = 'left';
 
     $scope.defaultUserId = 1;
     $scope.defaultUserPic = '/images/user.png';
     $scope.defaultUserName = 'User';
+
+    $scope.isScreenSmall = $mdMedia('xs') || $mdMedia('sm');
 
     $scope.openSideNav = openSideNav;
     $scope.openDropdownMenu = openDropdownMenu;
@@ -43,4 +45,3 @@ app.controller('NavbarCtrl', function($scope, $rootScope, $mdSidenav, $mdDialog,
     }
 
 });
-
