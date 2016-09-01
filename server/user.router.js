@@ -24,31 +24,6 @@ router.get('/:userId/exists', function(req,res,next){
 	.catch(next);
 });
 
-// Retrieving User Posts, GET request
-router.get('/:userId/posts', function(req,res,next){
-	var userId = req.params.userId;
-	return User.findOne({ 
-		where: { id : userId },
-		include: [
-			{
-				model: Journey,
-				include: [Post]
-			}
-		]
-	})
-	.then(function(allUserData){
-		var posts = [];
-		var journeys = allUserData.journeys;
-		journeys.forEach(function(journey){
-			journey.posts.forEach(function(post){
-				posts.push(post);
-			})
-		});
-		return res.status(200).send(posts);
-	})
-	.catch(next);
-})
-
 
 // Retrieving User Journeys, GET request
 router.get('/:userId/journeys', function(req,res,next){
