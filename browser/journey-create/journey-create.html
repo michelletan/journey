@@ -21,8 +21,8 @@
         </div>
         <md-content class="post-scroll-container" layout="row" layout-align="start start" layout-wrap>
             <md-card ng-repeat="post in posts | countryPost:getSelectedCountryNames()" ng-click="updatePostStatus(post)" ng-show="post.isVisible" ng-class="{'create-post-selected' : post.isSelected}" class="create-post" flex-sm="45" flex="30">
-                <div layout="row" layout-align="center center">
-                    <img ng-src="{{post.source ? post.source : defaultPostPic}}" class="md-card-image img-cover" flex>
+                <div class="create-post-img-container" layout="row" layout-align="center center">
+                    <img ng-src="{{post.source ? post.source : defaultPostPic}}" class="md-card-image img-cover create-post-img" flex>
                 </div>
                 <md-card-content>
                     {{$index}} The titles of Washed Out's breakthrough song and the first single from Paracosm share the
