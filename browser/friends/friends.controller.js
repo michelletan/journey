@@ -11,11 +11,9 @@ app.controller('FriendsCtrl', function($scope, $state, $stateParams, FacebookFac
 
     FacebookFactory.getFriends()
     .then(function(friends){
+        console.log("friend is: ", friends);
         $scope.friends = friends;
     });
 
-    $scope.goToFriendPage = function(userId){
-        $state.go('journeys', {userId: userId});
-    }
 
 });
