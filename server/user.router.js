@@ -137,7 +137,8 @@ router.post('/:userId/createJourney', function(req,res,next){
 	var source = posts[0].source;
 	return Journey.create({
 		name: name,
-		source: source
+		source: source,
+		created: posts[0].created || null
 	})
 	.then(function(createdJourney){
 		return Promise.map(posts, function(post){
