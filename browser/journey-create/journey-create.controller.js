@@ -1,6 +1,27 @@
 'use strict';
 
 app.controller('JourneyCreateCtrl', function($scope, $rootScope, $state, $stateParams, DatabaseFactory, FacebookFactory, PixabayFactory) {
+    if ($stateParams.journeyId) {
+        // If journey with id cannot be found, redirect
+
+        // Else, load journey data
+        // $scope.journey = journey;
+
+        // Get date range for the posts of the journey
+        var range = getDateRangeFromPosts($scope.journey.posts);
+        $scope.startDate = range.min;
+        $scope.endDate = range.max;
+
+        // Retrieve all posts with this range -- done on UI side or here?
+
+        // $scope.posts = retrievedPosts;
+
+        // Further init done below
+
+    } else {
+        selectAllPosts();
+    }
+
     // Defaults
     $scope.defaultPostPic = '/images/landing-feature2.jpg';
 
@@ -17,30 +38,49 @@ app.controller('JourneyCreateCtrl', function($scope, $rootScope, $state, $stateP
     $scope.journeyName = "";
     $scope.journeyCoverCountry;
 
-    // Functions
-    $scope.updateJourneyName = function(name){
+    // Assign functions to scope
+    $scope.updateJourneyName = updateJourneyName;
+    $scope.getJourneyCoverPhoto = getJourneyCoverPhoto;
+    $scope.createJourney = createJourney;
+    $scope.selectAllPosts = selectAllPosts;
+    $scope.getAllCountriesFromPosts = getAllCountriesFromPosts;
+    $scope.getSelectedCountryNames = getSelectedCountryNames;
+    $scope.updatePostStatus = updatePostStatus;
+
+    // Init actions
+    $scope.$watch('posts', $scope.updatePostStatus, true);
+    init();
+
+    // Public functions
+    function init() {
+        getAllCountriesFromPosts();
+        getJourneyCoverPhoto();
+        getSelectedPostCount();
+    }
+
+    function updateJourneyName(name) {
         $scope.journeyName = name;
     }
 
-    $scope.getJourneyCoverPhoto = function() {
+    function getJourneyCoverPhoto() {
         PixabayFactory.getCountryImgUrl($scope.journeyCoverCountry)
         .then(function(url){
             $scope.journeyCoverPhoto = url;
         });
     }
 
-    $scope.createJourney = function() {
+    function createJourney() {
         // Michelle: You can call createJourney, but you have to make sure to pass the correct journeyName, journeySource, and selectedPosts (an array of posts the user wants)
         DatabaseFactory.createJourney($rootScope.userId, $scope.journeyName, $scope.selectedPosts, $scope.journeyCoverPhoto);
     }
 
-    $scope.selectAllPosts = function() {
+    function selectAllPosts() {
         $scope.posts.map(function(post) {
             post.isSelected = true;
         });
     }
 
-    $scope.getAllCountriesFromPosts = function() {
+    function getAllCountriesFromPosts() {
         var countryNames = [];
         var countries = [];
 
@@ -55,7 +95,7 @@ app.controller('JourneyCreateCtrl', function($scope, $rootScope, $state, $stateP
         $scope.journeyCoverCountry = $scope.countries[0].name;
     }
 
-    $scope.getSelectedCountryNames = function() {
+    function getSelectedCountryNames() {
         var selectedCountries = [];
 
         $scope.countries.map(function(country) {
@@ -67,23 +107,33 @@ app.controller('JourneyCreateCtrl', function($scope, $rootScope, $state, $stateP
         return selectedCountries;
     }
 
-    $scope.updatePostStatus = function(post) {
+    function updatePostStatus(post) {
         if (post) {
             post.isSelected = !post.isSelected;
         }
         $scope.selectedPostCount = getSelectedPostCount();
     }
 
-    // Init actions
-    $scope.selectAllPosts();
-
-    $scope.$watch('posts', $scope.updatePostStatus, true);
-    $scope.$watch('journeyName', function() {console.log($scope.journeyName);}, true);
-
     // Private functions
     function getSelectedPostCount() {
         return $scope.posts.reduce(function(count, post) {
             return count + (post.isSelected ? 1 : 0)
         }, 0);
+    }
+
+    function getDateRangeFromPosts(posts) {
+        var minDate, maxDate;
+
+        posts.map(function(post) {
+            if (minDate === undefined || post.date.getTime() < minDate.getTime()) {
+                minDate = post.date;
+            }
+
+            if (maxDate === undefined || post.date.getTime() > maxDate.getTime()) {
+                maxDate = post.date;
+            }
+        });
+
+        return {min: minDate, max: maxDate};
     }
 });

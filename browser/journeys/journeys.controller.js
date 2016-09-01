@@ -2,9 +2,9 @@
 
 app.controller('JourneysCtrl', function($scope, $state, $stateParams, DatabaseFactory, $rootScope){
     // Redirect users if they haven't logged in
-    // if($rootScope.userId == null) $state.go('landing');
 
-    
+    if($rootScope.userId == null) $state.go('landing');
+
     // We use stateParams.userId because we're not necessarily rendering the user's own journeys -- we could be displaying his/her friend's journeys
     DatabaseFactory.getAllJourneys($stateParams.userId)
     .then(function(allUserData){

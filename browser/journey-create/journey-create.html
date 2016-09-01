@@ -31,18 +31,18 @@
             </md-card>
         </md-content>
     </div>
-    <div ng-init="getAllCountriesFromPosts()" class="create-filter-container" flex="25" hide-xs sticky>
+    <div class="create-filter-container" flex="25" hide-xs sticky>
         <div class="create-actions-container" layout-sm="column" layout="row" layout-align="center center">
             <md-button ng-disabled="journeyName === '' || selectedPostCount < 1" class="md-raised md-primary" flex="100">Done</md-button>
         </div>
         <div class="input-container">
             <md-input-container class="md-block">
                 <label>Journey Name</label>
-                <input ng-model="journeyName">
+                <input ng-model="journey.name">
             </md-input-container>
             <md-input-container class="md-block">
                 <label>Cover Photo Country</label>
-                <md-select placeholder="Cover Photo" ng-model="journeyCoverCountry" ng-change="getJourneyCoverPhoto()" ng-init="getJourneyCoverPhoto()">
+                <md-select placeholder="Cover Photo" ng-model="journeyCoverCountry" ng-change="getJourneyCoverPhoto()">
                     <md-option ng-value="country.name" ng-repeat="country in countries">
                         {{country.name}}
                     </md-option>
