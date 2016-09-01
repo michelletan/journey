@@ -138,24 +138,26 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 				var qPost = posts[i];
 				//check if post has place
 				if(qPost.place!=undefined){
-					var qCountry = qPost.place.location.country;
-					if(qCountry != undefined){
-						var newJourney;
-						//alert(qCountry);
-						if(qCountry != currCountry){
-							journeyCount++;
-							currCountry = qCountry;
-							newJourney = {};
-							newJourney.name = qCountry;
-							newJourney.posts = [];
-							journeys.push(newJourney);
+					if(qPost.place.location != undefined){
+						var qCountry = qPost.place.location.country;
+						if(qCountry != undefined){
+							var newJourney;
+							//alert(qCountry);
+							if(qCountry != currCountry){
+								journeyCount++;
+								currCountry = qCountry;
+								newJourney = {};
+								newJourney.name = qCountry;
+								newJourney.posts = [];
+								journeys.push(newJourney);
+			
+							}
+							var newPost = copyPost(qPost);
+							newJourney.posts.push(newPost);
 						}
-						var newPost = copyPost(qPost);
-						newJourney.posts.push(newPost);
 					}
 				}
 			}
-			//console.log(journeys);
 			deferred.resolve(journeys);
 		});
 		return deferred.promise;
@@ -237,7 +239,11 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 		if(qPost.full_picture!= undefined){
 			newPost.source = qPost.full_picture;
 		}
-		newPost.likes = qPost.likes.summary.total_count;
+		if(qPost.likes != undefined){
+			newPost.likes = qPost.likes.summary.total_count;
+		}else{
+			newPost.likes = '0';
+		}
 		newPost.country = qPost.place.location.country;
 		return newPost;
 	}
