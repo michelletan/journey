@@ -2,12 +2,12 @@
     <md-toolbar class="md-whiteframe-4dp">
         <div class="md-toolbar-tools" layout="row">
             <div layout="row" layout-align="space-between center" flex="33">
-                <md-button ng-click="openSideNav()" class="md-icon-button">
+                <md-button ng-show="userId != null" ng-click="openSideNav()" class="md-icon-button">
                     <i class="material-icons">&#xE5D2;</i>
                 </md-button>
             </div>
             <div layout="row" layout-align="center center" flex="33">
-                <div ui-sref="home" class="navbar-button" layout="row" layout-align="center center">
+                <div ui-sref="landing" class="navbar-button" layout="row" layout-align="center center">
                     <img class="app-icon" src="/images/journey-icon-circle.png" />
                     <p class="app-name">journey</p>
                 </div>

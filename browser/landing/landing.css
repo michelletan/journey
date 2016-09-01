@@ -4,3 +4,7 @@
     color: white !important;
     font-family: 'Roboto', sans-serif;
 }
+
+.landing-container {
+    padding: 0 !important;
+}
