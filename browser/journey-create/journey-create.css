@@ -3,8 +3,13 @@
     position: relative;
 }
 
+.create-post {
+    border: 5px solid white;
+    outline: none;
+}
+
 .create-post-selected {
-    box-shadow: 0 4px 8px 0 rgba(6, 166, 200, 0.4), 0 6px 20px 0 rgba(6, 166, 200, 0.3);
+    border: 5px solid #09a6c8;
     outline: none;
 }
 
