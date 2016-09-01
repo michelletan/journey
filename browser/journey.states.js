@@ -26,7 +26,7 @@ app.config(function($stateProvider){
   });
 
   $stateProvider.state('journeys', {
-    url: '/journeys',
+    url: '/user/:userId/journeys',
     templateUrl: '/browser/journeys/journeys.html',
     controller: 'JourneysCtrl'
   });
