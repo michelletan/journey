@@ -5,7 +5,7 @@ app.controller('FriendsCtrl', function($scope, $state, $stateParams, FacebookFac
     if($rootScope.userId == null) $state.go('landing');
     
 
-    $scope.id = $rootScope.userId;
+    $scope.userId = $rootScope.userId;
     $scope.userName = $rootScope.userName;
     $scope.userSource = $rootScope.userSource;
 
@@ -14,6 +14,5 @@ app.controller('FriendsCtrl', function($scope, $state, $stateParams, FacebookFac
         console.log("friend is: ", friends);
         $scope.friends = friends;
     });
-
 
 });
