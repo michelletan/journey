@@ -16,8 +16,10 @@
     <div class="journeys-container" layout="row" layout-align="center start">
         <div layout="row" layout-align="start center" layout-wrap flex-xs="100" flex-sm="80" flex="70" >
             <md-grid-list md-cols-xs="1" md-cols-sm="2" md-cols="3" md-gutter="0px" md-gutter-gt-xs="10px" md-row-height-xs="2:1" md-row-height-sm="2:2" md-row-height-gt-sm="3:3" layout-fill>
-                <md-grid-tile ng-repeat="journey in journeys" ng-click="goToJourney(journey.id)" ng-style="{'background-image':'url({{journey.source ? journey.source : defaultCoverUrl}})'}" class="img-overlay">
-                    <div class="journey-tile-info" flex-offset="10" flex="80">
+                <md-grid-tile ng-repeat="journey in journeys" ng-click="goToJourney(journey.id)" ng-style="{'background-image':'url({{journey.source ? journey.source : defaultCoverUrl}})'}" class="img-overlay" layout="column" layout-align="center center" layout-wrap>
+                    <div class="journey-tile-overlay" layout="row" layout-align="center start" flex="100" layout-fill>
+                    </div>
+                    <div class="journey-tile-info" flex="100">
                         <h2>{{journey.name ? journey.name : defaultJourneyTitle}}</h2>
                         <p>From {{ journey.posts[0].created }} to
                                 {{ journey.posts[journey.posts.length-1].created }} </p>

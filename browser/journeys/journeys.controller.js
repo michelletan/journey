@@ -2,8 +2,9 @@
 
 app.controller('JourneysCtrl', function($scope, $state, $stateParams, DatabaseFactory, $rootScope){
     // Redirect users if they haven't logged in
-    if($rootScope.userId == null) $state.go('landing');
+    // if($rootScope.userId == null) $state.go('landing');
 
+    $scope.journeys = [{}, {}, {}];
 
     $scope.userId = $rootScope.userId;
     $scope.userName = $rootScope.userName;
@@ -18,8 +19,8 @@ app.controller('JourneysCtrl', function($scope, $state, $stateParams, DatabaseFa
                 post.created = post.created.slice(5,10);
                 return post;
             })
-            return journey; 
-        }) 
+            return journey;
+        })
         console.log("Journeys to be displayed are:", journeys);
         $scope.journeys = journeys;
     });
