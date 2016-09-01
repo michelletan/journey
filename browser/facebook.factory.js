@@ -88,7 +88,7 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 		checkLoginState();
 		 FB.login(function(response) {
 		   checkLoginState();
-		 }, {scope: 'public_profile,email,user_tagged_places,user_friends'});
+		 }, {scope: 'public_profile,email,user_tagged_places,user_friends,user_posts'});
 	}
 	
 	FacebookFactory.logOutFb = function(){

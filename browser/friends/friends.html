@@ -13,7 +13,7 @@
             </div>
         </div>
         <div layout="row" layout-align="start center" layout-fill layout-wrap>
-            <md-card ng-repeat="friend in friends | searchFriends:searchQuery track by $index " flex="100" flex-sm="45" flex-gt-sm="30">
+            <md-card ng-repeat="friend in friends | searchFriends:searchQuery track by $index " flex="100" flex-sm="45" flex-gt-sm="30" ui-sref="journeys({userId: friend.id})">
                 <md-card-title>
                     <md-card-title-text>
                         <span class="md-headline">{{friend.name ? friend.name : defaultUserName}}</span>
