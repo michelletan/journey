@@ -1,6 +1,14 @@
 app.factory('DatabaseFactory', function($http, $rootScope){
 	var DatabaseFactory = {};
 
+	DatabaseFactory.getFeed = function(){
+		return $http.get('/feed')
+		.then(function(response){
+			return response.data;
+		})
+	}
+
+	// Very powerful db call which doesn't just get all journeys, it gets ALL user data
 	DatabaseFactory.getAllJourneys = function(userId){
 		return $http.get('/user/' + userId + '/journeys')
 		.then(function(response){
