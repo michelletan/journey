@@ -23,8 +23,12 @@ app.controller('JourneyCtrl', function($scope, $state, $stateParams, DatabaseFac
     $scope.defaultJourneyTitle = 'Amazing Trip';
     $scope.defaultPostPic = '/images/landing-feature2.jpg';
 	
-	$scope.shareJourney = function(jID,jName,jSrc, posts){
-		FacebookFactory.shareJourney(jID,jName,jSrc,posts);
-}
+	$scope.shareJourney = function(uName, jID,jName,jSrc, posts){
+		if (uName == $rootScope.userName){
+			FacebookFactory.shareJourney(jID,jName,jSrc,posts);
+		}else{
+			FacebookFactory.postOpenGraph( jID,jName, jSrc,posts);
+		}
+	}
 
 });
