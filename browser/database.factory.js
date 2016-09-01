@@ -24,7 +24,7 @@ app.factory('DatabaseFactory', function($http, $rootScope){
 	}
 
 	DatabaseFactory.getJourney = function(userId,journeyId){
-		return $http.get('/user/' + userId + '/journeys' + journeyId)
+		return $http.get('/user/' + userId + '/journeys/' + journeyId)
 		.then(function(response){
 			return response.data;
 		})
