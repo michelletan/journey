@@ -235,7 +235,7 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 		newPost.story = qPost.story;
 		newPost.message = qPost.message;
 		if(qPost.full_picture!= undefined){
-			newPost.src = qPost.full_picture;
+			newPost.source = qPost.full_picture;
 		}
 		newPost.likes = qPost.likes.summary.total_count;
 		newPost.country = qPost.place.location.country;
