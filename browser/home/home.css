@@ -1,11 +1,27 @@
-.img-post {
-    height: 300px;
-    object-fit: cover;
+.home-container {
+    margin-top: 10px;
 }
 
-.post-user-container {
-    margin: -40px 40px -50px 0px;
-    text-align: center;
+.home-post {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.home-post-img-overlay {
+    height: 130px;
+    background: none;
+}
+
+.home-post-user-container {
+    margin-right: 20px;
+    margin-bottom: -40px;
+}
+
+.home-post-title {
+    padding: 15px;
+    background-color: white;
+    color: black;
 }
 
 .post-user {
@@ -14,8 +30,8 @@
 }
 
 .img-post-user {
-    height: 70px;
-    width: 70px;
+    height: 80px;
+    width: 80px;
     object-fit: contain;
     margin-top: 5px;
     border: 2px solid white;
