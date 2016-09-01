@@ -15,9 +15,9 @@ router.get('/', function(req,res,next){
 		order: 'created DESC',
 		include: [User]
 	})
-	.then(function(journeysToSend){
-		console.log("Server sending feed: ", journeysToSend);
-		res.status(200).send(journeysToSend);
+	.then(function(journeys){
+		console.log("Server sending feed: ", journeys);
+		res.status(200).send(journeys);
 	})
 	.catch(next);
 })
