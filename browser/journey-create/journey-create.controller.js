@@ -19,6 +19,8 @@ app.controller('JourneyCreateCtrl', function($scope, $rootScope, $state, $stateP
         // Further init done below
 
     } else {
+        $scope.posts = [{country: 'China'}, {country: 'Malaysia'},{country: 'Malaysia'},{country: 'England'}, {country: 'Russia'},{country: 'Malaysia'},{country: 'Malaysia'}]; // <-- Ten will provide some async function here
+        
         selectAllPosts();
     }
 
@@ -31,7 +33,6 @@ app.controller('JourneyCreateCtrl', function($scope, $rootScope, $state, $stateP
     $scope.selectedPostCount = 0;
 
     // Post data
-    $scope.posts = [{country: 'China'}, {country: 'Malaysia'},{country: 'Malaysia'},{country: 'England'}, {country: 'Russia'},{country: 'Malaysia'},{country: 'Malaysia'}]; // <-- Ten will provide some async function here
     $scope.selectedPosts = [];
 
     // Journey params
