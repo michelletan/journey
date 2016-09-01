@@ -2,19 +2,25 @@
     <div ng-show="{{posts.length === 0}}" layout="column" layout-align="start center" layout-wrap flex="100">
         <img class="img-static" src="/images/invite.png">
         <p class="static-text" layout-padding>Oops, none of your friends are using Journey, or they haven't posted anything.</p>
-        <md-button class="md-raised md-primary">Invite Friends</md-button>
     </div>
     <div ng-show="{{posts.length > 0}}" class="home-container" layout="row" layout-align="center start" layout-wrap flex-xs="100" flex-gt-xs="80">
         <md-grid-list
         md-cols-xs="1" md-cols-sm="1" md-cols-md="2" md-cols-gt-md="3"
-        md-row-height-xs="2:1" md-row-height-sm="2:1" md-row-height="1:1"
-        md-gutter-xs="0px" md-gutter="12px" md-gutter-gt-sm="8px"
+        md-row-height-xs="16:9" md-row-height="16:9" md-row-height-md="4:3" md-row-height-gt-sm="1:1"
+        md-gutter-xs="0px" md-gutter="12px"
         flex="100" layout-fill>
-        <md-grid-tile ng-repeat="post in posts" ui-sref="journey({id: 1})" ng-style="{'background-image':'url({{post.spreadUrl ? post.spreadUrl : defaultSpreadPic}})'}" class="home-post" layout="column" layout-align="end start">
+        <md-grid-tile ng-repeat="post in posts" ng-style="{'background-image':'url({{post.spreadUrl ? post.spreadUrl : defaultSpreadPic}})'}" class="md-whiteframe-2dp home-post" layout="column" layout-align="end start">
+            <div ui-sref="journey({id: 1})" class="home-post-anim-overlay" layout="row" layout-align="center start" layout-fill>
+                View Journey
+            </div>
             <md-grid-tile-footer class="home-post-img-overlay" layout="column" layout-align="start stretch">
-                <div class="home-post-user-container" layout="row" layout-align="end start">
+                <div class="home-post-user-container" layout="row" layout-align="end end">
                     <p class="post-user">{{friend.name ? friend.name : defaultUserName}}</p>
-                    <img class="img-post-user img-circle" src="{{friend.source ? friend.source : defaultUserPic}}"/>
+                    <div ng-style="{'background-image':'url({{friend.source ? friend.source : defaultUserPic}})'}" class="img-post-user img-circle">
+                        <div ui-sref="profile({id: 1})" class="home-post-anim-overlay img-circle" layout="row" layout-align="center start" layout-fill>
+                            <p>Profile</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="home-post-title" layout="column" layout-align="end start">
                     <span class="md-headline">Crazy trip in China!!</span>

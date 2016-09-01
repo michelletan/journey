@@ -1,11 +1,12 @@
 .user-container {
-    margin-top: -50px;
+    margin-top: -70px;
     margin-bottom: 30px;
 }
 
 .img-profile-user {
     height: 100px;
     width: 100px;
+    margin-left: 20px;
 }
 
 .profile-user-name {

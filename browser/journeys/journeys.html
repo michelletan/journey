@@ -2,6 +2,12 @@
     <div ng-style="{'background-image':'linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.3)),url(/images/journeys-spread.jpg)'}" class="img-overlay img-subheader mid" layout="column" layout-align="center center">
         <h2>My Journeys</h2>
     </div>
+    <div class="user-container" layout="row" layout-align="center start">
+        <div layout="row" layout-align="start end" flex-xs="100" flex-sm="80" flex="70">
+            <img ng-src="{{user.profileSrc ? user.profileSrc : defaultUserPic}}" class="md-whiteframe-4dp img-profile-user img-circle" />
+            <h2 class="profile-user-name">{{user.name ? user.name : defaultUserName}}</h2>
+        </div>
+    </div>
     <div ng-show="{{journeys.length === 0}}" layout="column" layout-align="start center" layout-wrap flex="100">
         <img class="img-static" src="/images/travel.png">
         <p class="static-text" layout-padding>Oops, you don't have any journeys yet.</p>
