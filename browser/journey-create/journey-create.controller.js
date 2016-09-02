@@ -59,7 +59,7 @@ app.controller('JourneyCreateCtrl', function($scope, $rootScope, $state, $stateP
             return post.isSelected;
         })
 
-        DatabaseFactory.createJourney($stateParams.userId, $scope.journeyName, $scope.posts, $scope.journeyCoverCountry)
+        DatabaseFactory.createJourney($stateParams.userId, $scope.journeyName, $scope.posts, $scope.journeyCoverPhoto)
         .then(function(){
             $state.go('home');
         });
@@ -76,7 +76,6 @@ app.controller('JourneyCreateCtrl', function($scope, $rootScope, $state, $stateP
         return $scope.journeyName && $scope.journeyName != '' &&
                $scope.selectedPostCount && $scope.selectedPostCount < 1;
     }
-
 
     function updateJourneyName(name) {
         $scope.journeyName = name;

@@ -1,6 +1,7 @@
 # Journey
 
-![alt tag]()
+![alt tag](reports/imgs/journey_main.png)
+
 
 Keep up with your friends all over the world!
  
@@ -10,9 +11,15 @@ Journey will allow you to see all your friend's trips in one integrated platform
 
 ## Screenshots
 
-![alt tag]()
-![alt tag]()
-![alt tag]()
+Start exploring different trips
+![alt tag](reports/imgs/journey_landing.JPG)
+
+View your friend's journeys
+![alt tag](reports/imgs/journey_friend.JPG)
+
+See your own journeys
+![alt tag](reports/imgs/journey_self.JPG)
+
 
 ## Built With
 * [AngularJS](https://angularjs.org/)
@@ -22,6 +29,11 @@ Journey will allow you to see all your friend's trips in one integrated platform
 
 ## Live site url
 [http://journey.ddns.net/](http://journey.ddns.net/)
+
+
+## Documentation
+* [Journey Pitch](reports/group-2-pitch.pdf)
+* [Journey Milestones](reports/group-2-milestones.pdf)
 
 
 ## Contributors
