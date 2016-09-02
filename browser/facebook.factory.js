@@ -1,4 +1,4 @@
-app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $rootScope){
+app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $rootScope, $state){
 	var FacebookFactory = {}
 
 	// Declaring "global window" variables, so that we can rapidly grab user info on front-end
@@ -86,6 +86,7 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 	FacebookFactory.logIntoFb = function(){	
 		checkLoginState();
 		 FB.login(function(response) {
+		 	$state.go('home');
 		   checkLoginState();
 		 }, {scope: 'public_profile,email,user_tagged_places,user_friends,user_posts'});
 	}
@@ -98,6 +99,7 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 	  	$rootScope.userId = null;
 	  	$rootScope.userName = null;
 	  	$rootScope.userSource = null;
+	  	$state.go('landing');
 		});
 	}
 	

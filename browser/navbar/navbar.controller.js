@@ -41,7 +41,7 @@ app.controller('NavbarCtrl', function($scope, $rootScope, $mdMedia, $mdSidenav, 
     }
 
     function logout() {
-
+        FacebookFactory.logOutFb();
     }
 
 });
