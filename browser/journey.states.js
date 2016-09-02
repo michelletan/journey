@@ -26,13 +26,15 @@ app.config(function($stateProvider){
   });
 
   $stateProvider.state('journeys', {
-    url: '/user/:userId/journeys',
+    url: '/journeys',
+    params: { userId: null },
     templateUrl: '/browser/journeys/journeys.html',
     controller: 'JourneysCtrl'
   });
 
   $stateProvider.state('journey', {
-    url: '/user/:userId/journeys/:journeyId',
+    url: '/journey',
+    params: { userId: null, journeyId: null},
     templateUrl: '/browser/journey/journey.html',
     controller: 'JourneyCtrl'
   });

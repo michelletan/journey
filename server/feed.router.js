@@ -22,7 +22,7 @@ router.post('/', function(req,res,next){
 			return (friendsIdArr.indexOf(journey.user.id) > -1);
 		})	
 		console.log("Server sending feed: ", journeys);
-		res.status(200).send(journeys);
+		return res.status(200).send(journeys);
 	})
 	.catch(next);
 })
