@@ -28,10 +28,7 @@ app.controller('HomeCtrl', function($scope, $state, $stateParams, DatabaseFactor
 	})
 	.then(function(friendsIdArr){
 		return DatabaseFactory.getFeed(friendsIdArr)
-		.then(function(journeys){
-			console.log("DBgetFeed journeys is: ", journeys);
-			return journeys;
-		})
+	
 	})
 	.then(function(journeys){
 		journeys = journeys.map(function(journey){
