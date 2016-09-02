@@ -6,11 +6,11 @@
     </div>
     <div class="user-container" layout="row" layout-align="center start">
         <div layout="row" layout-align="start end" flex-xs="95" flex="70" >
-            <div layout="row" layout-align="start end" flex="70">
-                <img ng-src="{{userSource ? userSource : defaultUserPic}}" class="img-profile-user img-circle" />
+            <div layout="row" layout-align="start end" flex-xs="100" flex="70">
+                <img ng-src="{{userSource ? userSource : defaultUserPic}}" class="md-whiteframe-4dp img-profile-user img-circle" />
                 <h2 class="profile-user-name">{{userName ? userName : defaultUserName}}</h2>
             </div>
-            <div layout="row" layout-align="end center" flex-sm="30">
+            <div layout="row" layout-align="end center" flex="30" hide-xs>
                 <md-button ng-click="shareJourney(userName, journey.id,journey.name,journey.source,journey.posts)" class="md-raised md-primary" hide-xs>Share</md-button>
             </div>
         </div>
