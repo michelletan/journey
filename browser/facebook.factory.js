@@ -2,17 +2,6 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 	var FacebookFactory = {}
 	var toPrint = "";
   
-	FacebookFactory.getId = function(){
-		var deferred = $q.defer();
-		FB.api('me?fields=id', function(response) {
-			deferred.resolve({
-				id: response.id
-			})
-		});
-		return deferred.promise;
-	}
-
-
 	FacebookFactory.statusChangeCallback = function(response) {
 		// The response object is returned with a status field that lets the
 		// app know the current login status of the person.
@@ -51,10 +40,10 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 		  if(document.getElementById("logInLanding")!=undefined){
 		  	document.getElementById("logInLanding").style.display = 'block';
 		  }
-			FacebookFactory.getId()
-			.then(function(id){
-				DatabaseFactory.deleteUser(id);
-			})
+		  FacebookFactory.whenConnected()
+		  .then(function(userObj){
+		  	DatabaseFactory.deleteUser(userObj.id)
+		  });
 		  // Re-direct user if unauthorised
 			return $state.go('landing')
 			.then(function(){
@@ -67,18 +56,18 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 		  if(document.getElementById("logInLanding")!=undefined){
 				document.getElementById("logInLanding").style.display = 'block';
 		  }
-			FacebookFactory.getId()
-			.then(function(id){
-				DatabaseFactory.deleteUser(id);
-			})
+		  FacebookFactory.whenConnected()
+		  .then(function(userObj){
+		  	DatabaseFactory.deleteUser(userObj.id)
+		  });
 		  // Re-direct user if unauthorised
 			return $state.go('landing')
 			.then(function(){
 				return { id: null, name: "non-user", source: null }
 			});
 
+		}
 	}
-
 
 	FacebookFactory.whenConnected = function(){
 		var	deferred = $q.defer(); 
