@@ -28,6 +28,8 @@ app.controller('JourneyCreateCtrl', function($scope, $rootScope, $state, $stateP
     .then(function(posts){
         $scope.posts = posts;
         console.log("Create Journey posts are: ", posts);
+
+        init();
         return $scope.posts;
     });
 
@@ -48,7 +50,6 @@ app.controller('JourneyCreateCtrl', function($scope, $rootScope, $state, $stateP
 
     // Init actions
     $scope.$watch('posts', $scope.updatePostStatus, true);
-    init();
 
     // Public functions
     function done(){
