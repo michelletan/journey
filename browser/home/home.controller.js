@@ -2,6 +2,16 @@
 
 // Both HomeController and CountryController use the CountryFactory
 app.controller('HomeCtrl', function($scope, $state, $stateParams, DatabaseFactory, FacebookFactory, $q){
+  // Redirect users if they haven't logged in
+	FacebookFactory.checkLoginState()
+	.then(function(userObj){
+		if(!userObj.id) return;
+		$scope.userId = userObj.id;
+		$scope.userName = userObj.name;
+		$scope.userSource = userObj.source;
+	})
+
+
 	// Defaults
 	$scope.defaultUserPic = '/images/user.png';
 	$scope.defaultSpreadPic = '/images/landing-spread.jpg';

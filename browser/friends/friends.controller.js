@@ -2,7 +2,13 @@
 
 app.controller('FriendsCtrl', function($scope, $state, $stateParams, FacebookFactory, $rootScope) {
     // Redirect users if they haven't logged in
-    // if($rootScope.userId == null) $state.go('landing');
+		FacebookFactory.checkLoginState()
+		.then(function(userObj){
+			if(!userObj.id) return;
+			$scope.userId = userObj.id;
+			$scope.userName = userObj.name;
+			$scope.userSource = userObj.source;
+		})
 
     FacebookFactory.getFriends()
     .then(function(friends){

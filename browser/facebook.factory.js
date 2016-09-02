@@ -1,11 +1,5 @@
 app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $rootScope, $state){
 	var FacebookFactory = {}
-
-	// Declaring "global window" variables, so that we can rapidly grab user info on front-end
-	$rootScope.userId = null;
-	$rootScope.userName = null;
-	$rootScope.userSource = null;
-
 	var toPrint = "";
   
 	FacebookFactory.statusChangeCallback = function(response) {
@@ -18,47 +12,54 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 		if (response.status === 'connected') {
 		  if(document.getElementById("logInLanding")!=undefined)
 			document.getElementById("logInLanding").style.display = 'none';
-		  // We grab the user's id, name, source
+		  // When connected grabs the user's id, name, source
 		  return FacebookFactory.whenConnected()
-		  // and set them as rootScope variables
-		  .then(function(userObj){
-		  	$rootScope.userId = userObj.id;
-		  	$rootScope.userName = userObj.name;
-		  	$rootScope.userSource = userObj.source;
-		  	return userObj;
-		  })
 		  /* We keep passing the {id name source} object down the promise chain, and we check if user already exists on our db */
-		  .then(function(sameUserObj){
-		  	return DatabaseFactory.checkExistence($rootScope.userId)
+		  .then(function(userObj){
+		  	return DatabaseFactory.checkExistence(userObj.id)
 		  	.then(function(data){
 		  		// If user does not exist, form journeys and persist them onto our db
 		  		if(data.userExists == false){
 		  			return FacebookFactory.generateJourneyWS()
 		  			.then(function(journeys){
-		  				return DatabaseFactory.persistJourneys($rootScope.userId, journeys);
+		  				return DatabaseFactory.persistJourneys(userObj.id, journeys);
 		  			})
 		  			// Resolve the promise as the {id name source} object
 		  			.then(function(){
-		  				return sameUserObj;
+		  				return userObj;
 		  			})
 		  		// If user already exists, just resolve the promise as the {id name source} object
 		  		}else{
-		  			return sameUserObj;
+		  			return userObj;
 		  		}
 		  	})
 		  })
 
 		} else if (response.status === 'not_authorized') {
 		  // The person is logged into Facebook, but not your app.
-		  if(document.getElementById("logInLanding")!=undefined)
-			document.getElementById("logInLanding").style.display = 'block';
+		  if(document.getElementById("logInLanding")!=undefined){
+		  	document.getElementById("logInLanding").style.display = 'block';
+		  }
+
+		  // Re-direct user if unauthorised
+			return $state.go('landing')
+			.then(function(){
+				return { id: null, name: "non-user", source: null }
+			});
 		  
 		} else {
 		  // The person is not logged into Facebook, so we're not sure if
 		  // they are logged into this app or not.
-		  if(document.getElementById("logInLanding")!=undefined)
-			document.getElementById("logInLanding").style.display = 'block';
-		  
+		  if(document.getElementById("logInLanding")!=undefined){
+				document.getElementById("logInLanding").style.display = 'block';
+		  }
+
+		  // Re-direct user if unauthorised
+			return $state.go('landing')
+			.then(function(){
+				return { id: null, name: "non-user", source: null }
+			});
+
 		}
 	}
 
@@ -77,22 +78,23 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 					source: response.picture.data.url,
 					id: response.id
 				});
-			}	
+			}
+
 		});
 		return deferred.promise;
 	}
 
 
 	FacebookFactory.logIntoFb = function(){	
-		checkLoginState();
+		FacebookFactory.checkLoginState();
 		 FB.login(function(response) {
 		 	$state.go('home');
-		   checkLoginState();
+		   FacebookFactory.checkLoginState();
 		 }, {scope: 'public_profile,email,user_tagged_places,user_friends,user_posts'});
 	}
 	
 	FacebookFactory.logOutFb = function(){
-		checkLoginState();
+		FacebookFactory.checkLoginState();
 		FB.logout(function(response) {
 		  //logout processing here
 		  //Clearing rootscope variables
@@ -297,12 +299,12 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 
 
 	  // This function is called when someone finishes with the Login
-	  // Button.  See the onlogin handler attached to it in the sample
+	  // Button. See the onlogin handler attached to it in the sample
 	  // code below.
-	  function checkLoginState() {
+	  FacebookFactory.checkLoginState = function() {
 	  	// Checks if user is logged in ON facebook
 	  	FB.getLoginStatus(function(response) {
-	  		statusChangeCallback(response);
+	  		FacebookFactory.statusChangeCallback(response);
 	  	});
 	  }
 

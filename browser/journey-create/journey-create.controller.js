@@ -2,6 +2,15 @@
 
 app.controller('JourneyCreateCtrl', function($scope, $rootScope, $state, $stateParams, DatabaseFactory, FacebookFactory, PixabayFactory) {
 
+    // Redirect users if they haven't logged in
+    FacebookFactory.checkLoginState()
+    .then(function(userObj){
+        if(!userObj.id) return;
+        $scope.userId = userObj.id;
+        $scope.userName = userObj.name;
+        $scope.userSource = userObj.source;
+    })
+
     $scope.journey = {name: 'Amazing Trip'};
     $scope.endDate = new Date();
     $scope.startDate = new Date(new Date().setFullYear(new Date().getFullYear() - 1));
@@ -25,7 +34,6 @@ app.controller('JourneyCreateCtrl', function($scope, $rootScope, $state, $stateP
         // Init actions
         $scope.$watch('posts', $scope.updatePostStatus, true);
         init();
-
 
 
 
