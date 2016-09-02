@@ -20,7 +20,7 @@ app.controller('JourneyCreateCtrl', function($scope, $rootScope, $state, $stateP
 
     } else {
         $scope.posts = [{country: 'China'}, {country: 'Malaysia'},{country: 'Malaysia'},{country: 'England'}, {country: 'Russia'},{country: 'Malaysia'},{country: 'Malaysia'}]; // <-- Ten will provide some async function here
-        
+        $scope.journey = {name: 'Amazing Trip'};
         selectAllPosts();
     }
 
