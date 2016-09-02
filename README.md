@@ -21,12 +21,6 @@ See your own journeys
 ![alt tag](reports/imgs/journey_self.JPG)
 
 
-## Built With
-* [AngularJS](https://angularjs.org/)
-* [NodeJS](https://nodejs.org/en/)
-* [Postgresql](https://www.postgresql.org/)
-
-
 ## Live site url
 [http://journey.ddns.net/](http://journey.ddns.net/)
 
@@ -34,6 +28,12 @@ See your own journeys
 ## Documentation
 * [Journey Pitch](reports/group-2-pitch.pdf)
 * [Journey Milestones](reports/group-2-milestones.pdf)
+
+
+## Built With
+* [AngularJS](https://angularjs.org/)
+* [NodeJS](https://nodejs.org/en/)
+* [Postgresql](https://www.postgresql.org/)
 
 
 ## Contributors
