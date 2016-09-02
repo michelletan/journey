@@ -1,5 +1,5 @@
-<md-content class="scroll-container" layout="row" layout-align="center start">
-    <div ng-show="{{journeys.length === 0}}" layout="column" layout-align="start center" layout-wrap flex="100">
+<md-content class="scroll-container" layout="row" layout-align="center start" layout-wrap>
+    <div ng-show="{{journeys.length === 0}}" layout="column" layout-align="start center" layout-wrap>
         <img class="img-static" src="/images/invite.png">
         <p class="static-text" layout-padding>Oops, none of your friends are using Journey, or they haven't posted anything.</p>
     </div>
@@ -24,8 +24,8 @@
                 </div>
                 <div class="home-post-title" layout="column" layout-align="end start">
                     <span class="md-headline">{{journey.name}}</span>
-                    <span class="md-subhead"> 
-                        {{ journey.created }} 
+                    <span class="md-subhead">
+                        {{ journey.created }}
                     </span>
                 </div>
             </md-grid-tile-footer>
