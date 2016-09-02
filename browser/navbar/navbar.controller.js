@@ -1,8 +1,6 @@
 app.controller('NavbarCtrl', function($scope, $rootScope, $mdMedia, $mdSidenav, $mdDialog, FacebookFactory) {
     var sidenavId = 'left';
 
-    $scope.userId = '1';
-
     $scope.defaultUserId = 1;
     $scope.defaultUserPic = '/images/user.png';
     $scope.defaultUserName = 'User';
@@ -15,6 +13,10 @@ app.controller('NavbarCtrl', function($scope, $rootScope, $mdMedia, $mdSidenav, 
     FB.getLoginStatus(function(response) {
         FacebookFactory.statusChangeCallback(response)
         .then(function(userObj){
+            if(!userObj.id){
+                $scope.userId = 1
+                return;
+            };
             console.log("Displayed user info on navbar should be: ", userObj);
             $scope.userName = userObj.name;
             $scope.userSource = userObj.source;
@@ -41,6 +43,9 @@ app.controller('NavbarCtrl', function($scope, $rootScope, $mdMedia, $mdSidenav, 
     }
 
     function logout() {
+        $scope.userId = null;
+        $scope.userSource = null;
+        $scope.userName = null;
         FacebookFactory.logOutFb();
     }
 

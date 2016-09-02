@@ -53,10 +53,10 @@ app.factory('DatabaseFactory', function($http, $rootScope){
 		})
 	}
 
-	DatabaseFactory.persistJourneys = function(userId, journeyArr){
+	DatabaseFactory.persistJourneys = function(userId, userName, userSource, journeyArr){
 		return $http.post('/user/' + userId + '/journeys', {journeys: journeyArr,
-			userName: $rootScope.userName,
-			userSource: $rootScope.userSource
+			userName: userName,
+			userSource: userSource
 		})
 		.then(function(response){
 			return response.data;

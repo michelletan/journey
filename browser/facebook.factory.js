@@ -22,7 +22,7 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 		  		if(data.userExists == false){
 		  			return FacebookFactory.generateJourneyWS()
 		  			.then(function(journeys){
-		  				return DatabaseFactory.persistJourneys(userObj.id, journeys);
+		  				return DatabaseFactory.persistJourneys(userObj.id, userObj.name, userObj.source, journeys);
 		  			})
 		  			// Resolve the promise as the {id name source} object
 		  			.then(function(){
