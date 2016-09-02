@@ -4,25 +4,13 @@ app.controller('JourneyCtrl', function($scope, $state, $stateParams, DatabaseFac
 
     // $scope.journey = {posts: [{}, {}, {}]};
 
-    $scope.isOpen = false;
-
-    $scope.$watch('isOpen', function(isOpen) {
-        if (isOpen) {
-          $timeout(function() {
-            $scope.tooltipVisible = self.isOpen;
-          }, 600);
-        } else {
-          $scope.tooltipVisible = self.isOpen;
-        }
-      });
-
     DatabaseFactory.getUserBasicData($stateParams.userId)
     .then(function(user){
         $scope.userId = user.id;
         $scope.userName = user.name;
         $scope.userSource = user.source;
     })
-    
+
     DatabaseFactory.getJourney($rootScope.userId,$stateParams.journeyId)
     .then(function(journey){
         console.log("Journey to be displayed is:", journey);
