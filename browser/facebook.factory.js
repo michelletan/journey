@@ -7,7 +7,6 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 	$rootScope.userSource = null;
 
 	var toPrint = "";
-
   
 	FacebookFactory.statusChangeCallback = function(response) {
 		// The response object is returned with a status field that lets the
