@@ -55,7 +55,7 @@ app.controller('JourneyCreateCtrl', function($scope, $rootScope, $state, $stateP
         $scope.posts = $scope.posts.filter(function(post){
             return post.isSelected;
         })
-        
+
         DatabaseFactory.createJourney($stateParams.userId, $scope.journeyName, $scope.posts, $scope.journeyCoverCountry)
         .then(function(){
             $state.go('home');
@@ -71,7 +71,7 @@ app.controller('JourneyCreateCtrl', function($scope, $rootScope, $state, $stateP
 
     function isInfoFilled() {
         return $scope.journeyName === undefined || $scope.journeyName === '' ||
-               $scope.selectedPostCount === undefined || $scope.selectedPostCount < 1;
+        $scope.selectedPostCount === undefined || $scope.selectedPostCount < 1;
     }
 
 
@@ -148,7 +148,5 @@ app.controller('JourneyCreateCtrl', function($scope, $rootScope, $state, $stateP
 
         return {min: minDate, max: maxDate};
     }
-
-})
 
 });
