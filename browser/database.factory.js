@@ -1,20 +1,10 @@
-app.factory('DatabaseFactory', function($http, $rootScope, FacebookFactory){
+app.factory('DatabaseFactory', function($http, $rootScope){
 	var DatabaseFactory = {};
 
-	DatabaseFactory.getFeed = function(){
-		// Pull user's friends from Facebook first 
-		return FacebookFactory.getFriends()
-		.then(function(friendsArr){
-			var friendsIdArr = friendsArr.map(function(friendObj){
-				return friendObj.id;
-			});
-			return friendsIdArr;
-		})
-		.then(function(friendsIdArr){
-			return $http.post('/feed', {friendsIdArr: friendsIdArr})
-			.then(function(response){
-				return response.data;
-			})
+	DatabaseFactory.getFeed = function(friendsIdArr){
+		return $http.post('/feed', {friendsIdArr: friendsIdArr})
+		.then(function(response){
+			return response.data;
 		})
 	}
 
