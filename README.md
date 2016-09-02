@@ -12,13 +12,13 @@ Journey will allow you to see all your friend's trips in one integrated platform
 ## Screenshots
 
 Start exploring different trips
-![alt tag](reports/imgs/journey_landing.png)
+![alt tag](reports/imgs/journey_landing.JPG)
 
 View your friend's journeys
-![alt tag](reports/imgs/journey_friend.png)
+![alt tag](reports/imgs/journey_friend.JPG)
 
 See your own journeys
-![alt tag](reports/imgs/journey_self.png)
+![alt tag](reports/imgs/journey_self.JPG)
 
 
 ## Built With
