@@ -7,7 +7,6 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 	$rootScope.userSource = null;
 
 	var toPrint = "";
-
   
 	FacebookFactory.statusChangeCallback = function(response) {
 		// The response object is returned with a status field that lets the
@@ -221,6 +220,7 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 			});
 		});
 	}
+	
 	FacebookFactory.shareJourney = function(jID,jName,jSrc,posts){
 		
 		var dates = [];

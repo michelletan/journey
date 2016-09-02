@@ -2,8 +2,6 @@
 
 app.controller('JourneysCtrl', function($scope, $state, $stateParams, DatabaseFactory, $rootScope){
 
-    // $scope.journeys = [{}, {}, {}];
-
     // We use stateParams.userId because we're not necessarily rendering the user's own journeys -- we could be displaying his/her friend's journeys
     DatabaseFactory.getAllJourneys($stateParams.userId)
     .then(function(allUserData){
