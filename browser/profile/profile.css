@@ -2,6 +2,23 @@
     margin-bottom: 15px;
 }
 
+.user-container {
+    margin-top: -70px;
+    margin-bottom: 30px;
+}
+
+.img-profile-user {
+    height: 100px;
+    width: 100px;
+    margin-left: 20px;
+}
+
+.profile-user-name {
+    margin: 0px;
+    margin-left: 15px;
+}
+
+
 .journey-tile-info {
     height: 100px;
     background-color: white;
