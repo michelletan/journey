@@ -33,6 +33,7 @@ app.config(function($stateProvider){
 
   $stateProvider.state('create', {
     url: '/create',
+    params: {userId: null},
     templateUrl: '/browser/journey-create/journey-create.html',
     controller: 'JourneyCreateCtrl'
   });
