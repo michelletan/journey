@@ -221,6 +221,7 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 			});
 		});
 	}
+	
 	FacebookFactory.shareJourney = function(jID,jName,jSrc,posts){
 		
 		var dates = [];
