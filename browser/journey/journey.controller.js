@@ -1,12 +1,13 @@
 'use strict';
 
-app.controller('JourneyCtrl', function($scope, $state, $stateParams, DatabaseFactory, $rootScope) {
-    // Redirect users if they haven't logged in
-    if($rootScope.userId == null) $state.go('landing');
+app.controller('JourneyCtrl', function($scope, $state, $stateParams, DatabaseFactory, $rootScope,FacebookFactory) {
 
-    $scope.userId = $rootScope.userId;
-    $scope.userName = $rootScope.userName;
-    $scope.userSource = $rootScope.userSource;
+    DatabaseFactory.getUserBasicData($stateParams.userId)
+    .then(function(user){
+        $scope.userId = user.id;
+        $scope.userName = user.name;
+        $scope.userSource = user.source;
+    })
 
     DatabaseFactory.getJourney($rootScope.userId,$stateParams.journeyId)
     .then(function(journey){
@@ -21,5 +22,13 @@ app.controller('JourneyCtrl', function($scope, $state, $stateParams, DatabaseFac
 
     $scope.defaultJourneyTitle = 'Amazing Trip';
     $scope.defaultPostPic = '/images/landing-feature2.jpg';
+	
+	$scope.shareJourney = function(uName, jID,jName,jSrc, posts){
+		if (uName == $rootScope.userName){
+			FacebookFactory.shareJourney(jID,jName,jSrc,posts);
+		}else{
+			FacebookFactory.postOpenGraph(uName, jID,jName, jSrc,posts);
+		}
+	}
 
 });

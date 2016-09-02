@@ -30,15 +30,15 @@ var Journey = db.define('journey', {
 	},
 	source: {
 		type: Sequelize.STRING
+	},
+	created: {
+		type: Sequelize.DATE
 	}
 });
 
 var Post = db.define('post', {
 	fbpostid: {
 		type: Sequelize.STRING
-	},
-	journeyid: {
-		type: Sequelize.INTEGER,
 	},
 	story: {
 		type: Sequelize.TEXT,

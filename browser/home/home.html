@@ -1,5 +1,5 @@
 <md-content class="scroll-container" layout="row" layout-align="center start">
-    <div ng-show="{{posts.length === 0}}" layout="column" layout-align="start center" layout-wrap flex="100">
+    <div ng-show="{{journeys.length === 0}}" layout="column" layout-align="start center" layout-wrap flex="100">
         <img class="img-static" src="/images/invite.png">
         <p class="static-text" layout-padding>Oops, none of your friends are using Journey, or they haven't posted anything.</p>
     </div>
@@ -10,13 +10,13 @@
         md-gutter-xs="0px" md-gutter="12px"
         flex="100" layout-fill>
         <md-grid-tile ng-repeat="journey in journeys" ng-style="{'background-image':'url({{journey.source ? journey.source : defaultSpreadPic}})'}" class="md-whiteframe-2dp home-post" layout="column" layout-align="end start">
-            <div ui-sref="journey({journeyId: journey.id})" class="home-post-anim-overlay" layout="row" layout-align="center start" layout-fill>
+            <div ui-sref="journey({userId: journey.user.id, journeyId: journey.id})" class="home-post-anim-overlay" layout="row" layout-align="center start" layout-fill>
                 View Journey
             </div>
             <md-grid-tile-footer class="home-post-img-overlay" layout="column" layout-align="start stretch">
                 <div class="home-post-user-container" layout="row" layout-align="end end">
                     <p class="post-user">{{journey.user.name ? journey.user.name : defaultUserName}}</p>
-                    <div ng-style="{'background-image':'url({{journey.source ? journey.source : defaultUserPic}})'}" class="img-post-user img-circle">
+                    <div ng-style="{'background-image':'url({{journey.user.source ? journey.user.source : defaultUserPic}})'}" class="img-post-user img-circle">
                         <div ui-sref="journeys({userId: journey.user.id})" class="home-post-anim-overlay img-circle" layout="row" layout-align="center start" layout-fill>
                             <p></p>
                         </div>
@@ -24,10 +24,8 @@
                 </div>
                 <div class="home-post-title" layout="column" layout-align="end start">
                     <span class="md-headline">{{journey.name}}</span>
-                    <span class="md-subhead">
-                        {{journey.posts.length}} post(s),
-                        {{ journey.posts[0].created | date : 'd MMM yyyy' }} to
-                        {{ journey.posts[journey.posts.length-1].created | date : 'd MMM yyyy' }}
+                    <span class="md-subhead"> 
+                        {{ journey.created }} 
                     </span>
                 </div>
             </md-grid-tile-footer>
