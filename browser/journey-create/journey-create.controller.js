@@ -18,6 +18,7 @@ app.controller('JourneyCreateCtrl', function($scope, $rootScope, $state, $stateP
     $scope.startDate = new Date(new Date().setFullYear(new Date().getFullYear() - 1));
 
     $scope.done = done;
+    $scope.isJourneyValid = isJourneyValid;
     $scope.updateJourneyName = updateJourneyName;
     $scope.getJourneyCoverPhoto = getJourneyCoverPhoto;
     $scope.selectAllPosts = selectAllPosts;
@@ -73,7 +74,7 @@ app.controller('JourneyCreateCtrl', function($scope, $rootScope, $state, $stateP
 
     function isJourneyValid() {
         return $scope.journeyName && $scope.journeyName != '' &&
-               $scope.selectedPostCount && $scope.selectedPostCount > 0;
+               $scope.selectedPostCount && $scope.selectedPostCount < 1;
     }
 
 
