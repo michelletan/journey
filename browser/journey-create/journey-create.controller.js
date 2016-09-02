@@ -71,9 +71,9 @@ app.controller('JourneyCreateCtrl', function($scope, $rootScope, $state, $stateP
         getSelectedPostCount();
     }
 
-    function isInfoFilled() {
-        return $scope.journeyName === undefined || $scope.journeyName === '' ||
-        $scope.selectedPostCount === undefined || $scope.selectedPostCount < 1;
+    function isJourneyValid() {
+        return $scope.journeyName && $scope.journeyName != '' &&
+               $scope.selectedPostCount && $scope.selectedPostCount > 0;
     }
 
 
