@@ -3,7 +3,6 @@
 app.controller('JourneyCreateCtrl', function($scope, $rootScope, $state, $stateParams, DatabaseFactory, FacebookFactory, PixabayFactory) {
 
     $scope.journey = {name: 'Amazing Trip'};
-    selectAllPosts();
 
     $scope.endDate = new Date();
     $scope.startDate = new Date($scope.endDate.getTime() - 12 * 60000 * 60 * 24 * 30);
@@ -11,17 +10,20 @@ app.controller('JourneyCreateCtrl', function($scope, $rootScope, $state, $stateP
     FacebookFactory.getPosts($scope.startDate, $scope.endDate)
     .then(function(posts){
         $scope.posts = posts;        
+        console.log("Create Journey posts are: ", posts);
+        return $scope.posts;
     })
-    .then(function(){
+    .then(function(posts){
         $scope.done = function (posts){
             posts = posts.filter(function(post){
                 return post.isSelected;
             })
             DatabaseFactory.createJourney($stateParams.userId, $scope.journeyName, posts, $scope.journeyCoverCountry)
             .then(function(){
-                $state.go('home')
+                $state.go('home');
             })
         }
+
         $scope.updateJourneyName = updateJourneyName;
         $scope.getJourneyCoverPhoto = getJourneyCoverPhoto;
         $scope.selectAllPosts = selectAllPosts;
@@ -35,6 +37,7 @@ app.controller('JourneyCreateCtrl', function($scope, $rootScope, $state, $stateP
 
         // Public functions
         function init() {
+            selectAllPosts();
             getAllCountriesFromPosts();
             getJourneyCoverPhoto();
             getSelectedPostCount();
