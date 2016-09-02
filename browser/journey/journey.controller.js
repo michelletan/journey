@@ -2,18 +2,20 @@
 
 app.controller('JourneyCtrl', function($scope, $state, $stateParams, DatabaseFactory, $rootScope,FacebookFactory) {
 
-    DatabaseFactory.getUserBasicData($stateParams.userId)
-    .then(function(user){
-        $scope.userId = user.id;
-        $scope.userName = user.name;
-        $scope.userSource = user.source;
-    })
+    $scope.journey = {posts: [{}, {}, {}]};
 
-    DatabaseFactory.getJourney($rootScope.userId,$stateParams.journeyId)
-    .then(function(journey){
-        console.log("Journey to be displayed is:", journey);
-        $scope.journey = journey;
-    });
+    // DatabaseFactory.getUserBasicData($stateParams.userId)
+    // .then(function(user){
+    //     $scope.userId = user.id;
+    //     $scope.userName = user.name;
+    //     $scope.userSource = user.source;
+    // })
+    //
+    // DatabaseFactory.getJourney($rootScope.userId,$stateParams.journeyId)
+    // .then(function(journey){
+    //     console.log("Journey to be displayed is:", journey);
+    //     $scope.journey = journey;
+    // });
 
     $scope.defaultUserId = 1;
     $scope.defaultUserPic = '/images/user.png';
@@ -22,7 +24,7 @@ app.controller('JourneyCtrl', function($scope, $state, $stateParams, DatabaseFac
 
     $scope.defaultJourneyTitle = 'Amazing Trip';
     $scope.defaultPostPic = '/images/landing-feature2.jpg';
-	
+
 	$scope.shareJourney = function(uName, jID,jName,jSrc, posts){
 		if (uName == $rootScope.userName){
 			FacebookFactory.shareJourney(jID,jName,jSrc,posts);
