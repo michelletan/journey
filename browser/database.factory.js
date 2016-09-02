@@ -64,7 +64,7 @@ app.factory('DatabaseFactory', function($http, $rootScope){
 	}
 
 	DatabaseFactory.createJourney = function(userId, name, posts, source){
-		return $http.post('/user' + userId + '/createJourney', {name: name, posts: posts, source: source})
+		return $http.post('/user/' + userId + '/createJourney', {name: name, posts: posts, source: source})
 		.then(function(response){
 			return response.data;
 		})
