@@ -25,9 +25,9 @@
                 <div class="home-post-title" layout="column" layout-align="end start">
                     <span class="md-headline">{{journey.name}}</span>
                     <span class="md-subhead">
-                        {{journey.posts.length}} post(s), 
-                        {{ journey.posts[0].created }} to 
-                        {{ journey.posts[journey.posts.length-1].created }}
+                        {{journey.posts.length}} post(s),
+                        {{ journey.posts[0].created | date : 'd MMM yyyy' }} to
+                        {{ journey.posts[journey.posts.length-1].created | date : 'd MMM yyyy' }}
                     </span>
                 </div>
             </md-grid-tile-footer>
