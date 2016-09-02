@@ -14,7 +14,7 @@ app.config(function($stateProvider){
   });
 
   $stateProvider.state('profile', {
-    url: '/profile/:id',
+    url: '/profile/:userId',
     templateUrl: '/browser/profile/profile.html',
     controller: 'ProfileCtrl'
   });
@@ -25,16 +25,8 @@ app.config(function($stateProvider){
     controller: 'FriendsCtrl'
   });
 
-  $stateProvider.state('journeys', {
-    url: '/journeys',
-    params: { userId: null },
-    templateUrl: '/browser/journeys/journeys.html',
-    controller: 'JourneysCtrl'
-  });
-
   $stateProvider.state('journey', {
-    url: '/journey',  
-    params: { userId: null, journeyId: null},
+    url: '/profile/:userId/journey/:journeyId',  
     templateUrl: '/browser/journey/journey.html',
     controller: 'JourneyCtrl'
   });
