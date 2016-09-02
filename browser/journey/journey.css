@@ -13,3 +13,13 @@
     padding: 8px;
     background-color: white;
 }
+
+.hover-bottom-right {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+
+.icon-fab {
+    margin-top: 15px;
+}

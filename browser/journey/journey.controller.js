@@ -2,7 +2,19 @@
 
 app.controller('JourneyCtrl', function($scope, $state, $stateParams, DatabaseFactory, $rootScope,FacebookFactory) {
 
-    $scope.journey = {posts: [{}, {}, {}]};
+    // $scope.journey = {posts: [{}, {}, {}]};
+
+    $scope.isOpen = false;
+
+    $scope.$watch('isOpen', function(isOpen) {
+        if (isOpen) {
+          $timeout(function() {
+            $scope.tooltipVisible = self.isOpen;
+          }, 600);
+        } else {
+          $scope.tooltipVisible = self.isOpen;
+        }
+      });
 
     // DatabaseFactory.getUserBasicData($stateParams.userId)
     // .then(function(user){

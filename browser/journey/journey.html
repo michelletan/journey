@@ -5,33 +5,31 @@
         </div>
     </div>
     <div class="user-container" layout="row" layout-align="center start">
-        <div layout="row" layout-align="start end" flex-xs="95" flex-sm="80" flex="70" >
+        <div layout="row" layout-align="start end" flex-xs="95" flex="70" >
             <div layout="row" layout-align="start end" flex="70">
             <img ng-src="{{userSource ? userSource : defaultUserPic}}" class="img-profile-user img-circle" />
             <h2 class="profile-user-name">{{userName ? userName : defaultUserName}}</h2>
         </div>
-        <div flex="30">
+        <div layout="row" layout-align="end center" flex-sm="30">
             <md-button ui-sref="edit(journey.id)" class="md-raised md-secondary" hide-xs>Edit</md-button>
             <md-button ng-click="shareJourney(userName, journey.id,journey.name,journey.source,journey.posts)" class="md-raised md-primary" hide-xs>Share</md-button>
         </div>
         </div>
     </div>
-    <md-fab-speed-dial md-direction="up"
-                         ng-class="demo.selectedMode">
+    <md-fab-speed-dial md-open="isOpen" md-direction="up" class="md-scale hover-bottom-right" hide-gt-xs ng-cloak>
         <md-fab-trigger>
-          <md-button aria-label="menu" class="md-fab md-warn">
-            <i class="material-icons">&#xE5D2;</i>
+          <md-button aria-label="menu" class="md-fab md-primary">
+            <i class="material-icons icon-fab">&#xE5D2;</i>
           </md-button>
         </md-fab-trigger>
         <md-fab-actions>
-          <md-button aria-label="Twitter" class="md-fab md-raised md-mini">
-            <md-icon md-svg-src="img/icons/twitter.svg" aria-label="Twitter"></md-icon>
+          <md-button ui-sref="edit(journey.id)" aria-label="Edit" class="md-fab md-raised">
+              <md-tooltip md-direction="left" md-visible="tooltipVisible" md-autohide="false">Edit</md-tooltip>
+            <i class="material-icons icon-fab">&#xE3C9;</i>
           </md-button>
-          <md-button aria-label="Facebook" class="md-fab md-raised md-mini">
-            <md-icon md-svg-src="img/icons/facebook.svg" aria-label="Facebook"></md-icon>
-          </md-button>
-          <md-button aria-label="Google Hangout" class="md-fab md-raised md-mini">
-            <md-icon md-svg-src="img/icons/hangout.svg" aria-label="Google Hangout"></md-icon>
+          <md-button ng-click="shareJourney(userName, journey.id,journey.name,journey.source,journey.posts)" aria-label="Share" class="md-fab md-raised">
+              <md-tooltip md-direction="left" md-visible="tooltipVisible" md-autohide="false">Share</md-tooltip>
+            <i class="material-icons icon-fab">&#xE80D;</i>
           </md-button>
         </md-fab-actions>
       </md-fab-speed-dial>
