@@ -14,7 +14,7 @@ app.controller('NavbarCtrl', function($scope, $rootScope, $mdMedia, $mdSidenav, 
         FacebookFactory.statusChangeCallback(response)
         .then(function(userObj){
             if(!userObj.id){
-                $scope.userId = 1
+                
                 return;
             };
             console.log("Displayed user info on navbar should be: ", userObj);

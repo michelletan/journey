@@ -1,14 +1,12 @@
 'use strict';
 
-app.controller('ProfileCtrl', function($scope, $state, $stateParams, DatabaseFactory, $rootScope){
+app.controller('ProfileCtrl', function($scope, $state, $stateParams, DatabaseFactory, $rootScope,FacebookFactory){
     // Redirect users if they haven't logged in
     FB.getLoginStatus(function(response) {
         FacebookFactory.statusChangeCallback(response)
         .then(function(userObj){
                 if(!userObj.id) return;
-            $scope.userName = userObj.name;
-            $scope.userSource = userObj.source;
-            $scope.userId = userObj.id;
+            
         })
     });
 
