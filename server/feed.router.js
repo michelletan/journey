@@ -10,12 +10,17 @@ var Promise = require('bluebird');
 // Set up Router
 var router = require('express').Router();
 
-router.get('/', function(req,res,next){
-	Journey.findAll({
+router.post('/', function(req,res,next){
+	var friendsIdArr = req.body.friendsIdArr;
+	return Journey.findAll({
 		order: 'created DESC',
 		include: [User]
 	})
 	.then(function(journeys){
+		// Filter journey out if it does not belong to a user's friend
+		journeys = journeys.filter(function(journey){
+			return (friendsIdArr.indexOf(journey.user.id) > -1);
+		})	
 		console.log("Server sending feed: ", journeys);
 		res.status(200).send(journeys);
 	})
