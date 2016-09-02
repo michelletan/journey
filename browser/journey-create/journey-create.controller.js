@@ -13,6 +13,7 @@ app.controller('JourneyCreateCtrl', function($scope, $rootScope, $state, $stateP
     });
 
     $scope.journey = {name: 'Amazing Trip'};
+    $scope.posts = [];
     $scope.endDate = new Date();
     $scope.startDate = new Date(new Date().setFullYear(new Date().getFullYear() - 1));
 
@@ -129,9 +130,13 @@ app.controller('JourneyCreateCtrl', function($scope, $rootScope, $state, $stateP
 
     // Private functions
     function getSelectedPostCount() {
-        return $scope.posts.reduce(function(count, post) {
-            return count + (post.isSelected ? 1 : 0)
-        }, 0);
+        if ($scope.posts) {
+            return $scope.posts.reduce(function(count, post) {
+                return count + (post.isSelected ? 1 : 0)
+            }, 0);
+        } else {
+            return 0;
+        }
     }
 
     function getDateRangeFromPosts(posts) {
