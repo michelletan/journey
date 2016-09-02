@@ -34,13 +34,9 @@
                     <i class="material-icons list-item-icon">&#xE7FB;</i>
                     <p>Friends</p>
                 </md-list-item>
-                <md-list-item ui-sref="profile">
+                <md-list-item ui-sref="profile({userId: userId})">
                     <i class="material-icons list-item-icon">&#xE7FD;</i>
                     <p>My Profile</p>
-                </md-list-item>
-                <md-list-item ui-sref="journeys({userId: userId})">
-                    <i class="material-icons list-item-icon">&#xE55B;</i>
-                    <p>My Journeys</p>
                 </md-list-item>
                 <md-divider></md-divider>
                 <md-list-item ng-click="logout()">
