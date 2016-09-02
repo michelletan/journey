@@ -5,13 +5,12 @@ app.controller('FriendsCtrl', function($scope, $state, $stateParams, FacebookFac
     FB.getLoginStatus(function(response) {
         FacebookFactory.statusChangeCallback(response)
         .then(function(userObj){
-        		if(!userObj.id) return;
+                if(!userObj.id) return;
             $scope.userName = userObj.name;
             $scope.userSource = userObj.source;
             $scope.userId = userObj.id;
         })
     });
-
 
     FacebookFactory.getFriends()
     .then(function(friends){

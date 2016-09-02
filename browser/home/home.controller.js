@@ -6,13 +6,12 @@ app.controller('HomeCtrl', function($scope, $state, $stateParams, DatabaseFactor
   FB.getLoginStatus(function(response) {
       FacebookFactory.statusChangeCallback(response)
       .then(function(userObj){
-      		if(!userObj.id) return;
+              if(!userObj.id) return;
           $scope.userName = userObj.name;
           $scope.userSource = userObj.source;
           $scope.userId = userObj.id;
       })
   });
-
 
 	// Defaults
 	$scope.defaultUserPic = '/images/user.png';
