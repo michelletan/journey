@@ -6,7 +6,7 @@ app.controller('HomeCtrl', function($scope, $state, $stateParams, DatabaseFactor
 	$scope.defaultUserPic = '/images/user.png';
 	$scope.defaultSpreadPic = '/images/landing-spread.jpg';
 	$scope.defaultUserName = 'User';
-
+	$scope.journeys = [];
 
 	FacebookFactory.getFriends()
 	.then(function(friends){

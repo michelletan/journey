@@ -17,7 +17,7 @@
                 <div class="home-post-user-container" layout="row" layout-align="end end">
                     <p class="post-user">{{journey.user.name ? journey.user.name : defaultUserName}}</p>
                     <div ng-style="{'background-image':'url({{journey.user.source ? journey.user.source : defaultUserPic}})'}" class="img-post-user img-circle">
-                        <div ui-sref="journeys({userId: journey.user.id})" class="home-post-anim-overlay img-circle" layout="row" layout-align="center start" layout-fill>
+                        <div ui-sref="profile({userId: journey.user.id})" class="home-post-anim-overlay img-circle" layout="row" layout-align="center start" layout-fill>
                             <p></p>
                         </div>
                     </div>
