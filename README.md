@@ -11,9 +11,15 @@ Journey will allow you to see all your friend's trips in one integrated platform
 
 ## Screenshots
 
-![alt tag](reports/imgs/journey_main.png)
-![alt tag](reports/imgs/journey_main.png)
-![alt tag](reports/imgs/journey_main.png)
+Start exploring different trips
+![alt tag](reports/imgs/journey_landing.png)
+
+View your friend's journeys
+![alt tag](reports/imgs/journey_friend.png)
+
+See your own journeys
+![alt tag](reports/imgs/journey_self.png)
+
 
 ## Built With
 * [AngularJS](https://angularjs.org/)
