@@ -18,6 +18,10 @@ body {
     height: 450px;
 }
 
+.spread h2 {
+    margin-bottom: 0;
+}
+
 .spread-divider {
     height: 50px;
     background-color: white;
@@ -33,9 +37,7 @@ body {
 }
 
 .mid h2 {
-    margin: 0;
-    font-weight: 600;
-    font-size: 60px;
+    font-weight: bold !important;
 }
 
 .mid p {
@@ -54,8 +56,6 @@ body {
 
 .subheader {
     margin: 20px 0px 10px 0px;
-    font-size: 18px;
-    font-weight: 500;
 }
 
 .subheader-content {
@@ -94,4 +94,13 @@ body {
 
 .static-text {
     text-align: center;
+}
+
+/* For med size devices */
+@media screen and (device-width: 960px) {
+    .scroll-container { {
+        top: 48px; bottom: 0; left: 0; right: 0;
+    }
+
+
 }
