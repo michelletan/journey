@@ -167,15 +167,17 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 	}
 	
 	FacebookFactory.getPosts = function (date1,date2){
-		
-		var date1Str = date1.getFullYear()+"-"+date1.getMonth()+"-"+date1.getDate()+"T00:00:00";
-		var date2Str = date2.getFullYear()+"-"+date2.getMonth()+"-"+date2.getDate()+"T23:59:59";
+		var month1 = parseInt(date1.getMonth())+1;
+		var month2 = parseInt(date2.getMonth())+1;
+		var date1Str = date1.getFullYear()+"-"+month1+"-"+date1.getDate()+"T00:00:00";
+		var date2Str = date2.getFullYear()+"-"+month2+"-"+date2.getDate()+"T23:59:59";
 		var deferred = $q.defer();
 		var query ='me/feed?fields=id,created_time,story,message,likes.limit(0).summary(true),place,full_picture&since=';
 			query+=date1Str;
 			query+='&until=';
 			query+=date2Str;
 			query+='&limit=1000';
+			console.log(query);
 		FB.api(query, function(response) {
 			var posts = response.data;
 			var returnPosts = [];
@@ -274,7 +276,8 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 	}
 	FacebookFactory.getLastYear = function(){
 		var lastYear = new Date(new Date().setFullYear(new Date().getFullYear() - 1));
-		var returnVal = lastYear.getFullYear()+"-"+lastYear.getMonth()+"-"+lastYear.getDate()+"T00:00:00";
+		var lastMonth = parseInt(lastYear.getMonth()+1);
+		var returnVal = lastYear.getFullYear()+"-"+lastMonth+"-"+lastYear.getDate()+"T00:00:00";
 		//alert(returnVal);
 		return returnVal;
 	}
