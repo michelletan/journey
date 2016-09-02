@@ -16,18 +16,18 @@ app.controller('JourneyCtrl', function($scope, $state, $stateParams, DatabaseFac
         }
       });
 
-    // DatabaseFactory.getUserBasicData($stateParams.userId)
-    // .then(function(user){
-    //     $scope.userId = user.id;
-    //     $scope.userName = user.name;
-    //     $scope.userSource = user.source;
-    // })
-    //
-    // DatabaseFactory.getJourney($rootScope.userId,$stateParams.journeyId)
-    // .then(function(journey){
-    //     console.log("Journey to be displayed is:", journey);
-    //     $scope.journey = journey;
-    // });
+    DatabaseFactory.getUserBasicData($stateParams.userId)
+    .then(function(user){
+        $scope.userId = user.id;
+        $scope.userName = user.name;
+        $scope.userSource = user.source;
+    })
+    
+    DatabaseFactory.getJourney($rootScope.userId,$stateParams.journeyId)
+    .then(function(journey){
+        console.log("Journey to be displayed is:", journey);
+        $scope.journey = journey;
+    });
 
     $scope.defaultUserId = 1;
     $scope.defaultUserPic = '/images/user.png';
