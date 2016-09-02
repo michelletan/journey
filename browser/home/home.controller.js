@@ -6,17 +6,21 @@ app.controller('HomeCtrl', function($scope, $state, $stateParams, DatabaseFactor
 	$scope.defaultUserPic = '/images/user.png';
 	$scope.defaultSpreadPic = '/images/landing-spread.jpg';
 	$scope.defaultUserName = 'User';
-	$scope.journeys = [];
 
 	FacebookFactory.getFriends()
 	.then(function(friends){
 		var friendsIdArr = friends.map(function(friend){
 			return friend.id;
 		});
+		console.log("Friends Ids Array is: ", friendsIdArr);
 		return friendsIdArr;	
 	})
 	.then(function(friendsIdArr){
 		return DatabaseFactory.getFeed(friendsIdArr)
+		.then(function(journeys){
+			console.log("DBgetFeed journeys is: ", journeys);
+			return journeys;
+		})
 	})
 	.then(function(journeys){
 		journeys = journeys.map(function(journey){
