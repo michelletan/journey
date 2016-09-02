@@ -25,8 +25,8 @@
                     <img ng-src="{{post.source ? post.source : defaultPostPic}}" class="md-card-image img-cover create-post-img" flex>
                 </div>
                 <md-card-content>
-                    {{$index}} The titles of Washed Out's breakthrough song and the first single from Paracosm share the
-                    two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
+                    <b>{{post.story}}</b>
+                    {{post.message}}
                 </md-card-content>
             </md-card>
         </md-content>
