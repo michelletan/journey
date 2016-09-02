@@ -1,40 +1,20 @@
 'use strict';
 
 app.controller('JourneyCreateCtrl', function($scope, $rootScope, $state, $stateParams, DatabaseFactory, FacebookFactory, PixabayFactory) {
-    if ($stateParams.journeyId) {
-        // If journey with id cannot be found, redirect
 
-        // Else, load journey data
-        // $scope.journey = journey;
+    $scope.journey = {name: 'Amazing Trip'};
+    selectAllPosts();
 
-        // Get date range for the posts of the journey
-        var range = getDateRangeFromPosts($scope.journey.posts);
-        $scope.startDate = range.min;
-        $scope.endDate = range.max;
+    $scope.endDate = new Date();
+    $scope.startDate = new Date($scope.endDate.getTime() - 12 * 60000 * 60 * 24 * 30);
 
-        // Retrieve all posts with this range -- done on UI side or here?
-
-        // $scope.posts = retrievedPosts;
-
-        // Further init done below
-
-    } else {
-     /*   $scope.posts = [{country: 'China'}, {country: 'Malaysia'},{country: 'Malaysia'},{country: 'England'}, {country: 'Russia'},{country: 'Malaysia'},{country: 'Malaysia'}]; // <-- Ten will provide some async function here*/
-
-        $scope.journey = {name: 'Amazing Trip'};
-        selectAllPosts();
-
-
-        $scope.endDate = new Date();
-        $scope.startDate = new Date($scope.endDate.gettime() - 12 * 60000 * 60 * 24 * 30);
-
-        FacebookFactory.getPosts($scope.startDate, $scope.endDate)
-        .then(function(posts){
-            $scope.posts = posts;        
-        })
-
-        $scope.done = function (){
-            var posts = $scope.posts.filter(function(post){
+    FacebookFactory.getPosts($scope.startDate, $scope.endDate)
+    .then(function(posts){
+        $scope.posts = posts;        
+    })
+    .then(function(){
+        $scope.done = function (posts){
+            posts = posts.filter(function(post){
                 return post.isSelected;
             })
             DatabaseFactory.createJourney($stateParams.userId, $scope.journeyName, posts, $scope.journeyCoverCountry)
@@ -42,8 +22,24 @@ app.controller('JourneyCreateCtrl', function($scope, $rootScope, $state, $stateP
                 $state.go('home')
             })
         }
-        
-    }
+        $scope.updateJourneyName = updateJourneyName;
+        $scope.getJourneyCoverPhoto = getJourneyCoverPhoto;
+        $scope.selectAllPosts = selectAllPosts;
+        $scope.getAllCountriesFromPosts = getAllCountriesFromPosts;
+        $scope.getSelectedCountryNames = getSelectedCountryNames;
+        $scope.updatePostStatus = updatePostStatus;
+
+        // Init actions
+        $scope.$watch('posts', $scope.updatePostStatus, true);
+        init();
+
+        // Public functions
+        function init() {
+            getAllCountriesFromPosts();
+            getJourneyCoverPhoto();
+            getSelectedPostCount();
+        }
+    })
 
 
     // Defaults
@@ -61,24 +57,6 @@ app.controller('JourneyCreateCtrl', function($scope, $rootScope, $state, $stateP
     $scope.journeyName = "";
     $scope.journeyCoverCountry;
 
-    // Assign functions to scope
-    $scope.updateJourneyName = updateJourneyName;
-    $scope.getJourneyCoverPhoto = getJourneyCoverPhoto;
-    $scope.selectAllPosts = selectAllPosts;
-    $scope.getAllCountriesFromPosts = getAllCountriesFromPosts;
-    $scope.getSelectedCountryNames = getSelectedCountryNames;
-    $scope.updatePostStatus = updatePostStatus;
-
-    // Init actions
-    $scope.$watch('posts', $scope.updatePostStatus, true);
-    init();
-
-    // Public functions
-    function init() {
-        getAllCountriesFromPosts();
-        getJourneyCoverPhoto();
-        getSelectedPostCount();
-    }
 
     function updateJourneyName(name) {
         $scope.journeyName = name;

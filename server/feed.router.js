@@ -15,7 +15,7 @@ router.post('/', function(req,res,next){
 	friendsIdArr = friendsIdArr.map(function(friendId){
 		return String(friendId);
 	});
-	
+
 	return Journey.findAll({
 		order: 'created DESC',
 		include: [User]
