@@ -33,7 +33,7 @@ app.config(function($stateProvider){
   });
 
   $stateProvider.state('journey', {
-    url: '/journey',
+    url: '/journey',  
     params: { userId: null, journeyId: null},
     templateUrl: '/browser/journey/journey.html',
     controller: 'JourneyCtrl'
