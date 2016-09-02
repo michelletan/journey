@@ -86,15 +86,15 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 
 
 	FacebookFactory.logIntoFb = function(){	
-		FacebookFactory.checkLoginState();
+		checkLoginState();
 		 FB.login(function(response) {
 		 	$state.go('home');
-		   FacebookFactory.checkLoginState();
+		   checkLoginState();
 		 }, {scope: 'public_profile,email,user_tagged_places,user_friends,user_posts'});
 	}
 	
 	FacebookFactory.logOutFb = function(){
-		FacebookFactory.checkLoginState();
+		checkLoginState();
 		FB.logout(function(response) {
 		  //logout processing here
 		  //Clearing rootscope variables
@@ -304,7 +304,7 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 	  // This function is called when someone finishes with the Login
 	  // Button. See the onlogin handler attached to it in the sample
 	  // code below.
-	  FacebookFactory.checkLoginState = function() {
+	  function checkLoginState() {
 	  	// Checks if user is logged in ON facebook
 	  	FB.getLoginStatus(function(response) {
 	  		FacebookFactory.statusChangeCallback(response);

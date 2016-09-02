@@ -20,7 +20,7 @@
     </md-toolbar>
     <!-- side nav menu -->
     <md-sidenav class="md-sidenav-left" md-component-id="left" layout="column" layout-fill>
-        <md-toolbar ui-sref="profile({id: {{userId ? userId : defaultUserId}}})" class="md-tall md-whiteframe-4dp" layout="row" layout-align="space-between end" layout-padding flex>
+        <md-toolbar ui-sref="profile({userId: {{userId ? userId : defaultUserId}}})" class="md-tall md-whiteframe-4dp" layout="row" layout-align="space-between end" layout-padding flex>
             <span class="title-username">{{userName ? userName : defaultUserName}}</span>
             <img alt="person name" ng-src="{{userSource ? userSource : defaultUserPic}}" class="img-user img-circle" />
         </md-toolbar>
