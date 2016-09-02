@@ -19,10 +19,32 @@ app.controller('JourneyCreateCtrl', function($scope, $rootScope, $state, $stateP
         // Further init done below
 
     } else {
-        $scope.posts = [{country: 'China'}, {country: 'Malaysia'},{country: 'Malaysia'},{country: 'England'}, {country: 'Russia'},{country: 'Malaysia'},{country: 'Malaysia'}]; // <-- Ten will provide some async function here
+     /*   $scope.posts = [{country: 'China'}, {country: 'Malaysia'},{country: 'Malaysia'},{country: 'England'}, {country: 'Russia'},{country: 'Malaysia'},{country: 'Malaysia'}]; // <-- Ten will provide some async function here*/
+
         $scope.journey = {name: 'Amazing Trip'};
         selectAllPosts();
+
+
+        $scope.endDate = new Date();
+        $scope.startDate = new Date($scope.endDate.gettime() - 12 * 60000 * 60 * 24 * 30);
+
+        FacebookFactory.getPosts($scope.startDate, $scope.endDate)
+        .then(function(posts){
+            $scope.posts = posts;        
+        })
+
+        $scope.done = function (){
+            var posts = $scope.posts.filter(function(post){
+                return post.isSelected;
+            })
+            DatabaseFactory.createJourney($stateParams.userId, $scope.journeyName, posts, $scope.journeyCoverCountry)
+            .then(function(){
+                $state.go('home')
+            })
+        }
+        
     }
+
 
     // Defaults
     $scope.defaultPostPic = '/images/landing-feature2.jpg';
@@ -42,7 +64,6 @@ app.controller('JourneyCreateCtrl', function($scope, $rootScope, $state, $stateP
     // Assign functions to scope
     $scope.updateJourneyName = updateJourneyName;
     $scope.getJourneyCoverPhoto = getJourneyCoverPhoto;
-    $scope.createJourney = createJourney;
     $scope.selectAllPosts = selectAllPosts;
     $scope.getAllCountriesFromPosts = getAllCountriesFromPosts;
     $scope.getSelectedCountryNames = getSelectedCountryNames;
@@ -68,11 +89,6 @@ app.controller('JourneyCreateCtrl', function($scope, $rootScope, $state, $stateP
         .then(function(url){
             $scope.journeyCoverPhoto = url;
         });
-    }
-
-    function createJourney() {
-        // Michelle: You can call createJourney, but you have to make sure to pass the correct journeyName, journeySource, and selectedPosts (an array of posts the user wants)
-        DatabaseFactory.createJourney($rootScope.userId, $scope.journeyName, $scope.selectedPosts, $scope.journeyCoverPhoto);
     }
 
     function selectAllPosts() {
