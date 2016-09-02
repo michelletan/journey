@@ -33,7 +33,7 @@
     </div>
     <div class="create-filter-container" flex="25" hide-xs sticky>
         <div class="create-actions-container" layout-sm="column" layout="row" layout-align="center center">
-            <md-button ng-disabled="journeyName === '' || selectedPostCount < 1" class="md-raised md-primary" ng-click="done()" flex="100">Done</md-button>
+            <md-button ng-disabled="isInfoFilled()" class="md-raised md-primary" ng-click="done()" flex="100">Done</md-button>
         </div>
         <div class="input-container">
             <md-input-container class="md-block">
