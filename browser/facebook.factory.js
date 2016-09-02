@@ -164,7 +164,10 @@ app.factory('FacebookFactory', function($q, PixabayFactory, DatabaseFactory, $ro
 		return deferred.promise;
 	}
 	
-	FacebookFactory.getPosts = function (date1Str,date2Str){
+	FacebookFactory.getPosts = function (date1,date2){
+		
+		var date1Str = date1.getFullYear()+"-"+date1.getMonth()+"-"+date1.getDate()+"T00:00:00";
+		var date2Str = date2.getFullYear()+"-"+date2.getMonth()+"-"+date2.getDate()+"T23:59:59";
 		var deferred = $q.defer();
 		var query ='me/feed?fields=id,created_time,story,message,likes.limit(0).summary(true),place,full_picture&since=';
 			query+=date1Str;
