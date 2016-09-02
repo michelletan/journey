@@ -12,20 +12,17 @@ var router = require('express').Router();
 
 router.post('/', function(req,res,next){
 	var friendsIdArr = req.body.friendsIdArr;
-	friendsIdArr = friendsIdArr.map(function(friendId){
-		return String(friendId);
-	});
 
 	return Journey.findAll({
 		order: 'created DESC',
-		include: [User]
+		include: [User],
+		where: {
+			user_id: {
+				$in: friendsIdArr
+			}
+		}
 	})
 	.then(function(journeys){
-		// Filter journey out if it does not belong to a user's friend
-		journeys = journeys.filter(function(journey){
-			return (friendsIdArr.indexOf(journey.user.id) > -1);
-		})	
-		console.log("Server sending feed: ", journeys);
 		return res.status(200).send(journeys);
 	})
 	.catch(next);
