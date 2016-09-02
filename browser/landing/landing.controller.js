@@ -1,7 +1,13 @@
 'use strict';
 
 app.controller('LandingCtrl', function($scope, $rootScope, $state, $stateParams, FacebookFactory) {
-   
+    FB.getLoginStatus(function(response) {
+        FacebookFactory.statusChangeCallback(response)
+        .then(function(userObj){
+                if(userObj.id == null) return;
+			$state.go('home');
+        })
+    });
     $scope.spreadImagePath = '/images/landing-spread.jpg';//'https://dl.dropboxusercontent.com/s/34vnqzdl7k1x6ak/spread.jpg?dl=0';
 
     $scope.imageFeature1Path = '/images/landing-feature1.jpg';
