@@ -12,6 +12,10 @@ var router = require('express').Router();
 
 router.post('/', function(req,res,next){
 	var friendsIdArr = req.body.friendsIdArr;
+	friendsIdArr = friendsIdArr.map(function(friendId){
+		return String(friendId);
+	});
+	
 	return Journey.findAll({
 		order: 'created DESC',
 		include: [User]
